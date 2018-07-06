@@ -90,8 +90,9 @@ class User(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(blank=True, max_length=100)
     middle_name = models.CharField(blank=True, max_length=100)
-    email = models.CharField(max_length=255, db_index=True, unique=True)
+    email = models.EmailField(max_length=255, unique=True)
     phone = models.CharField(max_length=50, unique=True)
+    """ установить min_length """
     password = models.CharField(max_length=255)
     is_agree_with_save_personal_data = models.BooleanField()
     api_key = models.CharField(max_length=255, db_index=True)
