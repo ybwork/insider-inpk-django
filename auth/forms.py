@@ -1,8 +1,13 @@
+import re
+
 from django.forms import ModelForm
 from django import forms
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
 
 from auth.models import User
+
+user_model = User
 
 custom_error_messages = {
     'max_length': 'Превышен лимит символов',
@@ -10,6 +15,7 @@ custom_error_messages = {
     'unique': 'Запись уже существует',
     'min_length': 'Минимальное кол-во символов 2',
     'format': 'Неверный формат',
+    'invalid': 'Неверный формат',
 }
 
 
@@ -23,52 +29,157 @@ class CompanyForm(forms.Form):
     )
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = User
+def is_unique_email(value):
+    try:
+        user = user_model.manager.get(email=value)
 
-        fields = [
-            'first_name',
-            'last_name',
-            'middle_name',
-            'email',
-            'phone',
-            'password',
-            'is_agree_with_save_personal_data'
-        ]
+        if user.email:
+            raise ValidationError(custom_error_messages['unique'])
+    except ObjectDoesNotExist:
+        pass
 
-        error_messages = {
-            'first_name': {
-                'max_length': _(custom_error_messages['max_length']),
-                'required': _(custom_error_messages['required']),
-            },
 
-            'last_name': {
-                'max_length': _(custom_error_messages['max_length']),
-            },
+def is_unique_phone(value):
+    try:
+        user = user_model.manager.get(phone=value)
 
-            'middle_name': {
-                'max_length': _(custom_error_messages['max_length']),
-            },
+        if user.phone:
+            raise ValidationError(custom_error_messages['unique'])
+    except ObjectDoesNotExist:
+        pass
 
-            'email': {
-                'max_length': _(custom_error_messages['max_length']),
-                'required': _(custom_error_messages['required']),
-                'unique': _(custom_error_messages['unique'])
-            },
 
-            'phone': {
-                'max_length': _(custom_error_messages['max_length']),
-                'required': _(custom_error_messages['required']),
-                'unique': _(custom_error_messages['unique'])
-            },
-
-            'password': {
-                'max_length': _(custom_error_messages['max_length']),
-                'required': _(custom_error_messages['required'])
-            },
-
-            'is_agree_with_save_personal_data': {
-                'required': _(custom_error_messages['required']),
-            },
+class RegisterForm(forms.Form):
+    company_name = forms.CharField(
+        max_length=100,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
         }
+    )
+
+    first_name = forms.CharField(
+        max_length=100,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    last_name = forms.CharField(
+        max_length=100,
+        error_messages={
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    middle_name = forms.CharField(
+        max_length=100,
+        error_messages={
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    email = forms.EmailField(
+        validators=[is_unique_email],
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+            'unique': custom_error_messages['unique'],
+            'invalid': custom_error_messages['invalid']
+        }
+    )
+
+    phone = forms.CharField(
+        validators=[is_unique_phone],
+        max_length=50,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+            'unique': custom_error_messages['unique'],
+        }
+    )
+
+    password = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    is_agree_with_save_personal_data = forms.BooleanField(
+        error_messages={
+            'required': custom_error_messages['required'],
+        }
+    )
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'invalid': custom_error_messages['invalid'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    password = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+        }
+    )
+
+# class UserForm(ModelForm):
+#     class Meta:
+#         model = User
+#
+#         fields = [
+#             'first_name',
+#             'last_name',
+#             'middle_name',
+#             'email',
+#             'phone',
+#             'password',
+#             'is_agree_with_save_personal_data'
+#         ]
+#
+#         error_messages = {
+#             'first_name': {
+#                 'max_length': _(custom_error_messages['max_length']),
+#                 'required': _(custom_error_messages['required']),
+#             },
+#
+#             'last_name': {
+#                 'max_length': _(custom_error_messages['max_length']),
+#             },
+#
+#             'middle_name': {
+#                 'max_length': _(custom_error_messages['max_length']),
+#             },
+#
+#             'email': {
+#                 'max_length': _(custom_error_messages['max_length']),
+#                 'required': _(custom_error_messages['required']),
+#                 'unique': _(custom_error_messages['unique'])
+#             },
+#
+#             'phone': {
+#                 'max_length': _(custom_error_messages['max_length']),
+#                 'required': _(custom_error_messages['required']),
+#                 'unique': _(custom_error_messages['unique'])
+#             },
+#
+#             'password': {
+#                 'max_length': _(custom_error_messages['max_length']),
+#                 'required': _(custom_error_messages['required'])
+#             },
+#
+#             'is_agree_with_save_personal_data': {
+#                 'required': _(custom_error_messages['required']),
+#             },
+#         }
