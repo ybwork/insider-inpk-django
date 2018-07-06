@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>Home test</p>
+
+    <button class="get">get</button>
+    <button class="post">post</button>
+    <button class="put">put</button>
+    <button class="delete">delete</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{#    <script SRC="">#}
+{#        $.ajax({#}
+{#            url: 'http://127.0.0.1:8000/login/',#}
+{#            type: 'POST',#}
+{#            contentType: false,#}
+{#            cache: false,#}
+{#            processType: false,#}
+{##}
+{#            headers: {#}
+{#                "X-CSRFToken": '{{ csrf_token }}'#}
+{#            },#}
+{##}
+{#            success: function (data) {#}
+{#                var response = $.parseJSON(data);#}
+{#            },#}
+{##}
+{#            error: function (e) {#}
+{#                var error = e.responseJSON;#}
+{#            }#}
+{#        {);#}
+{#    </script>#}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        $('.get').on('click', function() {
+            axios({
+                method: 'GET',
+
+                headers: {
+                    {#"X-CSRFToken": '{{ csrf_token }}',#}
+                },
+
+                params: {
+                    api_key: 'jxexdVIS7ovPMMbYYyrN09EQfolM2fUebwqn8VdA8Lu3KojHqrm3mmeGHxeboMeG',
+                    house_id: 'ed70941f'
+                },
+
+                <!--url: 'http://172.100.2.15:8000/companies/9fd29501/users',-->
+                <!--url: 'http://172.100.2.15:8000/users',-->
+                <!--url: 'http://172.100.2.15:8000/buildings',-->
+                <!--url: 'http://172.100.2.15:8000/company/9fd29501/buildings',-->
+                <!--url: 'http://172.100.2.15:8000/buildings/6077e8aa/houses',-->
+                <!--url: 'http://172.100.2.15:8000/houses'-->
+                <!--url: 'http://172.100.2.15:8000/houses/ed70941f/flats-schemas',-->
+                <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
+                <!--url: 'http://172.100.2.15:8000/houses/2365798a/floors',-->
+                url: 'http://172.100.2.15:8000/floor-types'
+                <!--url: 'http://172.100.2.15:8000/floors'-->
+                <!--url: 'http://172.100.2.15:8000/houses/3eca5cb2/apartments',-->
+                <!--url: 'http://172.100.2.15:8000/apartments'-->
+                <!--url: 'http://172.100.2.15:8000/typical-floors',-->
+                <!--url: 'http://172.100.2.15:8000/typical-apartments',-->
+            }).then(function (response) {
+                console.log(response);
+            })
+        });
+
+        $('.post').on('click', function() {
+            axios({
+                method: 'POST',
+
+                headers: {
+                    <!--"X-CSRFToken": '{{ csrf_token }}',-->
+                },
+
+                data: {
+                    <!--company_name: 'admin',-->
+                    <!--first_name: 'admin',-->
+                    <!--last_name: 'admin',-->
+                    <!--middle_name: 'admin',-->
+                    <!--email: 'admin@gmail.com',-->
+                    <!--phone: '89081996450',-->
+                    <!--password: '1234asdf',-->
+                    <!--is_agree_with_save_personal_data: 'True',-->
+
+                    <!--company_name: 'user',-->
+                    <!--first_name: 'user',-->
+                    <!--last_name: 'user',-->
+                    <!--middle_name: 'user',-->
+                    <!--email: 'user@gmail.com',-->
+                    <!--phone: '89081996420',-->
+                    <!--password: '1234asdf',-->
+                    <!--company_id: '9fd29501',-->
+
+                    <!--email: 'register@gmail.com',-->
+                    <!--password: '1234asdf',-->
+
+                    <!--name: 'building2',-->
+                    <!--region: 'building2',-->
+                    <!--district: 'building2',-->
+                    <!--city: 'building2',-->
+                    <!--country: 'building2',-->
+                    <!--video: 'https://www.youtube.com/?gl=RU&hl=ru',-->
+                    <!--images: 'path/to/image',-->
+                    <!--coordinates: '122.11, 888.00',-->
+                    <!--currency: 'building2',-->
+                    <!--company_id: '9fd29501',-->
+
+                    api_key: "jxexdVIS7ovPMMbYYyrN09EQfolM2fUebwqn8VdA8Lu3KojHqrm3mmeGHxeboMeG",
+
+                    <!--building_id: '6077e8aa',-->
+                    <!--number_of_floors: 11,-->
+                    <!--living_floors: '1-10',-->
+                    <!--number_of_entrance: 4,-->
+                    <!--number_of_flat: 500,-->
+                    <!--street_name: 'Morozova',-->
+                    <!--number: '25/b',-->
+                    <!--finishing: 'pure',-->
+                    <!--materials: ['material', 'material', 'material'],-->
+                    <!--stage_development: 'test',-->
+                    <!--start_development: '',-->
+                    <!--end_development: '',-->
+
+                    <!--house_id: 'ed70941f',-->
+                    <!--type: 'test',-->
+                    <!--image: 'test',-->
+                    <!--number_of_balcony: 1,-->
+                    <!--number_of_loggia: 1,-->
+                    <!--area: '111.11',-->
+                    <!--price: '111.11',-->
+
+                    <!--house_id: 'ed70941f',-->
+                    <!--image: 'path/to/image',-->
+                    <!--clone_floors: [5, 6, 7, 8]-->
+
+                    <!--house_id: 'ed70941f',-->
+                    <!--floor_type_id: '12ec63e4',-->
+                    <!--flat_schema_id: '6b2c52af',-->
+                    <!--entrance: 1,-->
+                    <!--number: 13,-->
+                    <!--area: 0,-->
+                    <!--price: 0,-->
+                    <!--windows: ['test', 'test2'],-->
+                    <!--status: 0,-->
+                    <!--coordinates: '213.22, 749.22',-->
+                    <!--clone_floors: [1, 2, 3, 4]-->
+
+                    house_id: 'ed70941f',
+                    clone_floors: [1, 2, 3, 4],
+                    number_of_entrance: 3,
+                },
+
+                <!--url: 'http://172.100.2.15:8000/register',-->
+                <!--url: 'http://172.100.2.15:8000/login'-->
+                <!--url: 'http://172.100.2.15:8000/logout'-->
+                <!--url: 'http://172.100.2.15:8000/users'-->
+                <!--url: 'http://172.100.2.15:8000/buildings'-->
+                <!--url: 'http://172.100.2.15:8000/houses',-->
+                <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
+                <!--url: 'http://172.100.2.15:8000/floor-types',-->
+                <!--url: 'http://172.100.2.15:8000/flat-types',-->
+                url: 'http://172.100.2.15:8000/flats/numbering',
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error)
+            })
+        });
+
+        $('.put').on('click', function() {
+            axios({
+                method: 'PUT',
+
+                headers: {
+                    <!--'X-CSRFToken': '{{ csrf_token }}'-->
+                },
+
+                data: {
+                    <!--first_name: 'change',-->
+                    <!--last_name: 'change',-->
+                    <!--middle_name: 'change',-->
+                    <!--email: 'user2@gmail.com',-->
+                    <!--phone: '89081996422',-->
+                    <!--password: '1234asdf',-->
+
+                    <!--name: 'change',-->
+                    <!--region: 'change',-->
+                    <!--district: 'change',-->
+                    <!--city: 'change',-->
+                    <!--country: 'change',-->
+                    <!--video: 'https://www.youtube.com/?gl=RU&hl=ru',-->
+                    <!--images: 'change',-->
+                    <!--coordinates: '234.8508, 073.0',-->
+                    <!--currency: 'change',-->
+
+                    api_key: "jxexdVIS7ovPMMbYYyrN09EQfolM2fUebwqn8VdA8Lu3KojHqrm3mmeGHxeboMeG",
+
+                    <!--number_of_floors: 13,-->
+                    <!--living_floors: '2-5',-->
+                    <!--number_of_entrance: 13,-->
+                    <!--number_of_flat: 13,-->
+                    <!--street_name: 'changed',-->
+                    <!--number: '28/d',-->
+                    <!--finishing: 'changed',-->
+                    <!--materials: ['changed', 'changed'],-->
+                    <!--stage_development: 'changed',-->
+                    <!--start_development: '2017-06-13',-->
+                    <!--end_development: '2017-06-13',-->
+
+                    <!--type: 'change',-->
+                    <!--image: 'change',-->
+                    <!--number_of_balcony: 5,-->
+                    <!--number_of_loggia: 5,-->
+                    <!--area: '5.5',-->
+                    <!--price: '5.5',-->
+
+                    house_id: 'ed70941f',
+                    image: 'path/to/image',
+                    clone_floors: [9, 10, 11, 12],
+
+                    <!--house_id: '3eca5cb2',-->
+                    <!--typical_apartment_id: '820dff56',-->
+                    <!--typical_floor_id: 'fcee45b0',-->
+                    <!--planing_id: '2aae7ac4',-->
+                    <!--entrance: 1,-->
+                    <!--number: 1,-->
+                    <!--area: 0,-->
+                    <!--price: 0,-->
+                    <!--windows: ['test', 'test2'],-->
+                    <!--status: 0,-->
+                    <!--coordinates: '213.22, 749.22',-->
+                    <!--clone_floors: [1, 3, 5, 7]-->
+                },
+
+                <!--url: 'http://172.100.2.15:8000/users/4bb06707',-->
+                <!--url: 'http://172.100.2.15:8000/buildings/9ddccb07'-->
+                <!--url: 'http://172.100.2.15:8000/houses/e65573a3',-->
+                <!--url: 'http://172.100.2.15:8000/flats-schemas/33cc9f85',-->
+                url: 'http://172.100.2.15:8000/floor-types/04fd82b8',
+                <!--url: 'http://172.100.2.15:8000/apartments/9b88abc4',-->
+                <!--url: 'http://172.100.2.15:8000/typical-floors/686d73f2',-->
+                <!--url: 'http://172.100.2.15:8000/typical-apartments/820dff56',-->
+            });
+        });
+
+        $('.delete').on('click', function() {
+            axios({
+                method: 'DELETE',
+
+                headers: {
+                    <!--"X-CSRFToken": '{{ csrf_token }}'-->
+                },
+
+                data: {
+                    api_key: "jxexdVIS7ovPMMbYYyrN09EQfolM2fUebwqn8VdA8Lu3KojHqrm3mmeGHxeboMeG",
+                },
+
+                <!--url: 'http://172.100.2.15:8000/users/4bb06707'-->
+                <!--url: 'http://172.100.2.15:8000/buildings/9ddccb07'-->
+                <!--url: 'http://172.100.2.15:8000/houses/e65573a3',-->
+                <!--url: 'http://172.100.2.15:8000/flats-schemas/33cc9f85',-->
+                url: 'http://172.100.2.15:8000/floor-types/3fe74ab4',
+                <!--url: 'http://172.100.2.15:8000/typical-apartments/3a109e43',-->
+                <!--url: 'http://172.100.2.15:8000/apartments/9b88abc4',-->
+            })
+        });
+    </script>
+</body>
+</html>
