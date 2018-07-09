@@ -1,3 +1,5 @@
+import re
+
 from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 
@@ -27,8 +29,12 @@ class AuthMiddleware(MiddlewareMixin):
         available_paths = [
             '/',
             '/login',
-            '/register'
+            '/register',
         ]
+
+        confirm_email = re.search('confirm/email', request.path)
+        if confirm_email:
+            available_paths.append(request.path)
 
         if request.path in available_paths:
             return True

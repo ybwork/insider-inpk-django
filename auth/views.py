@@ -1,17 +1,27 @@
+import re
+
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, render_to_response
+from django.template.defaulttags import url
+from django.urls import reverse
 from django.contrib.auth.hashers import check_password
 from django.core import serializers
+from django.core.mail import send_mail, get_connection
 from django.db import transaction
 from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import path
 from django.views.decorators.http import require_http_methods
 from django.views.generic.base import View
 from auth.forms import CompanyForm, LoginForm, RegisterForm
 from auth.models import Company, User
-from insider.services import Deserialization
+from insider.services import Deserialization, Helper
 
 deserialization = Deserialization()
 user_model = User
 company_model = Company
+helper = Helper()
 
 
 def create(model, data):
@@ -60,11 +70,26 @@ def register(request):
 
             form.cleaned_data['company'] = created_company
             form.cleaned_data['company_hash_id'] = created_company.hash_id
+            form.cleaned_data['email_code'] = helper.create_hash()
             form.cleaned_data['is_admin'] = True
 
             created_user = user_model.manager.create(form.cleaned_data)
 
             """ Здесь должна быть отправка письма на почту для подтверждения аккаунта """
+            message = 'https:/' + reverse(
+                'confirm_email',
+                kwargs={'email_code': created_user.email_code}
+            ) + '?api_key=' + created_user.api_key
+
+            mail = send_mail(
+                subject='test',
+                message=message,
+                from_email='inpk@gmail.com',
+                recipient_list=[created_user.email],
+                connection=get_connection()
+            )
+
+            print(mail)
 
         return generate_json_response(data={**model_to_dict(created_company), **model_to_dict(created_user)}, status=200)
 
@@ -86,6 +111,17 @@ def login(request):
         return generate_json_response(data={'message': 'Логин или пароль не верны'}, status=400)
 
     return JsonResponse(form.errors, status=400)
+
+
+def confirm_email(request, email_code):
+    try:
+        user = user_model.manager.get(email_code=email_code)
+        user.is_confirmed_email = True
+        user.save()
+    except ObjectDoesNotExist:
+        return render_to_response(template_name='404/404.html')
+
+    return HttpResponseRedirect(reverse('home'))
 
 
 def get_user_with_company(**condition):

@@ -39,6 +39,7 @@ class UserManager(models.Manager):
             last_name=data['last_name'],
             middle_name=data['middle_name'],
             email=data['email'],
+            email_code=data['email_code'],
             phone=data['phone'],
             password=make_password(data['password']),
             is_agree_with_save_personal_data=data['is_agree_with_save_personal_data'],
@@ -92,13 +93,14 @@ class User(models.Model):
     middle_name = models.CharField(blank=True, max_length=100)
     email = models.EmailField(max_length=255, unique=True)
     phone = models.CharField(max_length=50, unique=True)
-    """ установить min_length """
+    """ минимальное значение пароля 6 символо, сделать проверку в форме """
     password = models.CharField(max_length=255)
     is_agree_with_save_personal_data = models.BooleanField()
     api_key = models.CharField(max_length=255, db_index=True)
-    confirm_email = models.BooleanField(default=False)
-    confirm_phone = models.BooleanField(default=False)
+    is_confirmed_email = models.BooleanField(default=False)
+    is_confirmed_phone = models.BooleanField(default=False)
     is_admin = models.BooleanField(db_index=True, blank=True, default=False)
+    email_code = models.CharField(max_length=255, null=True)
     phone_code = models.PositiveIntegerField(default=0)
 
     class Meta:
