@@ -1,20 +1,15 @@
-import re
-
-from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, render_to_response
-from django.template.defaulttags import url
 from django.urls import reverse
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, make_password
 from django.core import serializers
 from django.core.mail import send_mail, get_connection
 from django.db import transaction
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from django.urls import path
 from django.views.decorators.http import require_http_methods
 from django.views.generic.base import View
-from auth.forms import CompanyForm, LoginForm, RegisterForm
+from auth.forms import LoginForm, RegisterForm, ResetPasswordForm
 from auth.models import Company, User
 from insider.services import Deserialization, Helper
 
@@ -63,7 +58,6 @@ def register(request):
     data = json_decode(request.body)
 
     form = RegisterForm(data)
-
     if form.is_valid():
         with transaction.atomic():
             created_company = company_model.manager.create(form.cleaned_data)
@@ -75,19 +69,18 @@ def register(request):
 
             created_user = user_model.manager.create(form.cleaned_data)
 
-            """ отправка письма на почту для подтверждения аккаунта, зашить  """
-            message = 'https:/' + reverse(
-                'confirm_email',
-                kwargs={'email_code': created_user.email_code}
-            ) + '?api_key=' + created_user.api_key
+        message = 'https:/' + request.get_host() + reverse(
+            'confirm_email',
+            kwargs={'email_code': created_user.email_code}
+        )
 
-            mail = send_mail(
-                subject='test',
-                message=message,
-                from_email='inpk@gmail.com',
-                recipient_list=[created_user.email],
-                connection=get_connection()
-            )
+        mail = send_mail(
+            subject='test',
+            message=message,
+            from_email='inpk@gmail.com',
+            recipient_list=[created_user.email],
+            connection=get_connection()
+        )
 
         return generate_json_response(data={**model_to_dict(created_company), **model_to_dict(created_user)}, status=200)
 
@@ -122,8 +115,61 @@ def confirm_email(request, email_code):
     return HttpResponseRedirect(reverse('home'))
 
 
-def send_reset_link_on_email(request):
-    pass
+@require_http_methods(['POST'])
+def send_reset_link_email(request):
+    data = json_decode(request.body)
+
+    user = user_model.manager.get(email=data['email'])
+    user.password_code = helper.create_hash()
+    user.save()
+
+    message = 'https:/' + request.get_host() + reverse(
+        'show_reset_password_form',
+        kwargs={'password_code': user.password_code}
+    )
+
+    mail = send_mail(
+        subject='test',
+        message=message,
+        from_email='inpk@gmail.com',
+        recipient_list=[user.email],
+        connection=get_connection()
+    )
+
+    return HttpResponse(mail)
+
+
+def show_reset_password_form(request, password_code):
+    try:
+        user_model.manager.get(password_code=password_code)
+    except ObjectDoesNotExist:
+        return render_to_response(template_name='404/404.html')
+
+    return HttpResponse('форма для ввода нового пароля')
+
+
+def reset_password(request):
+    data = json_decode(request.body)
+
+    if not is_equal_passwords(data['password'], data['password_confirmation']):
+        return JsonResponse({'message': 'Пароли не совпадают'}, status=400)
+
+    form = ResetPasswordForm(data)
+    if form.is_valid():
+        user = user_model.manager.get(password_code=data['password_code'])
+        user.password = make_password(form.cleaned_data['password'])
+        user.save()
+
+        return HttpResponse('должен быть редирект на логин, но я хз, как это с vue')
+
+    return JsonResponse(form.errors, status=400)
+
+
+def is_equal_passwords(password, password_confirmation):
+    if password == password_confirmation:
+        return True
+    return False
+
 
 def get_user_with_company(**condition):
     return user_model.manager.select_related().filter(**condition).first()

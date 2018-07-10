@@ -10,10 +10,10 @@ from auth.models import User
 user_model = User
 
 custom_error_messages = {
+    'min_length': 'Должно быть больше символов',
     'max_length': 'Превышен лимит символов',
     'required': 'Поле обязательно для заполнения',
     'unique': 'Запись уже существует',
-    'min_length': 'Минимальное кол-во символов 2',
     'format': 'Неверный формат',
     'invalid': 'Неверный формат',
 }
@@ -130,6 +130,28 @@ class LoginForm(forms.Form):
         max_length=255,
         error_messages={
             'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+        }
+    )
+
+
+class ResetPasswordForm(forms.Form):
+    password = forms.CharField(
+        min_length=6,
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'min_length': custom_error_messages['min_length'],
+            'max_length': custom_error_messages['max_length'],
+        }
+    )
+
+    password_confirmation = forms.CharField(
+        min_length=6,
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'min_length': custom_error_messages['min_length'],
             'max_length': custom_error_messages['max_length'],
         }
     )
