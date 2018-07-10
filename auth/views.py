@@ -75,7 +75,7 @@ def register(request):
 
             created_user = user_model.manager.create(form.cleaned_data)
 
-            """ Здесь должна быть отправка письма на почту для подтверждения аккаунта """
+            """ отправка письма на почту для подтверждения аккаунта, зашить  """
             message = 'https:/' + reverse(
                 'confirm_email',
                 kwargs={'email_code': created_user.email_code}
@@ -88,8 +88,6 @@ def register(request):
                 recipient_list=[created_user.email],
                 connection=get_connection()
             )
-
-            print(mail)
 
         return generate_json_response(data={**model_to_dict(created_company), **model_to_dict(created_user)}, status=200)
 
@@ -123,6 +121,9 @@ def confirm_email(request, email_code):
 
     return HttpResponseRedirect(reverse('home'))
 
+
+def send_reset_link_on_email(request):
+    pass
 
 def get_user_with_company(**condition):
     return user_model.manager.select_related().filter(**condition).first()
