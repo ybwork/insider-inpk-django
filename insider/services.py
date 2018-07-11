@@ -8,7 +8,6 @@ from django.http import HttpResponse
 from django.middleware.csrf import _get_new_csrf_string, _salt_cipher_secret
 
 
-
 class Serialization:
     def json_decode(self, data):
         return json.loads(data)
@@ -31,11 +30,6 @@ class Validation:
 
 
 class Helper:
-    def generate_api_key(self):
-        csrf_secret = _get_new_csrf_string()
-
-        return _salt_cipher_secret(csrf_secret)
-
     def create_hash(self):
         hash = str(uuid4())
 

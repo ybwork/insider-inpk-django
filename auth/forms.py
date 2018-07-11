@@ -31,7 +31,7 @@ class CompanyForm(forms.Form):
 
 def is_unique_email(value):
     try:
-        user = user_model.manager.get(email=value)
+        user = user_model.objects.get(email=value)
 
         if user.email:
             raise ValidationError(custom_error_messages['unique'])
@@ -41,7 +41,7 @@ def is_unique_email(value):
 
 def is_unique_phone(value):
     try:
-        user = user_model.manager.get(phone=value)
+        user = user_model.objects.get(phone=value)
 
         if user.phone:
             raise ValidationError(custom_error_messages['unique'])
