@@ -7,16 +7,16 @@ helper = Helper()
 validation = Validation()
 
 
-class CompanyManager(models.Manager):
-    def create(self, data):
-        company = self.model(
-            hash_id=helper.create_hash(),
-            name=data['company_name'],
-        )
-
-        company.save()
-
-        return company
+# class CompanyManager(models.Manager):
+#     def create(self, data):
+#         company = self.model(
+#             hash_id=helper.create_hash(),
+#             name=data['company_name'],
+#         )
+#
+#         company.save()
+#
+#         return company
 
 
 class Company(models.Model):
@@ -26,62 +26,62 @@ class Company(models.Model):
     class Meta:
         db_table = 'company'
 
-    manager = CompanyManager()
+    # manager = CompanyManager()
 
 
-class UserManager(models.Manager):
-    def create(self, data):
-        user = self.model(
-            hash_id=helper.create_hash(),
-            company=data['company'],
-            company_hash_id=data['company_hash_id'],
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            middle_name=data['middle_name'],
-            email=data['email'],
-            email_code=data['email_code'],
-            phone=data['phone'],
-            password=make_password(data['password']),
-            is_agree_with_save_personal_data=data['is_agree_with_save_personal_data'],
-            api_key=helper.generate_api_key(),
-            is_admin=data['is_admin'],
-        )
-
-        user.save()
-
-        return user
-
-    def update(self, user, data):
-        if self.is_password_exists(data['password']):
-            data['password'] = make_password(data['password'])
-        else:
-            data['password'] = user.password
-
-        user.first_name = data['first_name']
-        user.last_name = data['last_name']
-        user.middle_name = data['middle_name']
-        user.email = data['email']
-        user.phone = data['phone']
-        user.password = data['password']
-
-        user.save()
-
-        return user
-
-    def is_password_exists(self, password):
-        if password:
-            return True
-
-        return False
-
-    def update_api_key(self, api_key):
-        user = self.get(api_key=api_key)
-
-        user.api_key = helper.generate_api_key()
-
-        user.save()
-
-        return user.api_key
+# class UserManager(models.Manager):
+#     def create(self, data):
+#         user = self.model(
+#             hash_id=helper.create_hash(),
+#             company=data['company'],
+#             company_hash_id=data['company_hash_id'],
+#             first_name=data['first_name'],
+#             last_name=data['last_name'],
+#             middle_name=data['middle_name'],
+#             email=data['email'],
+#             email_code=data['email_code'],
+#             phone=data['phone'],
+#             password=make_password(data['password']),
+#             is_agree_with_save_personal_data=data['is_agree_with_save_personal_data'],
+#             api_key=helper.generate_api_key(),
+#             is_admin=data['is_admin'],
+#         )
+#
+#         user.save()
+#
+#         return user
+#
+#     def update(self, user, data):
+#         if self.is_password_exists(data['password']):
+#             data['password'] = make_password(data['password'])
+#         else:
+#             data['password'] = user.password
+#
+#         user.first_name = data['first_name']
+#         user.last_name = data['last_name']
+#         user.middle_name = data['middle_name']
+#         user.email = data['email']
+#         user.phone = data['phone']
+#         user.password = data['password']
+#
+#         user.save()
+#
+#         return user
+#
+#     def is_password_exists(self, password):
+#         if password:
+#             return True
+#
+#         return False
+#
+#     def update_api_key(self, api_key):
+#         user = self.get(api_key=api_key)
+#
+#         user.api_key = helper.generate_api_key()
+#
+#         user.save()
+#
+#         return user.api_key
 
 
 class User(models.Model):
@@ -109,4 +109,4 @@ class User(models.Model):
     class Meta:
         db_table = 'user'
 
-    manager = UserManager()
+    # manager = UserManager()

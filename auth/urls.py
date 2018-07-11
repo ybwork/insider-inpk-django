@@ -11,8 +11,8 @@ urlpatterns = [
     path('password/reset/<str:password_code>', views.show_reset_password_form, name='show_reset_password_form'),
     path('password/reset', views.reset_password, name='reset_password'),
 
-    path('companies/<str:id>/users', views.get_company_users, name='companies_users'),
-
-    path('users', views.User.as_view()),
-    path('users/<str:id>', views.User.as_view()),
+    # path('companies/<str:id>/users', views.get_company_users, name='companies_users'),
+    #
+    # path('users', views.User.as_view()),
+    # path('users/<str:id>', views.User.as_view()),
 ]
