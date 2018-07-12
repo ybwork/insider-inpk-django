@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 MIDDLEWARE = [
     'auth.middleware.AuthMiddleware',
     'django.middleware.security.SecurityMiddleware',

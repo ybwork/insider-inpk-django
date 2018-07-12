@@ -270,7 +270,7 @@ def show_reset_password_form(request, password_code):
     except ObjectDoesNotExist:
         return create_response_with_html_template(path_to_template='404/404.html')
 
-    return HttpResponse('форма для ввода нового пароля')
+    return render(request, 'reset_password/reset_password.html', model_to_dict(user))
 
 
 def get_user_object_by_password_code(password_code):
