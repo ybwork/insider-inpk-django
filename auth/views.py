@@ -93,7 +93,9 @@ def register(request):
 
         send_confirmation_account_to_email(user)
 
-        return generate_json_response(data={**model_to_dict(user)}, status=200)
+        success_message = 'Вы успешно зарегистрировались! На вашу почту отправленно сообщение с подтверждением.'
+
+        return generate_json_response(data={'message': success_message}, status=200)
 
     return generate_json_response(data={**form.errors}, status=400)
 
@@ -121,7 +123,7 @@ def create_user(data, is_amdin):
             phone=data['phone'],
             password=make_password(data['password']),
             is_agree_with_save_personal_data=data['is_agree_with_save_personal_data'],
-            api_key=helper.generate_api_key(),
+            api_key=generate_api_key(),
             is_admin=is_amdin,
         )
 
@@ -207,19 +209,25 @@ def confirm_user_email(user):
 def send_reset_link_email(request):
     data = json_decode(request.body)
 
-    user = get_user_object_by_email(data['email'])
+    user = get_user_by_email(data['email'])
+
+    if not is_user_exists(user):
+        return generate_json_response(
+            data={'message': 'Такой почтовый ящик не найден в нашей системе'},
+            status=400
+        )
 
     password_code = add_password_code_confirmation_to_user(user)
 
     confirmation = send_confirmation_reset_password_to_email(password_code, data['email'])
 
     if is_confrimation_send(confirmation):
-        return JsonResponse({'message': 'Успешно'}, status=200)
-    return JsonResponse(status=500)
+        return generate_json_response(data={'message': 'Успешно'}, status=200)
+    return generate_json_response(status=500)
 
 
-def get_user_object_by_email(email):
-    return user_model.objects.get(email=email)
+# def get_user_object_by_email(email):
+#     return user_model.objects.get(email=email)
 
 
 def add_password_code_confirmation_to_user(user):

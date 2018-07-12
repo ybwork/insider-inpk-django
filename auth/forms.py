@@ -111,7 +111,7 @@ class RegisterForm(forms.Form):
 
     is_agree_with_save_personal_data = forms.BooleanField(
         error_messages={
-            'required': custom_error_messages['required'],
+            'required': 'Подтвердите обработку персональных данных',
         }
     )
 
