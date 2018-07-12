@@ -358,7 +358,7 @@
       <find>get_user_object_by_password_code</find>
       <find>is_a</find>
       <find>generate_api_key</find>
-      <find>return generate_json_response(data={**form.errors}, status=400)</find>
+      <find />
       <find>send_rese</find>
       <find>password/emai</find>
       <find>send_reset_link_email</find>
@@ -420,7 +420,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
