@@ -226,7 +226,7 @@ def send_reset_link_email(request):
     return generate_json_response(status=500)
 
 
-# def get_user_object_by_email(email):
+# def show_reset_password_form(email):
 #     return user_model.objects.get(email=email)
 
 
@@ -281,7 +281,7 @@ def reset_password(request):
     data = json_decode(request.body)
 
     if not is_equal_passwords(data['password'], data['password_confirmation']):
-        return JsonResponse({'message': 'Пароли не совпадают'}, status=400)
+        return generate_json_response(data={'password_confirmation': ['Пароли не совпадают']}, status=400)
 
     form = get_reset_password_form(data)
 
@@ -290,9 +290,10 @@ def reset_password(request):
 
         update_user_password(user, form.cleaned_data['password'])
 
-        return HttpResponse('должен быть редирект на логин, но я хз, как это с vue')
-
-    return JsonResponse(form.errors, status=400)
+        return generate_json_response(data=model_to_dict(user), status=200)
+    # test = {'data': form.errors}
+    # print(test)
+    return generate_json_response(data=form.errors, status=400)
 
 
 def get_reset_password_form(data):
