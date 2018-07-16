@@ -291,8 +291,7 @@ def reset_password(request):
         update_user_password(user, form.cleaned_data['password'])
 
         return generate_json_response(data=model_to_dict(user), status=200)
-    # test = {'data': form.errors}
-    # print(test)
+
     return generate_json_response(data=form.errors, status=400)
 
 

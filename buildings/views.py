@@ -61,6 +61,14 @@ user_model = User
 """
 
 
+def json_decode(data):
+    return serialization.json_decode(data)
+
+
+def get_object_from_db(model, **condition):
+    return model.objects.get(**condition)
+
+
 class Building(View):
     def get(self, request):
         data = building_model.manager.all()
@@ -72,7 +80,7 @@ class Building(View):
         return response
 
     def post(self, request):
-        data = serialization.json_decode(request.body)
+        data = json_decode(request.body)
 
         company = company_model.manager.get(hash_id=data['company_id'])
 

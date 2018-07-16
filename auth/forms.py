@@ -156,6 +156,16 @@ class ResetPasswordForm(forms.Form):
         }
     )
 
+class SendResetLinkEmail(forms.Form):
+    email = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+            'invalid': custom_error_messages['invalid'],
+        }
+    )
+
 # class UserForm(ModelForm):
 #     class Meta:
 #         model = User
