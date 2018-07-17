@@ -6,41 +6,41 @@ validation = Validation()
 helper = Helper()
 
 
-class BuildingManager(models.Manager):
-    def create(self, data):
-        building = self.model(
-            hash_id=helper.create_hash(),
-            company=data['company'],
-            company_hash_id=data['company_hash_id'],
-            name=data['name'],
-            region=data['region'],
-            district=data['district'],
-            city=data['city'],
-            country=data['country'],
-            images=data['images'],
-            video=data['video'],
-            coordinates=data['coordinates'],
-            currency=data['currency'],
-        )
-
-        building.save()
-
-        return building
-
-    def update(self, building, data):
-        building.name = data['name']
-        building.region = data['region']
-        building.district = data['district']
-        building.city = data['city']
-        building.country = data['country']
-        building.images = data['images']
-        building.video = data['video']
-        building.coordinates = data['coordinates']
-        building.currency = data['currency']
-
-        building.save()
-
-        return building
+# class BuildingManager(models.Manager):
+#     def create(self, data):
+#         building = self.model(
+#             hash_id=helper.create_hash(),
+#             company=data['company'],
+#             company_hash_id=data['company_hash_id'],
+#             name=data['name'],
+#             region=data['region'],
+#             district=data['district'],
+#             city=data['city'],
+#             country=data['country'],
+#             images=data['images'],
+#             video=data['video'],
+#             coordinates=data['coordinates'],
+#             currency=data['currency'],
+#         )
+#
+#         building.save()
+#
+#         return building
+#
+#     def update(self, building, data):
+#         building.name = data['name']
+#         building.region = data['region']
+#         building.district = data['district']
+#         building.city = data['city']
+#         building.country = data['country']
+#         building.images = data['images']
+#         building.video = data['video']
+#         building.coordinates = data['coordinates']
+#         building.currency = data['currency']
+#
+#         building.save()
+#
+#         return building
 
 
 class Building(models.Model):
@@ -60,8 +60,6 @@ class Building(models.Model):
     class Meta:
         db_table = 'building'
         ordering = ['id']
-
-    manager = BuildingManager()
 
 
 class HouseManager(models.Manager):

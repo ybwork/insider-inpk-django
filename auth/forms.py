@@ -1,9 +1,5 @@
-import re
-
-from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.utils.translation import gettext_lazy as _
 
 from auth.models import User
 
@@ -156,6 +152,7 @@ class ResetPasswordForm(forms.Form):
         }
     )
 
+
 class SendResetLinkEmail(forms.Form):
     email = forms.CharField(
         max_length=255,
@@ -165,53 +162,3 @@ class SendResetLinkEmail(forms.Form):
             'invalid': custom_error_messages['invalid'],
         }
     )
-
-# class UserForm(ModelForm):
-#     class Meta:
-#         model = User
-#
-#         fields = [
-#             'first_name',
-#             'last_name',
-#             'middle_name',
-#             'email',
-#             'phone',
-#             'password',
-#             'is_agree_with_save_personal_data'
-#         ]
-#
-#         error_messages = {
-#             'first_name': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#                 'required': _(custom_error_messages['required']),
-#             },
-#
-#             'last_name': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'middle_name': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'email': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#                 'required': _(custom_error_messages['required']),
-#                 'unique': _(custom_error_messages['unique'])
-#             },
-#
-#             'phone': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#                 'required': _(custom_error_messages['required']),
-#                 'unique': _(custom_error_messages['unique'])
-#             },
-#
-#             'password': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#                 'required': _(custom_error_messages['required'])
-#             },
-#
-#             'is_agree_with_save_personal_data': {
-#                 'required': _(custom_error_messages['required']),
-#             },
-#         }

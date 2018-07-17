@@ -10,6 +10,7 @@ from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
+from buildings.forms import BuildingForm
 
 serialization = Serialization()
 helper = Helper()
@@ -23,6 +24,7 @@ floor_type_model = FloorType
 flat_type_model = FlatType
 flat_model = Flat
 user_model = User
+building_form = BuildingForm
 
 """
     company_id = request.user.company_id
@@ -61,65 +63,116 @@ user_model = User
 """
 
 
-def json_decode(data):
+def decode_from_json_format_to_object(data):
     return serialization.json_decode(data)
 
 
-def get_object_from_db(model, **condition):
+def encode_to_json_format(data):
+    return serializers.serialize('json', data)
+
+
+def generate_response(data={}, status=200):
+    response = JsonResponse(data=data, status=status, safe=False)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
+
+
+def bind_data_with_form(form, data):
+    return form(data)
+
+
+def fetch_from_db(model, **condition):
     return model.objects.get(**condition)
 
 
+def fetch_all_from_db(model, condition={}):
+    return model.objects.filter(**condition)
+
+
+def delete_from_db(model, **condition):
+    return model.objects.filter(**condition).delete()
+
+
 class Building(View):
-    def get(self, request):
-        data = building_model.manager.all()
-
-        buildings = serializers.serialize('json', data)
-
-        response = JsonResponse(buildings, status=200, safe=False)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+    # def get(self, request):
+    #     data = fetch_all_from_db(model=building_model)
+    #
+    #     buildings = encode_to_json_format(data)
+    #
+    #     return generate_response(data=buildings, status=200)
 
     def post(self, request):
-        data = json_decode(request.body)
+        data = decode_from_json_format_to_object(request.body)
 
-        company = company_model.manager.get(hash_id=data['company_id'])
+        form = bind_data_with_form(building_form, data)
 
-        data['company'] = company
-        data['company_hash_id'] = company.hash_id
+        if form.is_valid():
+            building = self.create_building(form.cleaned_data)
+            return generate_response(data=model_to_dict(building), status=200)
 
-        building = building_model.manager.create(data)
+        return generate_response(data=form.errors, status=400)
 
-        response = JsonResponse(model_to_dict(building), status=200)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+    def create_building(self, data):
+        company = fetch_from_db(company_model, **{'hash_id': data['company_id']})
+
+        return building_model.objects.create(
+            hash_id=helper.create_hash(),
+            company=company,
+            company_hash_id=company.hash_id,
+            name=data['name'],
+            region=data['region'],
+            district=data['district'],
+            city=data['city'],
+            country=data['country'],
+            images=data['images'],
+            video=data['video'],
+            coordinates=data['coordinates'],
+            currency=data['currency'],
+        )
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body)
+        data = decode_from_json_format_to_object(request.body)
 
-        old_building = building_model.manager.get(hash_id=id)
+        form = bind_data_with_form(building_form, data)
 
-        new_building = building_model.manager.update(old_building, data)
+        if form.is_valid():
+            old_building = fetch_from_db(building_model, **{'hash_id': id})
 
-        response = JsonResponse(model_to_dict(new_building), status=200)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+            new_building = self.update_building(old_building, form.cleaned_data)
+
+            return generate_response(data=model_to_dict(new_building), status=200)
+
+        return generate_response(data=form.errors, status=400)
+
+    def update_building(self, building, data):
+        building.name = data['name']
+        building.region = data['region']
+        building.district = data['district']
+        building.city = data['city']
+        building.country = data['country']
+        building.images = data['images']
+        building.video = data['video']
+        building.coordinates = data['coordinates']
+        building.currency = data['currency']
+
+        building.save()
+
+        return building
 
     def delete(self, request, id):
-        building_model.manager.filter(hash_id=id).delete()
-
-        response = HttpResponse(status=200)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+        delete_from_db(building_model, **{'hash_id': id})
+        return generate_response(status=200)
 
 
 def get_company_buildings(request, id):
-    data = building_model.manager.filter(company_hash_id=id)
+    data = fetch_all_from_db(
+        model=building_model,
+        condition={'company_hash_id': id}
+    )
 
-    company_buildings = serializers.serialize('json', data)
+    company_buildings = encode_to_json_format(data)
 
-    response = JsonResponse(company_buildings, status=200, safe=False)
-    response['Access-Control-Allow-Origin'] = '*'
-    return response
+    return generate_response(data=company_buildings, status=200)
 
 
 def get_building_houses(request, id):
