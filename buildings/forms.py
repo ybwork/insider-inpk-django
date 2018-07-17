@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
-from buildings.models import Building
+from buildings.models import House, Building
 
 custom_error_messages = {
     'min_length': 'Должно быть больше символов',
@@ -92,59 +92,70 @@ class BuildingForm(forms.Form):
         )
 
 
-# class BuildingForm(ModelForm):
-#     class Meta:
-#         model = Building
-#
-#         fields = [
-#             'name',
-#             'region',
-#             'district',
-#             'city',
-#             'country',
-#             'images',
-#             'video',
-#             'coordinates',
-#             'currency',
-#         ]
-#
-#         # exclude = ['company_id', 'company_hash_id']
-#
-#         error_messages = {
-#             'name': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#                 'required': _(custom_error_messages['required']),
-#             },
-#
-#             'region': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'district': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'city': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'country': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'images': {
-#                 'max_length': _(custom_error_messages['max_length']),
-#             },
-#
-#             'video': {
-#                 'required': _(custom_error_messages['required']),
-#             },
-#
-#             'coordinates': {
-#                 'required': _(custom_error_messages['required']),
-#             },
-#
-#             'currency': {
-#                 'required': _(custom_error_messages['required']),
-#             },
-#         }
+class HouseForm(ModelForm):
+    class Meta:
+        model = House
+
+        fields = [
+            'number_of_floors',
+            'living_floors',
+            'number_of_entrance',
+            'number_of_flat',
+            'street_name',
+            'number',
+            'finishing',
+            'materials',
+            'stage_development',
+            'start_development',
+            'end_development'
+        ]
+
+        error_messages = {
+            'number_of_floors': {
+                'max_length': _(custom_error_messages['max_length']),
+            },
+
+            'living_floors': {
+                'max_length': _(custom_error_messages['max_length']),
+            },
+
+            'number_of_entrance': {
+                'max_length': _(custom_error_messages['max_length']),
+            },
+
+            'number_of_flat': {
+                'max_length': _(custom_error_messages['max_length']),
+            },
+
+            'street_name': {
+                'max_length': _(custom_error_messages['max_length']),
+                'required': _(custom_error_messages['required']),
+            },
+
+            'number': {
+                'max_length': _(custom_error_messages['max_length']),
+                'required': _(custom_error_messages['required']),
+            },
+
+            'finishing': {
+                'max_length': _(custom_error_messages['max_length']),
+            },
+
+            'materials': {
+                'required': _(custom_error_messages['required']),
+                'max_length': _(custom_error_messages['max_length'])
+            },
+
+            'stage_development': {
+                'required': _(custom_error_messages['required']),
+                'max_length': _(custom_error_messages['max_length'])
+            },
+
+            'start_development': {
+                'format': _(custom_error_messages['format']),
+            },
+
+            'end_development': {
+                'format': _(custom_error_messages['format']),
+            },
+        }

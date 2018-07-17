@@ -8,7 +8,7 @@ urlpatterns = [
     path('buildings', views.Building.as_view()),
     path('buildings/<str:id>', views.Building.as_view()),
 
-    path('buildings/<str:id>/houses', views.get_building_houses),
+    # path('buildings/<str:id>/houses', views.get_building_houses),
 
     path('houses', views.House.as_view()),
     path('houses/<str:id>', views.House.as_view()),

@@ -10,7 +10,7 @@ from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm
+from buildings.forms import BuildingForm, HouseForm
 
 serialization = Serialization()
 helper = Helper()
@@ -25,6 +25,7 @@ flat_type_model = FlatType
 flat_model = Flat
 user_model = User
 building_form = BuildingForm
+house_form = HouseForm
 
 """
     company_id = request.user.company_id
@@ -175,49 +176,93 @@ def get_company_buildings(request, id):
     return generate_response(data=company_buildings, status=200)
 
 
-def get_building_houses(request, id):
-    data = house_model.manager.select_related().filter(building_hash_id=id)
-
-    building_houses = serializers.serialize('json', data)
-
-    return JsonResponse(building_houses, status=200, safe=False)
+# def get_building_houses(request, id):
+#     data = house_model.manager.select_related().filter(building_hash_id=id)
+#
+#     building_houses = serializers.serialize('json', data)
+#
+#     return JsonResponse(building_houses, status=200, safe=False)
 
 
 class House(View):
-    def get(self, request):
-        data = house_model.manager.all()
-
-        houses = serializers.serialize('json', data)
-
-        return JsonResponse(houses, status=200, safe=False)
+    # def get(self, request):
+    #     data = house_model.manager.all()
+    #
+    #     houses = serializers.serialize('json', data)
+    #
+    #     return JsonResponse(houses, status=200, safe=False)
 
     def post(self, request):
-        data = serialization.json_decode(request.body)
+        data = decode_from_json_format_to_object(request.body)
 
-        building = building_model.manager.get(hash_id=data['building_id'])
+        form = bind_data_with_form(house_form, data)
 
-        data['building'] = building
-        data['building_hash_id'] = building.hash_id
+        if form.is_valid():
+            house = self.create_house(data)
+            return generate_response(data=model_to_dict(house), status=200)
 
-        house = house_model.manager.create(data)
+        return generate_response(data=form.errors, status=400)
 
-        response = JsonResponse(model_to_dict(house), status=200)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+    def create_house(self, data):
+        building = fetch_from_db(building_model, **{'hash_id': data['building_id']})
+
+        return house_model.objects.create(
+            hash_id=helper.create_hash(),
+            building=building,
+            building_hash_id=building.hash_id,
+            living_floors=data['living_floors'],
+            number_of_floors=data['number_of_floors'],
+            number_of_entrance=data['number_of_entrance'],
+            number_of_flat=data['number_of_flat'],
+            street_name=data['street_name'],
+            number=data['number'],
+            finishing=data['finishing'],
+            materials=data['materials'],
+            stage_development=data['stage_development'],
+            start_development=self.get_correct_date(data['start_development']),
+            end_development=self.get_correct_date(data['end_development']),
+        )
+
+    def get_correct_date(self, date):
+        if date:
+            return date
+        return None
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body)
+        data = decode_from_json_format_to_object(request.body)
 
-        old_house = house_model.manager.get(hash_id=id)
+        form = bind_data_with_form(house_form, data)
 
-        new_house = house_model.manager.update(old_house, data)
+        if form.is_valid():
+            old_house = fetch_from_db(house_model, **{'hash_id': id})
 
-        return JsonResponse(model_to_dict(new_house), status=200, reason='OK')
+            new_house = self.update_house(old_house, form.cleaned_data)
 
-    def delete(self, request, id):
-        house_model.manager.filter(hash_id=id).delete()
+            return generate_response(data=model_to_dict(new_house), status=200)
 
-        return HttpResponse(status=200, reason='OK')
+        return generate_response(data=form.errors, status=400)
+
+    def update_house(self, house, data):
+        house.number_of_floors = data['number_of_floors']
+        house.living_floors = data['living_floors']
+        house.number_of_entrance = data['number_of_entrance']
+        house.number_of_flat = data['number_of_flat']
+        house.street_name = data['street_name']
+        house.number = data['number']
+        house.finishing = data['finishing']
+        house.materials = data['materials']
+        house.stage_development = data['stage_development']
+        house.start_development = self.get_correct_date(data['start_development'])
+        house.end_development = self.get_correct_date(data['end_development'])
+
+        house.save()
+
+        return house
+
+    # def delete(self, request, id):
+    #     house_model.manager.filter(hash_id=id).delete()
+    #
+    #     return HttpResponse(status=200, reason='OK')
 
 
 def get_house_ftats_schemas(request, id):

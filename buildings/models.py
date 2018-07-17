@@ -6,43 +6,6 @@ validation = Validation()
 helper = Helper()
 
 
-# class BuildingManager(models.Manager):
-#     def create(self, data):
-#         building = self.model(
-#             hash_id=helper.create_hash(),
-#             company=data['company'],
-#             company_hash_id=data['company_hash_id'],
-#             name=data['name'],
-#             region=data['region'],
-#             district=data['district'],
-#             city=data['city'],
-#             country=data['country'],
-#             images=data['images'],
-#             video=data['video'],
-#             coordinates=data['coordinates'],
-#             currency=data['currency'],
-#         )
-#
-#         building.save()
-#
-#         return building
-#
-#     def update(self, building, data):
-#         building.name = data['name']
-#         building.region = data['region']
-#         building.district = data['district']
-#         building.city = data['city']
-#         building.country = data['country']
-#         building.images = data['images']
-#         building.video = data['video']
-#         building.coordinates = data['coordinates']
-#         building.currency = data['currency']
-#
-#         building.save()
-#
-#         return building
-
-
 class Building(models.Model):
     hash_id = models.CharField(max_length=16, db_index=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -60,59 +23,6 @@ class Building(models.Model):
     class Meta:
         db_table = 'building'
         ordering = ['id']
-
-
-class HouseManager(models.Manager):
-    def create(self, data):
-        if not data['start_development']:
-            data['start_development'] = None
-
-        if not data['end_development']:
-            data['end_development'] = None
-
-        house = self.model(
-            hash_id=helper.create_hash(),
-            building=data['building'],
-            building_hash_id=data['building_hash_id'],
-            living_floors=data['living_floors'],
-            number_of_floors=data['number_of_floors'],
-            number_of_entrance=data['number_of_entrance'],
-            number_of_flat=data['number_of_flat'],
-            street_name=data['street_name'],
-            number=data['number'],
-            finishing=data['finishing'],
-            materials=data['materials'],
-            stage_development=data['stage_development'],
-            start_development=data['start_development'],
-            end_development=data['end_development'],
-        )
-
-        house.save()
-
-        return house
-
-    def update(self, house, data):
-        if not data['start_development']:
-            data['start_development'] = None
-
-        if not data['end_development']:
-            data['end_development'] = None
-
-        house.number_of_floors = data['number_of_floors']
-        house.living_floors = data['living_floors']
-        house.number_of_entrance = data['number_of_entrance']
-        house.number_of_flat = data['number_of_flat']
-        house.street_name = data['street_name']
-        house.number = data['number']
-        house.finishing = data['finishing']
-        house.materials = data['materials']
-        house.stage_development = data['stage_development']
-        house.start_development = data['start_development']
-        house.end_development = data['end_development']
-
-        house.save()
-
-        return house
 
 
 class House(models.Model):
@@ -134,8 +44,6 @@ class House(models.Model):
     class Meta:
         db_table = 'building_houses'
         ordering = ['id']
-
-    manager = HouseManager()
 
 
 class FlatSchemaManager(models.Manager):
