@@ -86,7 +86,13 @@ def register(request):
     form = get_register_form(data)
 
     if not is_equal_passwords(data['password'], data['password_confirmation']):
-        return JsonResponse({'message': 'Пароли не совпадают'}, status=400)
+        return generate_json_response(
+            data={
+                'message': 'Пароли не совпадают',
+                'single_error': True
+            },
+            status=400
+        )
 
     if form.is_valid():
         user = create_user(form.cleaned_data, is_amdin=True)
@@ -95,7 +101,13 @@ def register(request):
 
         success_message = 'Вы успешно зарегистрировались! На вашу почту отправленно сообщение с подтверждением.'
 
-        return generate_json_response(data={'message': success_message}, status=200)
+        return generate_json_response(
+            data={
+                'message': success_message,
+                'single_error': True
+            },
+            status=200
+        )
 
     return generate_json_response(data={**form.errors}, status=400)
 
@@ -158,9 +170,15 @@ def login(request):
         if is_user_exists(user) and is_valid_user_password(data['password'], user.password):
             return generate_json_response(data=model_to_dict(user), status=200)
 
-        return generate_json_response(data={'message': 'Логин или пароль не верны'}, status=400)
+        return generate_json_response(
+            data={
+                'message': 'Логин или пароль не верны',
+                'single_error': True
+            },
+            status=400
+        )
 
-    return JsonResponse(form.errors, status=400)
+    return generate_json_response(data=form.errors, status=400)
 
 
 def get_login_form(data):
@@ -213,7 +231,10 @@ def send_reset_link_email(request):
 
     if not is_user_exists(user):
         return generate_json_response(
-            data={'message': 'Такой почтовый ящик не найден в нашей системе'},
+            data={
+                'message': 'Такой почтовый ящик не найден в нашей системе',
+                'single_error': True
+            },
             status=400
         )
 

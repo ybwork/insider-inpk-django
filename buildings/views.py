@@ -64,12 +64,12 @@ house_form = HouseForm
 """
 
 
-def decode_from_json_format_to_object(data):
+def decode(data):
     return serialization.json_decode(data)
 
 
-def encode_to_json_format(data):
-    return serializers.serialize('json', data)
+def encode(format, data):
+    return serializers.serialize(format, data)
 
 
 def generate_response(data={}, status=200):
@@ -95,15 +95,13 @@ def delete_from_db(model, **condition):
 
 
 class Building(View):
-    # def get(self, request):
-    #     data = fetch_all_from_db(model=building_model)
-    #
-    #     buildings = encode_to_json_format(data)
-    #
-    #     return generate_response(data=buildings, status=200)
+    def get(self, request, id):
+        building = fetch_from_db(building_model, **{'hash_id': id})
+
+        return generate_response(data=model_to_dict(building), status=200)
 
     def post(self, request):
-        data = decode_from_json_format_to_object(request.body)
+        data = decode(request.body)
 
         form = bind_data_with_form(building_form, data)
 
@@ -132,7 +130,7 @@ class Building(View):
         )
 
     def put(self, request, id):
-        data = decode_from_json_format_to_object(request.body)
+        data = decode(request.body)
 
         form = bind_data_with_form(building_form, data)
 
@@ -162,6 +160,7 @@ class Building(View):
 
     def delete(self, request, id):
         delete_from_db(building_model, **{'hash_id': id})
+
         return generate_response(status=200)
 
 
@@ -171,29 +170,19 @@ def get_company_buildings(request, id):
         condition={'company_hash_id': id}
     )
 
-    company_buildings = encode_to_json_format(data)
+    company_buildings = encode(format='json', data=data)
 
     return generate_response(data=company_buildings, status=200)
 
 
-# def get_building_houses(request, id):
-#     data = house_model.manager.select_related().filter(building_hash_id=id)
-#
-#     building_houses = serializers.serialize('json', data)
-#
-#     return JsonResponse(building_houses, status=200, safe=False)
-
-
 class House(View):
-    # def get(self, request):
-    #     data = house_model.manager.all()
-    #
-    #     houses = serializers.serialize('json', data)
-    #
-    #     return JsonResponse(houses, status=200, safe=False)
+    def get(self, request, id):
+        house = fetch_from_db(house_model, **{'hash_id': id})
+
+        return generate_response(data=model_to_dict(house), status=200)
 
     def post(self, request):
-        data = decode_from_json_format_to_object(request.body)
+        data = decode(request.body)
 
         form = bind_data_with_form(house_form, data)
 
@@ -229,7 +218,7 @@ class House(View):
         return None
 
     def put(self, request, id):
-        data = decode_from_json_format_to_object(request.body)
+        data = decode(request.body)
 
         form = bind_data_with_form(house_form, data)
 
@@ -259,10 +248,21 @@ class House(View):
 
         return house
 
-    # def delete(self, request, id):
-    #     house_model.manager.filter(hash_id=id).delete()
-    #
-    #     return HttpResponse(status=200, reason='OK')
+    def delete(self, request, id):
+        delete_from_db(house_model, **{'hash_id': id})
+
+        return generate_response(status=200)
+
+
+def get_building_houses(request, id):
+    data = fetch_all_from_db(
+        model=house_model,
+        condition={'building_hash_id': id}
+    )
+
+    houses = encode(format='json', data=data)
+
+    return generate_response(data=houses, status=200)
 
 
 def get_house_ftats_schemas(request, id):
