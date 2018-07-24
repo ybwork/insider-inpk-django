@@ -8,7 +8,7 @@ from django.views import View
 
 from auth.models import Company
 from auth.models import User
-from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
+from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType, FloorTypeEntrance
 from insider.services import Serialization, Helper
 from buildings.forms import BuildingForm, HouseForm
 
@@ -24,6 +24,7 @@ floor_type_model = FloorType
 flat_type_model = FlatType
 flat_model = Flat
 user_model = User
+floor_type_entrance_model = FloorTypeEntrance
 building_form = BuildingForm
 house_form = HouseForm
 
@@ -187,7 +188,7 @@ class House(View):
         form = bind_data_with_form(house_form, data)
 
         if form.is_valid():
-            house = self.create_house(data)
+            house = self.create_house(form.cleaned_data)
             return generate_response(data=model_to_dict(house), status=200)
 
         return generate_response(data=form.errors, status=400)
@@ -265,28 +266,28 @@ def get_building_houses(request, id):
     return generate_response(data=houses, status=200)
 
 
-def get_house_ftats_schemas(request, id):
-    data = flat_schema_model.manager.filter(house_hash_id=id)
-
-    house_flats_schemas = serializers.serialize('json', data)
-
-    return JsonResponse(house_flats_schemas, status=200, safe=False)
-
-
-def get_house_floors(request, id):
-    data = floor_model.manager.filter(house_hash_id=id)
-
-    house_floors = serializers.serialize('json', data)
-
-    return JsonResponse(house_floors, status=200, safe=False)
+# def get_house_ftats_schemas(request, id):
+#     data = flat_schema_model.manager.filter(house_hash_id=id)
+#
+#     house_flats_schemas = serializers.serialize('json', data)
+#
+#     return JsonResponse(house_flats_schemas, status=200, safe=False)
 
 
-def get_house_flats(request, id):
-    data = flat_model.manager.filter(house_hash_id=id)
+# def get_house_floors(request, id):
+#     data = floor_model.manager.filter(house_hash_id=id)
+#
+#     house_floors = serializers.serialize('json', data)
+#
+#     return JsonResponse(house_floors, status=200, safe=False)
 
-    house_flats = serializers.serialize('json', data)
 
-    return JsonResponse(house_flats, status=200, safe=False)
+# def get_house_flats(request, id):
+#     data = flat_model.manager.filter(house_hash_id=id)
+#
+#     house_flats = serializers.serialize('json', data)
+#
+#     return JsonResponse(house_flats, status=200, safe=False)
 
 
 class FlatSchema(View):
@@ -298,7 +299,7 @@ class FlatSchema(View):
     def post(self, request):
         data = serialization.json_decode(request.body)
 
-        house = house_model.manager.get(hash_id=data['house_id'])
+        house = house_model.objects.get(hash_id=data['house_id'])
 
         data['house'] = house
         data['house_hash_id'] = house.hash_id
@@ -335,7 +336,7 @@ class FloorType(View):
     def post(self, request):
         data = serialization.json_decode(request.body)
 
-        house = house_model.manager.get(hash_id=data['house_id'])
+        house = house_model.objects.get(hash_id=data['house_id'])
 
         data['house'] = house
         data['house_hash_id'] = house.hash_id
@@ -345,9 +346,23 @@ class FloorType(View):
             data['floor_type'] = floor_type
             data['floor_type_hash_id'] = floor_type.hash_id
 
+            entrances = [
+                [1, 25],
+            ]
+
+            floor_type_entrances = (FloorTypeEntrance(
+                hash_id=helper.create_hash(),
+                floor_type=floor_type,
+                floor_type_hash_id=floor_type.hash_id,
+                number='%s' % number,
+                number_of_flats='%s' % number_of_flats
+            )for number, number_of_flats in entrances)
+
+            floor_type_entrance_model.objects.bulk_create(floor_type_entrances)
+
             floor_model.manager.multiple_create(data)
 
-        return HttpResponse('сформировать ответ, когда это козёл фронтендер будет знать, что ему нужно')
+        return HttpResponse('good')
 
     def put(self, request, id):
         data = serialization.json_decode(request.body)
@@ -365,7 +380,7 @@ class FloorType(View):
 
             floor_model.manager.multiple_create(data)
 
-        return HttpResponse(' сформировать ответ, когда это козёл фронтендер будет знать, что ему нужно')
+        return HttpResponse('сформировать ответ, когда фронтендер будет знать, что ему нужно')
 
     def delete(self, request, id):
         floor_type_model.manager.filter(hash_id=id).delete()

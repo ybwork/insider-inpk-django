@@ -271,5 +271,17 @@ class Flat(models.Model):
     manager = FlatManager()
 
 
+class FloorTypeEntrance(models.Model):
+    hash_id = models.CharField(max_length=16)
+    floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE)
+    floor_type_hash_id = models.CharField(max_length=16)
+    number = models.PositiveIntegerField()
+    number_of_flats = models.PositiveIntegerField()
+
+    class Meta:
+        db_table = 'building_house_floor_type_entrances'
+        ordering = ['id']
+
+
 
 
