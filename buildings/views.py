@@ -431,6 +431,101 @@ class Flat(View):
         return HttpResponse(status=200, reason='OK')
 
 
+# class FlatType(View):
+#     def get(self, request):
+#         return HttpResponse('get flat type')
+#
+#     def post(self, request):
+#         data = serialization.json_decode(request.body)
+#         # return HttpResponse(data['number_of_flats_in_entrance'][num]['number_of'])
+#
+#         # TO DO
+#         # len(data['flats'])
+#         # self.is_correct_number_of_flats(data)
+#
+#         flat_type = self.create_flat_type(data)
+#
+#         return HttpResponse(flat_type)
+#
+#     def create_flat_type(self, data):
+#         with transaction.atomic():
+#             house = house_model.objects.get(hash_id=data['house_id'])
+#             flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
+#             floor_type = floor_type_model.objects.get(hash_id=data['floor_type_id'])
+#
+#             # flat_type = flat_type_model.objects.create(
+#             #     hash_id=helper.create_hash(),
+#             #     house=house,
+#             #     house_hash_id=house.hash_id,
+#             #     floor_type=floor_type,
+#             #     floor_type_hash_id=floor_type.hash_id,
+#             #     coordinates=data['coordinates'],
+#             # )
+#
+#             # flats = (flat_model(
+#             #     hash_id=helper.create_hash(),
+#             #     house=house,
+#             #     house_hash_id=house.hash_id,
+#             #     flat_schema=flat_schema,
+#             #     flat_schema_hash_id=flat_schema.hash_id,
+#             #     flat_type=flat_type,
+#             #     flat_type_hash_id=flat_type.hash_id,
+#             #     entrance=data['entrance'],
+#             #     number=0,
+#             #     area=data['area'],
+#             #     price=data['price'],
+#             #     windows=data['windows'],
+#             #     status=data['status'],
+#             #     floor='%s' % floor
+#             # )for floor in data['clone_floors'])
+#
+#             flats_objects = []
+#
+#             for floor in data['clone_floors']:
+#
+#                 for flat_type in data['flats']:
+#
+#                     if floor == data['clone_floors'][0]:
+#                         num = flat_type['number']
+#                     else:
+#                         number_entrance = str(flat_type['entrance'])
+#                         number_of_flats_in_entrance = data['number_of_flats_in_entrance'][number_entrance]['number_of']
+#                         flat_type['number'] += number_of_flats_in_entrance
+#
+#                     flat_object = flat_model(
+#                         hash_id=helper.create_hash(),
+#                         house=house,
+#                         house_hash_id=house.hash_id,
+#                         flat_schema=flat_schema,
+#                         flat_schema_hash_id=flat_schema.hash_id,
+#                         # flat_type=flat_type,
+#                         # flat_type_hash_id=flat_type.hash_id,
+#                         entrance=flat_type['entrance'],
+#                         number=flat_type['number'],
+#                         area=flat_type['area'],
+#                         price=flat_type['price'],
+#                         windows=flat_type['windows'],
+#                         status=flat_type['status'],
+#                         floor=floor,
+#                         coordinates=flat_type['coordinates'],
+#                     )
+#
+#                     flats_objects.append((
+#                         flat_object
+#                     ))
+#
+#             flat_model.objects.bulk_create(flats_objects)
+#
+#             return data['clone_floors']
+#
+#     def put(self, request, id):
+#         flat = flat_model.manager.filter(flat_type__hash_id=id).update()
+#         return HttpResponse(flat)
+#
+#     def delete(self, request, id):
+#         return HttpResponse('delete flat type')
+
+
 class FlatType(View):
     def get(self, request):
         return HttpResponse('get flat type')
