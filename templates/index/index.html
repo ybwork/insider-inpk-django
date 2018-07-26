@@ -112,11 +112,11 @@
                     <!--images: 'path/to/image',-->
                     <!--coordinates: '122.11, 888.00',-->
                     <!--currency: 'building',-->
-                    <!--company_id: 'cb0406e9',-->
+                    <!--company_id: '46c59141',-->
 
-                    api_key: "svFuEKT573va3bV0HJNtFF5OtA4fh2JBHgOCklxsxo6TfKi9h6RDWXa9zajGGNrj",
+                    api_key: "amgnLDtlnXFIiW4zqhnB8dAcHD8vsqZddLzzpC7ZlCPi3aFLRZ8mBJQibzCEES8u",
 
-                    <!--building_id: '7bd898b4',-->
+                    <!--building_id: '9e161531',-->
                     <!--number_of_floors: 11,-->
                     <!--living_floors: '1-10',-->
                     <!--number_of_entrance: 4,-->
@@ -129,7 +129,7 @@
                     <!--start_development: '',-->
                     <!--end_development: '',-->
 
-                    <!--house_id: '17d19e5b',-->
+                    <!--house_id: 'f12865f7',-->
                     <!--type: 'test',-->
                     <!--image: 'test',-->
                     <!--number_of_balcony: 1,-->
@@ -137,17 +137,17 @@
                     <!--area: '111.11',-->
                     <!--price: '111.11',-->
 
-                    house_id: '17d19e5b',
-                    image: 'path/to/image',
-                    clone_floors: [1, 2, 3, 4],
-                    number: 1,
-                    number_of_flats: 25,
-
-                    <!--house_id: 'ed70941f',-->
-                    <!--floor_type_id: '12ec63e4',-->
-                    <!--flat_schema_id: '6b2c52af',-->
-                    <!--entrance: 1,-->
+                    <!--house_id: 'f12865f7',-->
+                    <!--image: 'path/to/image',-->
+                    <!--clone_floors: [1, 2, 3, 4],-->
                     <!--number: 1,-->
+                    <!--number_of_flats: 25,-->
+
+                    <!--house_id: 'f12865f7',-->
+                    <!--floor_type_id: '93371c11',-->
+                    <!--flat_schema_id: '81873559',-->
+                    <!--entrance: 3,-->
+                    <!--number: 83,-->
                     <!--area: 0,-->
                     <!--price: 0,-->
                     <!--windows: ['test', 'test2'],-->
@@ -155,9 +155,19 @@
                     <!--coordinates: '213.22, 749.22',-->
                     <!--clone_floors: [1, 2, 3, 4]-->
 
-                    <!--house_id: 'ed70941f',-->
-                    <!--clone_floors: [1, 2, 3, 4],-->
-                    <!--number_of_entrance: 3,-->
+                    house_id: 'f12865f7',
+                    clone_floors: [1, 2, 3, 4],
+                    number_of_flats_in_entrance: {
+                        1: {
+                            number_of: 4,
+                        },
+                        2: {
+                            number_of: 6,
+                        },
+                        3: {
+                            number_of: 4,
+                        }
+                    },
                 },
 
                 <!--url: 'http://172.100.2.15:8000/password/reset',-->
@@ -169,9 +179,9 @@
                 <!--url: 'http://172.100.2.15:8000/buildings'-->
                 <!--url: 'http://172.100.2.15:8000/houses',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
-                url: 'http://172.100.2.15:8000/floor-types',
+                <!--url: 'http://172.100.2.15:8000/floor-types',-->
                 <!--url: 'http://172.100.2.15:8000/flat-types',-->
-                <!--url: 'http://172.100.2.15:8000/flats/numbering',-->
+                url: 'http://172.100.2.15:8000/flats/numbering',
             }).then(function (response) {
                 console.log(response);
             }).catch(function (error) {

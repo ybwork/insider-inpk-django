@@ -1,7 +1,8 @@
-from django.contrib.postgres.aggregates import ArrayAgg
+from django.contrib.postgres.aggregates import ArrayAgg, StringAgg
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
+from django.db.models import Count, Sum
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views import View
@@ -437,7 +438,7 @@ class FlatType(View):
     def post(self, request):
         data = serialization.json_decode(request.body)
 
-        house = house_model.manager.get(hash_id=data['house_id'])
+        house = house_model.objects.get(hash_id=data['house_id'])
         data['house'] = house
         data['house_hash_id'] = house.hash_id
 
@@ -466,27 +467,53 @@ class FlatType(View):
         return HttpResponse('delete flat type')
 
 
+# def numbering_flats(request):
+#     data = serialization.json_decode(request.body)
+#
+#     number_flat = 1
+#     number_of_entrance = data['number_of_entrance'] + 1
+#
+#     with transaction.atomic():
+#         for entrance in range(1, number_of_entrance):
+#
+#             for clone_floor in data['clone_floors']:
+#                 flats = flat_model.manager.filter(
+#                     house_hash_id=data['house_id']
+#                 ).filter(
+#                     floor=clone_floor
+#                 ).filter(
+#                     entrance=entrance
+#                 )
+#
+#                 for flat in flats:
+#                     flat.number = number_flat
+#                     flat.save()
+#                     number_flat += 1
+#
+#     return JsonResponse({}, status=200)
+
 def numbering_flats(request):
     data = serialization.json_decode(request.body)
 
-    number_flat = 1
-    number_of_entrance = data['number_of_entrance'] + 1
-
     with transaction.atomic():
+        flats = flat_model.manager.filter(
+            house_hash_id=data['house_id']
+        )
+
+        number_of_entrance = flats.values('entrance').distinct().count() + 1
+        number_first_flat = flats.first().number
+
         for entrance in range(1, number_of_entrance):
+            number_of_flats_in_etrance = data['number_of_flats_in_entrance'][str(entrance)]['number_of']
 
-            for clone_floor in data['clone_floors']:
-                flats = flat_model.manager.filter(
-                    house_hash_id=data['house_id']
-                ).filter(
-                    floor=clone_floor
-                ).filter(
-                    entrance=entrance
-                )
+            flats_by_entrance = flats.filter(entrance=entrance)
 
-                for flat in flats:
-                    flat.number = number_flat
-                    flat.save()
-                    number_flat += 1
+            for flat in flats_by_entrance:
+                if flat.number:
+                    number_first_flat = int(flat.number)
+
+                flat.number = number_first_flat
+                flat.save()
+                number_first_flat += number_of_flats_in_etrance
 
     return JsonResponse({}, status=200)
