@@ -184,6 +184,57 @@ class HouseForm(forms.Form):
     )
 
 
+class FlatSchemaForm(forms.Form):
+    house_id = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': 'Что то пошло не так... Попробуйте позже!'
+        }
+    )
+
+    type = forms.CharField(
+        max_length=100,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    image = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    number_of_balcony = forms.IntegerField(
+        error_messages={
+            'required': custom_error_messages['required'],
+        }
+    )
+
+    number_of_loggia = forms.IntegerField(
+        error_messages={
+            'format': custom_error_messages['format']
+        }
+    )
+
+    area = forms.DecimalField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'format': custom_error_messages['format']
+        }
+    )
+
+    price = forms.DecimalField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'format': custom_error_messages['format']
+        }
+    )
+
+
 # class HouseForm(ModelForm):
 #     class Meta:
 #         model = House

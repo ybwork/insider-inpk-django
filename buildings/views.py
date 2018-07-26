@@ -1,8 +1,6 @@
-from django.contrib.postgres.aggregates import ArrayAgg, StringAgg
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
-from django.db.models import Count, Sum
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views import View
@@ -11,7 +9,7 @@ from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType, FloorTypeEntrance
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm, HouseForm
+from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm
 
 serialization = Serialization()
 helper = Helper()
@@ -26,8 +24,10 @@ flat_type_model = FlatType
 flat_model = Flat
 user_model = User
 floor_type_entrance_model = FloorTypeEntrance
+
 building_form = BuildingForm
 house_form = HouseForm
+flat_schema_form = FlatSchemaForm
 
 """
     company_id = request.user.company_id
@@ -226,9 +226,7 @@ class House(View):
 
         if form.is_valid():
             old_house = fetch_from_db(house_model, **{'hash_id': id})
-
             new_house = self.update_house(old_house, form.cleaned_data)
-
             return generate_response(data=model_to_dict(new_house), status=200)
 
         return generate_response(data=form.errors, status=400)
@@ -292,38 +290,66 @@ def get_building_houses(request, id):
 
 
 class FlatSchema(View):
-    def get(self, request):
-        flats_schemas = serializers.serialize('json', flat_schema_model.manager.all())
+    def get(self, request, id):
+        flats_schemas = fetch_from_db(flat_schema_model, **{'hash_id': id})
 
-        return JsonResponse(flats_schemas, status=200, safe=False)
+        return generate_response(data=model_to_dict(flats_schemas), status=200)
 
     def post(self, request):
-        data = serialization.json_decode(request.body)
+        data = decode(request.body)
 
+        form = bind_data_with_form(flat_schema_form, data)
+
+        if form.is_valid():
+            flat_schema = self.create_flat_schema(form.cleaned_data)
+            return generate_response(data=model_to_dict(flat_schema), status=200)
+
+        return generate_response(data=form.errors, status=400)
+
+    def create_flat_schema(self, data):
         house = house_model.objects.get(hash_id=data['house_id'])
 
-        data['house'] = house
-        data['house_hash_id'] = house.hash_id
-
-        flat_schema = flat_schema_model.manager.create(data)
-
-        response = JsonResponse(model_to_dict(flat_schema), status=200)
-        response['Access-Control-Allow-Origin'] = '*'
-        return response
+        return flat_schema_model.objects.create(
+            hash_id=helper.create_hash(),
+            house=house,
+            house_hash_id=house.hash_id,
+            type=data['type'],
+            image=data['image'],
+            number_of_balcony=data['number_of_balcony'],
+            number_of_loggia=data['number_of_loggia'],
+            area=data['area'],
+            price=data['price'],
+        )
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body)
+        data = decode(request.body)
 
-        old_flat_schema = flat_schema_model.manager.get(hash_id=id)
+        form = bind_data_with_form(flat_schema_form, data)
 
-        new_flat_schema = flat_schema_model.manager.update(old_flat_schema, data)
+        if form.is_valid():
+            old_flat_schema = fetch_from_db(flat_schema_model, **{'hash_id': id})
+            new_flat_schema = self.update_flat_schema(old_flat_schema, form.cleaned_data)
+            return generate_response(data=model_to_dict(new_flat_schema), status=200)
 
-        return JsonResponse(model_to_dict(new_flat_schema), status=200, reason='OK')
+        return generate_response(data=form.errors, status=400)
+
+
+    def update_flat_schema(self, flat_schema, data):
+        flat_schema.type = data['type']
+        flat_schema.image = data['image']
+        flat_schema.number_of_balcony = data['number_of_balcony']
+        flat_schema.number_of_loggia = data['number_of_loggia']
+        flat_schema.area = data['area']
+        flat_schema.price = data['price']
+
+        flat_schema.save()
+
+        return flat_schema
 
     def delete(self, request, id):
-        flat_schema_model.manager.filter(hash_id=id).delete()
+        delete_from_db(flat_schema_model, **{'hash_id': id})
 
-        return HttpResponse(status=200, reason='OK')
+        return generate_response(status=200)
 
 
 class FloorType(View):

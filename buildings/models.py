@@ -46,35 +46,35 @@ class House(models.Model):
         ordering = ['id']
 
 
-class FlatSchemaManager(models.Manager):
-    def create(self, data):
-        flat_schema = self.model(
-            hash_id=helper.create_hash(),
-            house_hash_id=data['house_hash_id'],
-            house=data['house'],
-            type=data['type'],
-            image=data['image'],
-            number_of_balcony=data['number_of_balcony'],
-            number_of_loggia=data['number_of_loggia'],
-            area=data['area'],
-            price=data['price'],
-        )
-
-        flat_schema.save()
-
-        return flat_schema
-
-    def update(self, flat_schema, data):
-        flat_schema.type = data['type']
-        flat_schema.image = data['image']
-        flat_schema.number_of_balcony = data['number_of_balcony']
-        flat_schema.number_of_loggia = data['number_of_loggia']
-        flat_schema.area = data['area']
-        flat_schema.price = data['price']
-
-        flat_schema.save()
-
-        return flat_schema
+# class FlatSchemaManager(models.Manager):
+#     def create(self, data):
+#         flat_schema = self.model(
+#             hash_id=helper.create_hash(),
+#             house_hash_id=data['house_hash_id'],
+#             house=data['house'],
+#             type=data['type'],
+#             image=data['image'],
+#             number_of_balcony=data['number_of_balcony'],
+#             number_of_loggia=data['number_of_loggia'],
+#             area=data['area'],
+#             price=data['price'],
+#         )
+#
+#         flat_schema.save()
+#
+#         return flat_schema
+#
+#     def update(self, flat_schema, data):
+#         flat_schema.type = data['type']
+#         flat_schema.image = data['image']
+#         flat_schema.number_of_balcony = data['number_of_balcony']
+#         flat_schema.number_of_loggia = data['number_of_loggia']
+#         flat_schema.area = data['area']
+#         flat_schema.price = data['price']
+#
+#         flat_schema.save()
+#
+#         return flat_schema
 
 
 class FlatSchema(models.Model):
@@ -92,7 +92,7 @@ class FlatSchema(models.Model):
         db_table = 'building_house_flats_schemas'
         ordering = ['id']
 
-    manager = FlatSchemaManager()
+    # manager = FlatSchemaManager()
 
 
 class FloorTypeManager(models.Manager):
