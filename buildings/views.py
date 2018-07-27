@@ -1,5 +1,6 @@
 import random
 
+from django.contrib.postgres.aggregates import ArrayAgg
 from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import FileSystemStorage
@@ -571,8 +572,10 @@ class Flat(View):
 
 
 class FlatType(View):
-    def get(self, request):
-        return HttpResponse('get flat type')
+    def get(self, request, id):
+        flat_type = flat_type_model.manager.get(hash_id=id)
+
+        return generate_response(data=model_to_dict(flat_type), status=200)
 
     def post(self, request):
         data = serialization.json_decode(request.body)
@@ -581,12 +584,18 @@ class FlatType(View):
         data['house'] = house
         data['house_hash_id'] = house.hash_id
 
-        floor_type = floor_type_model.manager.get(hash_id=data['floor_type_id'])
-        data['floor_type'] = floor_type
-        data['floor_type_hash_id'] = floor_type.hash_id
+        floors = floor_model.manager.filter(
+            floor_type__hash_id=data['floor_type_id']
+        ).filter(
+            house_hash_id=data['house_id']
+        )
+
+        data['floor_type'] = floors.first().floor_type
+        data['floor_type_hash_id'] = floors.first().floor_type.hash_id
+
+        data['clone_floors'] = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
 
         flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
-
         data['flat_schema'] = flat_schema
         data['flat_schema_hash_id'] = flat_schema.hash_id
 
@@ -595,18 +604,51 @@ class FlatType(View):
 
             data['flat_type'] = flat_type
             data['flat_type_hash_id'] = flat_type.hash_id
-            print(data['coordinates'])
-            print(isinstance(data['coordinates'], str))
+
             flats = flat_model.manager.multiple_create(data)
 
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def put(self, request, id):
-        flat = flat_model.manager.filter(flat_type__hash_id=id).update()
-        return HttpResponse(flat)
+        data = serialization.json_decode(request.body)
+
+        flat_type_model.manager.filter(hash_id=id).delete()
+
+        house = house_model.objects.get(hash_id=data['house_id'])
+        data['house'] = house
+        data['house_hash_id'] = house.hash_id
+
+        floors = floor_model.manager.filter(
+            floor_type__hash_id=data['floor_type_id']
+        ).filter(
+            house_hash_id=data['house_id']
+        )
+
+        data['floor_type'] = floors.first().floor_type
+        data['floor_type_hash_id'] = floors.first().floor_type.hash_id
+
+        data['clone_floors'] = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
+
+        flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
+        data['flat_schema'] = flat_schema
+        data['flat_schema_hash_id'] = flat_schema.hash_id
+
+        with transaction.atomic():
+            flat_type = flat_type_model.manager.create(data)
+
+            data['flat_type'] = flat_type
+            data['flat_type_hash_id'] = flat_type.hash_id
+
+            flats = flat_model.manager.multiple_create(data)
+
+        return generate_response(data=model_to_dict(flat_type), status=200)
 
     def delete(self, request, id):
-        return HttpResponse('delete flat type')
+        try:
+            flat_type_model.manager.filter(hash_id=id).delete()
+            return generate_response(status=200)
+        except SomethingWentWrong:
+            return generate_response(status=500)
 
 
 # def numbering_flats(request):
