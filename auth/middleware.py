@@ -26,20 +26,6 @@ class AuthMiddleware(MiddlewareMixin):
         }, status=401)
 
     def is_available_path(self, request):
-        # available_paths = [
-        #     '/',
-        #     '/login',
-        #     '/register',
-        # ]
-
-        # if available_path:
-        #     available_paths.append(request.path)
-
-        # if request.path in available_paths:
-        #     return True
-        #
-        # return False
-
         path_in_url = re.search('/|login|register|confirm|reset', request.path)
 
         if path_in_url:

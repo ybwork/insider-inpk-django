@@ -1,6 +1,9 @@
+import random
+
 from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import FileSystemStorage
-from django.db import transaction
+from django.db import transaction, DatabaseError
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views import View
@@ -93,7 +96,15 @@ def fetch_all_from_db(model, condition={}):
 
 
 def delete_from_db(model, **condition):
-    return model.objects.filter(**condition).delete()
+    result = model.objects.filter(**condition).delete()
+
+    if result[0]:
+        return result
+    raise SomethingWentWrong()
+
+
+class SomethingWentWrong(Exception):
+    pass
 
 
 class Building(View):
@@ -161,9 +172,11 @@ class Building(View):
         return building
 
     def delete(self, request, id):
-        delete_from_db(building_model, **{'hash_id': id})
-
-        return generate_response(status=200)
+        try:
+            delete_from_db(building_model, **{'hash_id': id})
+            return generate_response(status=200)
+        except SomethingWentWrong:
+            return generate_response(status=500)
 
 
 def get_company_buildings(request, id):
@@ -226,7 +239,9 @@ class House(View):
 
         if form.is_valid():
             old_house = fetch_from_db(house_model, **{'hash_id': id})
+
             new_house = self.update_house(old_house, form.cleaned_data)
+
             return generate_response(data=model_to_dict(new_house), status=200)
 
         return generate_response(data=form.errors, status=400)
@@ -249,9 +264,11 @@ class House(View):
         return house
 
     def delete(self, request, id):
-        delete_from_db(house_model, **{'hash_id': id})
-
-        return generate_response(status=200)
+        try:
+            delete_from_db(house_model, **{'hash_id': id})
+            return generate_response(status=200)
+        except SomethingWentWrong:
+            return generate_response(status=500)
 
 
 def get_building_houses(request, id):
@@ -263,15 +280,6 @@ def get_building_houses(request, id):
     houses = encode(format='json', data=data)
 
     return generate_response(data=houses, status=200)
-
-
-# def get_house_ftats_schemas(request, id):
-#     data = flat_schema_model.manager.filter(house_hash_id=id)
-#
-#     house_flats_schemas = serializers.serialize('json', data)
-#
-#     return JsonResponse(house_flats_schemas, status=200, safe=False)
-
 
 # def get_house_floors(request, id):
 #     data = floor_model.manager.filter(house_hash_id=id)
@@ -328,11 +336,12 @@ class FlatSchema(View):
 
         if form.is_valid():
             old_flat_schema = fetch_from_db(flat_schema_model, **{'hash_id': id})
+
             new_flat_schema = self.update_flat_schema(old_flat_schema, form.cleaned_data)
+
             return generate_response(data=model_to_dict(new_flat_schema), status=200)
 
         return generate_response(data=form.errors, status=400)
-
 
     def update_flat_schema(self, flat_schema, data):
         flat_schema.type = data['type']
@@ -347,9 +356,18 @@ class FlatSchema(View):
         return flat_schema
 
     def delete(self, request, id):
-        delete_from_db(flat_schema_model, **{'hash_id': id})
+        try:
+            delete_from_db(flat_schema_model, **{'hash_id': id})
+            return generate_response(status=200)
+        except SomethingWentWrong:
+            return generate_response(status=500)
 
-        return generate_response(status=200)
+# def get_house_ftats_schemas(request, id):
+#     data = flat_schema_model.manager.filter(house_hash_id=id)
+#
+#     house_flats_schemas = serializers.serialize('json', data)
+#
+#     return JsonResponse(house_flats_schemas, status=200, safe=False)
 
 
 class FloorType(View):
@@ -567,18 +585,21 @@ class FlatType(View):
         data['floor_type'] = floor_type
         data['floor_type_hash_id'] = floor_type.hash_id
 
-        flat_schema = flat_schema_model.manager.get(hash_id=data['flat_schema_id'])
+        flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
+
         data['flat_schema'] = flat_schema
         data['flat_schema_hash_id'] = flat_schema.hash_id
 
         with transaction.atomic():
             flat_type = flat_type_model.manager.create(data)
+
             data['flat_type'] = flat_type
             data['flat_type_hash_id'] = flat_type.hash_id
-
+            print(data['coordinates'])
+            print(isinstance(data['coordinates'], str))
             flats = flat_model.manager.multiple_create(data)
 
-        return HttpResponse(flats)
+        return generate_response(data=model_to_dict(flat_type), status=200)
 
     def put(self, request, id):
         flat = flat_model.manager.filter(flat_type__hash_id=id).update()
@@ -631,7 +652,7 @@ def numbering_flats(request):
 
             for flat in flats_by_entrance:
                 if flat.number:
-                    number_first_flat = int(flat.number)
+                    number_first_flat = flat.number
 
                 flat.number = number_first_flat
                 flat.save()

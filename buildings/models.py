@@ -219,14 +219,12 @@ class FlatManager(models.Manager):
                 flat_type_hash_id=data['flat_type_hash_id'],
                 entrance=data['entrance'],
                 number=data['number'],
-                area=data['area'],
-                price=data['price'],
                 windows=data['windows'],
-                status=data['status'],
+                status=data['number'],
                 floor=floor
             )
 
-            data['number'] = ''
+            data['number'] = 0
 
             flats.append((
                 flat
@@ -239,8 +237,6 @@ class FlatManager(models.Manager):
     def update(self, flat, data):
         flat.entrance = data['entrance']
         flat.number = data['number']
-        flat.area = data['area']
-        flat.price = data['price']
         flat.windows = data['windows']
         flat.status = data['status']
 
@@ -259,9 +255,7 @@ class Flat(models.Model):
     flat_type_hash_id = models.CharField(max_length=16, db_index=True, null=True)
     floor = models.PositiveIntegerField()
     entrance = models.PositiveIntegerField()
-    number = models.CharField(max_length=255, blank=True, null=True)
-    area = models.DecimalField(blank=True, max_digits=10, decimal_places=2)
-    price = models.DecimalField(blank=True, max_digits=10, decimal_places=2)
+    number = models.PositiveIntegerField()
     windows = models.TextField(blank=True)
     status = models.PositiveIntegerField(blank=True, null=True)
 
