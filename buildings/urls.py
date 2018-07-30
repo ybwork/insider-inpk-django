@@ -17,7 +17,7 @@ urlpatterns = [
     path('flats-schemas', views.FlatSchema.as_view()),
     path('flats-schemas/<str:id>', views.FlatSchema.as_view()),
 
-    # path('houses/<str:id>/floors', views.get_house_floors),
+    path('houses/<str:id>/floor-types', views.get_house_floor_types),
 
     path('floor-types', views.FloorType.as_view()),
     path('floor-types/<str:id>', views.FloorType.as_view()),

@@ -95,18 +95,18 @@ class FlatSchema(models.Model):
     # manager = FlatSchemaManager()
 
 
-class FloorTypeManager(models.Manager):
-    def create(self, data):
-        floor_type = self.model(
-            hash_id=helper.create_hash(),
-            house=data['house'],
-            house_hash_id=data['house_hash_id'],
-            image=data['image']
-        )
-
-        floor_type.save()
-
-        return floor_type
+# class FloorTypeManager(models.Manager):
+#     def create(self, data):
+#         floor_type = self.model(
+#             hash_id=helper.create_hash(),
+#             house=data['house'],
+#             house_hash_id=data['house_hash_id'],
+#             image=data['image']
+#         )
+#
+#         floor_type.save()
+#
+#         return floor_type
 
 
 class FloorType(models.Model):
@@ -114,47 +114,48 @@ class FloorType(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE)
     house_hash_id = models.CharField(max_length=16, db_index=True, null=True)
     image = models.CharField(max_length=255, null=True)
+    number_of_flats = models.PositiveIntegerField(null=True)
 
     class Meta:
         db_table = 'building_house_floors_types'
         ordering = ['id']
 
-    manager = FloorTypeManager()
+    # manager = FloorTypeManager()
 
 
-class FloorManager(models.Manager):
-    def create(self, data):
-        floor = self.model(
-            hash_id=helper.create_hash(),
-            house=data['house'],
-            house_hash_id=data['house_hash_id'],
-            floor_type=data['floor_type'],
-            floor_type_hash_id=data['floor_type_hash_id'],
-            number=data['number'],
-        )
-
-        floor.save()
-
-        return floor
-
-    def multiple_create(self, data):
-        floors = (Floor(
-            hash_id=helper.create_hash(),
-            house=data['house'],
-            house_hash_id=data['house_hash_id'],
-            floor_type=data['floor_type'],
-            floor_type_hash_id=data['floor_type_hash_id'],
-            number='%s' % number
-        ) for number in data['clone_floors'])
-
-        self.bulk_create(floors)
-
-    def update(self, floor, data):
-        floor.number = data['number']
-
-        floor.save()
-
-        return floor
+# class FloorManager(models.Manager):
+#     def create(self, data):
+#         floor = self.model(
+#             hash_id=helper.create_hash(),
+#             house=data['house'],
+#             house_hash_id=data['house_hash_id'],
+#             floor_type=data['floor_type'],
+#             floor_type_hash_id=data['floor_type_hash_id'],
+#             number=data['number'],
+#         )
+#
+#         floor.save()
+#
+#         return floor
+#
+#     def multiple_create(self, data):
+#         floors = (Floor(
+#             hash_id=helper.create_hash(),
+#             house=data['house'],
+#             house_hash_id=data['house_hash_id'],
+#             floor_type=data['floor_type'],
+#             floor_type_hash_id=data['floor_type_hash_id'],
+#             number='%s' % number
+#         ) for number in data['clone_floors'])
+#
+#         self.bulk_create(floors)
+#
+#     def update(self, floor, data):
+#         floor.number = data['number']
+#
+#         floor.save()
+#
+#         return floor
 
 
 class Floor(models.Model):
@@ -163,13 +164,13 @@ class Floor(models.Model):
     house_hash_id = models.CharField(max_length=16, db_index=True)
     floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE, null=True)
     floor_type_hash_id = models.CharField(max_length=16, db_index=True, null=True)
-    number = models.IntegerField()
+    number = models.PositiveIntegerField(null=True)
 
     class Meta:
         db_table = 'building_house_floors'
         ordering = ['id']
 
-    manager = FloorManager()
+    # manager = FloorManager()
 
 
 class FlatTypeManager(models.Manager):
@@ -266,16 +267,16 @@ class Flat(models.Model):
     manager = FlatManager()
 
 
-class FloorTypeEntrance(models.Model):
-    hash_id = models.CharField(max_length=16)
-    floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE)
-    floor_type_hash_id = models.CharField(max_length=16)
-    number = models.PositiveIntegerField()
-    number_of_flats = models.PositiveIntegerField()
-
-    class Meta:
-        db_table = 'building_house_floor_type_entrances'
-        ordering = ['id']
+# class FloorTypeEntrance(models.Model):
+#     hash_id = models.CharField(max_length=16)
+#     floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE)
+#     floor_type_hash_id = models.CharField(max_length=16)
+#     number = models.PositiveIntegerField()
+#     number_of_flats = models.PositiveIntegerField()
+#
+#     class Meta:
+#         db_table = 'building_house_floor_type_entrances'
+#         ordering = ['id']
 
 
 

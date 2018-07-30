@@ -235,6 +235,38 @@ class FlatSchemaForm(forms.Form):
     )
 
 
+class FloorTypeForm(forms.Form):
+    house_id = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    image = forms.CharField(
+        max_length=255,
+        required=False,
+        error_messages={
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    clone_floors = forms.CharField(
+        max_length=255,
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length']
+        }
+    )
+
+    number_of_flats = forms.IntegerField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'format': custom_error_messages['format']
+        }
+    )
+
 # class HouseForm(ModelForm):
 #     class Meta:
 #         model = House

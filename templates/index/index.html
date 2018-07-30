@@ -65,11 +65,12 @@
                 <!--url: 'http://172.100.2.15:8000/houses/ed70941f/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas/81873559',-->
-                <!--url: 'http://172.100.2.15:8000/houses/2365798a/floors',-->
+                <!--url: 'http://172.100.2.15:8000/houses/00344377/floor-types',-->
                 <!--url: 'http://172.100.2.15:8000/floor-types'-->
+                <!--url: 'http://172.100.2.15:8000/floor-types/d52b43f6'-->
                 <!--url: 'http://172.100.2.15:8000/floors'-->
                 <!--url: 'http://172.100.2.15:8000/houses/3eca5cb2/apartments',-->
-                url: 'http://172.100.2.15:8000/flat-types/7f38d8c7',
+                <!--url: 'http://172.100.2.15:8000/flat-types/7f38d8c7',-->
 
             }).then(function (response) {
                 console.log(response);
@@ -117,18 +118,18 @@
 
                     api_key: "m9fYYw0buyXXn5HsUXJkWLbBEHuIQl8flDw2s9UuZioQmVArwyysVdU1NCELeUDy",
 
-                    <!--building_id: '1a95704e',-->
-                    <!--number_of_floors: 11,-->
-                    <!--living_floors: '1-10',-->
-                    <!--number_of_entrance: 4,-->
-                    <!--number_of_flat: 500,-->
-                    <!--street_name: 'Morozova',-->
-                    <!--number: '25-a',-->
-                    <!--finishing: 'pure',-->
-                    <!--materials: ['material', 'material', 'material'],-->
-                    <!--stage_development: 'test',-->
-                    <!--start_development: '',-->
-                    <!--end_development: '',-->
+                    building_id: '1a95704e',
+                    number_of_floors: 11,
+                    living_floors: '1-10',
+                    number_of_entrance: 4,
+                    number_of_flat: 500,
+                    street_name: 'Morozova',
+                    number: '25-a',
+                    finishing: 'pure',
+                    materials: ['material', 'material', 'material'],
+                    stage_development: 'test',
+                    start_development: '',
+                    end_development: '',
 
                     <!--house_id: '00344377',-->
                     <!--type: 'test',-->
@@ -138,19 +139,18 @@
                     <!--area: '111.11',-->
                     <!--price: '111.11',-->
 
-                    <!--house_id: '00344377',-->
-                    <!--image: 'path/to/image',-->
-                    <!--clone_floors: [1, 2, 3, 4],-->
-                    <!--number: 1,-->
-                    <!--number_of_flats: 25,-->
-
                     house_id: '00344377',
-                    floor_type_id: '93f07e65',
-                    flat_schema_id: '816f1fe6',
-                    entrance: 1,
-                    number: 1,
-                    windows: ['test', 'test2'],
-                    coordinates: '213.22, 749.22',
+                    image: 'path/to/image',
+                    clone_floors: '1, 2, 3, 4',
+                    number_of_flats: 25,
+
+                    <!--house_id: '00344377',-->
+                    <!--floor_type_id: '93f07e65',-->
+                    <!--flat_schema_id: '816f1fe6',-->
+                    <!--entrance: 1,-->
+                    <!--number: 1,-->
+                    <!--windows: ['test', 'test2'],-->
+                    <!--coordinates: '213.22, 749.22',-->
                     <!--clone_floors: [1, 2, 3, 4],-->
 
                     <!--house_id: 'f12865f7',-->
@@ -177,8 +177,8 @@
                 <!--url: 'http://172.100.2.15:8000/buildings'-->
                 <!--url: 'http://172.100.2.15:8000/houses',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
-                <!--url: 'http://172.100.2.15:8000/floor-types',-->
-                url: 'http://172.100.2.15:8000/flat-types',
+                url: 'http://172.100.2.15:8000/floor-types',
+                <!--url: 'http://172.100.2.15:8000/flat-types',-->
                 <!--url: 'http://172.100.2.15:8000/flats/numbering',-->
             }).then(function (response) {
                 console.log(response);
@@ -239,17 +239,18 @@
                     <!--area: '5.5',-->
                     <!--price: '5.5',-->
 
-                    <!--house_id: 'ed70941f',-->
-                    <!--image: 'path/to/image',-->
-                    <!--clone_floors: [9, 10, 11, 12],-->
-
                     house_id: '00344377',
-                    floor_type_id: '93f07e65',
-                    flat_schema_id: '816f1fe6',
-                    entrance: 2,
-                    number: 2,
-                    windows: ['change', 'change'],
-                    coordinates: '213.22, 749.22',
+                    image: 'new/path/to/image',
+                    clone_floors: '5, 6',
+                    number_of_flats: 10,
+
+                    <!--house_id: '00344377',-->
+                    <!--floor_type_id: '93f07e65',-->
+                    <!--flat_schema_id: '816f1fe6',-->
+                    <!--entrance: 2,-->
+                    <!--number: 2,-->
+                    <!--windows: ['change', 'change'],-->
+                    <!--coordinates: '213.22, 749.22',-->
 
                     <!--house_id: '3eca5cb2',-->
                     <!--typical_apartment_id: '820dff56',-->
@@ -269,8 +270,8 @@
                 <!--url: 'http://172.100.2.15:8000/buildings/6f0d3d40'-->
                 <!--url: 'http://172.100.2.15:8000/houses/f12865f7',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas/21453a1c',-->
-                <!--url: 'http://172.100.2.15:8000/floor-types/04fd82b8',-->
-                url: 'http://172.100.2.15:8000/flat-types/a574c8d4',
+                url: 'http://172.100.2.15:8000/floor-types/f5260cb2',
+                <!--url: 'http://172.100.2.15:8000/flat-types/a574c8d4',-->
             });
         });
 
@@ -290,8 +291,8 @@
                 <!--url: 'http://172.100.2.15:8000/buildings/0c3ef3fd'-->
                 <!--url: 'http://172.100.2.15:8000/houses/e65573a3',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas/53e9c45',-->
-                <!--url: 'http://172.100.2.15:8000/floor-types/21453a1c',-->
-                url: 'http://172.100.2.15:8000/flat-types/ac9d8323',
+                url: 'http://172.100.2.15:8000/floor-types/455fdf6b',
+                <!--url: 'http://172.100.2.15:8000/flat-types/ac9d8323',-->
             })
         });
     </script>

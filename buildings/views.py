@@ -1,19 +1,16 @@
-import random
-
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core import serializers
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import FileSystemStorage
-from django.db import transaction, DatabaseError
+from django.db import transaction
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 
 from auth.models import Company
 from auth.models import User
-from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType, FloorTypeEntrance
+from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm
+from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm
 
 serialization = Serialization()
 helper = Helper()
@@ -27,11 +24,11 @@ floor_type_model = FloorType
 flat_type_model = FlatType
 flat_model = Flat
 user_model = User
-floor_type_entrance_model = FloorTypeEntrance
 
 building_form = BuildingForm
 house_form = HouseForm
 flat_schema_form = FlatSchemaForm
+floor_type_form = FloorTypeForm
 
 """
     company_id = request.user.company_id
@@ -70,7 +67,7 @@ flat_schema_form = FlatSchemaForm
 """
 
 
-def decode(data):
+def decode_from_json_format(data):
     return serialization.json_decode(data)
 
 
@@ -101,6 +98,7 @@ def delete_from_db(model, **condition):
 
     if result[0]:
         return result
+
     raise SomethingWentWrong()
 
 
@@ -115,12 +113,13 @@ class Building(View):
         return generate_response(data=model_to_dict(building), status=200)
 
     def post(self, request):
-        data = decode(request.body)
+        data = decode_from_json_format(request.body.decode('utf-8'))
 
         form = bind_data_with_form(building_form, data)
 
         if form.is_valid():
             building = self.create_building(form.cleaned_data)
+
             return generate_response(data=model_to_dict(building), status=200)
 
         return generate_response(data=form.errors, status=400)
@@ -144,7 +143,7 @@ class Building(View):
         )
 
     def put(self, request, id):
-        data = decode(request.body)
+        data = decode_from_json_format(request.body.decode('utf-8'))
 
         form = bind_data_with_form(building_form, data)
 
@@ -173,11 +172,9 @@ class Building(View):
         return building
 
     def delete(self, request, id):
-        try:
-            delete_from_db(building_model, **{'hash_id': id})
-            return generate_response(status=200)
-        except SomethingWentWrong:
-            return generate_response(status=500)
+        delete_from_db(building_model, **{'hash_id': id})
+
+        return generate_response(status=200)
 
 
 def get_company_buildings(request, id):
@@ -198,12 +195,13 @@ class House(View):
         return generate_response(data=model_to_dict(house), status=200)
 
     def post(self, request):
-        data = decode(request.body)
+        data = decode_from_json_format(request.body.decode('utf-8'))
 
         form = bind_data_with_form(house_form, data)
 
         if form.is_valid():
             house = self.create_house(form.cleaned_data)
+
             return generate_response(data=model_to_dict(house), status=200)
 
         return generate_response(data=form.errors, status=400)
@@ -231,10 +229,11 @@ class House(View):
     def get_correct_date(self, date):
         if date:
             return date
+
         return None
 
     def put(self, request, id):
-        data = decode(request.body)
+        data = decode_from_json_format(request.body.decode('utf-8'))
 
         form = bind_data_with_form(house_form, data)
 
@@ -265,11 +264,9 @@ class House(View):
         return house
 
     def delete(self, request, id):
-        try:
-            delete_from_db(house_model, **{'hash_id': id})
-            return generate_response(status=200)
-        except SomethingWentWrong:
-            return generate_response(status=500)
+        delete_from_db(house_model, **{'hash_id': id})
+
+        return generate_response(status=200)
 
 
 def get_building_houses(request, id):
@@ -305,12 +302,13 @@ class FlatSchema(View):
         return generate_response(data=model_to_dict(flats_schemas), status=200)
 
     def post(self, request):
-        data = decode(request.body)
+        data = decode_from_json_format(request.body.decode('utf-8'))
 
         form = bind_data_with_form(flat_schema_form, data)
 
         if form.is_valid():
             flat_schema = self.create_flat_schema(form.cleaned_data)
+
             return generate_response(data=model_to_dict(flat_schema), status=200)
 
         return generate_response(data=form.errors, status=400)
@@ -331,7 +329,7 @@ class FlatSchema(View):
         )
 
     def put(self, request, id):
-        data = decode(request.body)
+        data = decode_from_json_format(request.body.decode('utf-8'))
 
         form = bind_data_with_form(flat_schema_form, data)
 
@@ -357,11 +355,9 @@ class FlatSchema(View):
         return flat_schema
 
     def delete(self, request, id):
-        try:
-            delete_from_db(flat_schema_model, **{'hash_id': id})
-            return generate_response(status=200)
-        except SomethingWentWrong:
-            return generate_response(status=500)
+        delete_from_db(flat_schema_model, **{'hash_id': id})
+
+        return generate_response(status=200)
 
 # def get_house_ftats_schemas(request, id):
 #     data = flat_schema_model.manager.filter(house_hash_id=id)
@@ -372,66 +368,96 @@ class FlatSchema(View):
 
 
 class FloorType(View):
-    def get(self, request):
-        floor_types = serializers.serialize(
-            'json', floor_type_model.manager.filter(house_hash_id=request.GET['house_id'])
-        )
+    def get(self, request, id):
+        floor_type = fetch_from_db(floor_type_model, **{'hash_id': id})
 
-        return JsonResponse(floor_types, status=200, safe=False)
+        return generate_response(data=model_to_dict(floor_type))
 
     def post(self, request):
-        data = serialization.json_decode(request.body)
+        data = serialization.json_decode(request.body.decode('utf-8'))
 
-        house = house_model.objects.get(hash_id=data['house_id'])
+        form = bind_data_with_form(floor_type_form, data)
 
-        data['house'] = house
-        data['house_hash_id'] = house.hash_id
+        if form.is_valid():
+            floor_type = self.create_floor_type(form.cleaned_data)
 
+            return generate_response(data=encode('json', floor_type), status=200)
+
+        return generate_response(data=form.errors, status=400)
+
+    def create_floor_type(self, data):
         with transaction.atomic():
-            floor_type = floor_type_model.manager.create(data)
-            data['floor_type'] = floor_type
-            data['floor_type_hash_id'] = floor_type.hash_id
+            house = house_model.objects.get(hash_id=data['house_id'])
 
-            entrances = [
-                [1, 25],
-            ]
-
-            floor_type_entrances = (FloorTypeEntrance(
+            floor_type = floor_type_model.objects.create(
                 hash_id=helper.create_hash(),
+                house=house,
+                house_hash_id=house.hash_id,
+                image=data['image'],
+                number_of_flats=data['number_of_flats']
+            )
+
+            floors = (floor_model(
+                hash_id=helper.create_hash(),
+                house=house,
+                house_hash_id=house.hash_id,
                 floor_type=floor_type,
                 floor_type_hash_id=floor_type.hash_id,
-                number='%s' % number,
-                number_of_flats='%s' % number_of_flats
-            )for number, number_of_flats in entrances)
+                number='%s' % number
+            ) for number in data['clone_floors'].split(','))
 
-            floor_type_entrance_model.objects.bulk_create(floor_type_entrances)
-
-            floor_model.manager.multiple_create(data)
-
-        return HttpResponse('good')
+            return floor_model.objects.bulk_create(floors)
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body)
+        data = serialization.json_decode(request.body.decode('utf-8'))
 
+        form = bind_data_with_form(floor_type_form, data)
+
+        if form.is_valid():
+            new_floor_type = self.update_floor_type(form.cleaned_data, id)
+
+            return generate_response(data=encode('json', new_floor_type), status=200)
+
+        return generate_response(data=form.errors, status=400)
+
+    def update_floor_type(self, data, id):
         with transaction.atomic():
-            floor_type_model.manager.filter(hash_id=id).delete()
+            delete_from_db(floor_type_model, **{'hash_id': id})
 
-            house = house_model.manager.get(hash_id=data['house_id'])
-            data['house'] = house
-            data['house_hash_id'] = house.hash_id
+            house = house_model.objects.get(hash_id=data['house_id'])
 
-            floor_type = floor_type_model.manager.create(data)
-            data['floor_type'] = floor_type
-            data['floor_type_hash_id'] = floor_type.hash_id
+            floor_type = floor_type_model.objects.create(
+                hash_id=helper.create_hash(),
+                house=house,
+                house_hash_id=house.hash_id,
+                image=data['image'],
+                number_of_flats=data['number_of_flats']
+            )
 
-            floor_model.manager.multiple_create(data)
+            floors = (floor_model(
+                hash_id=helper.create_hash(),
+                house=house,
+                house_hash_id=house.hash_id,
+                floor_type=floor_type,
+                floor_type_hash_id=floor_type.hash_id,
+                number='%s' % number
+            ) for number in data['clone_floors'].split(','))
 
-        return HttpResponse('сформировать ответ, когда фронтендер будет знать, что ему нужно')
+            return floor_model.objects.bulk_create(floors)
 
     def delete(self, request, id):
-        floor_type_model.manager.filter(hash_id=id).delete()
+        delete_from_db(floor_type_model, **{'hash_id': id})
 
-        return HttpResponse(status=200, reason='OK')
+        return generate_response(status=200)
+
+
+def get_house_floor_types(request, id):
+    house_floor_type = fetch_all_from_db(
+        model=floor_model,
+        condition={'floor_type__house_hash_id': id}
+    )
+    
+    return generate_response(data=encode('json', house_floor_type), status=200)
 
 
 class Flat(View):
@@ -441,7 +467,7 @@ class Flat(View):
         return JsonResponse(flat, status=200, safe=False)
 
     def post(self, request):
-        data = serialization.json_decode(request.body)
+        data = serialization.json_decode(request.body.decode('utf-8'))
 
         house = house_model.manager.get(hash_id=data['house_id'])
         data['house'] = house
@@ -462,7 +488,7 @@ class Flat(View):
         return response
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body)
+        data = serialization.json_decode(request.body.decode('utf-8'))
 
         old_flat = flat_model.manager.get(hash_id=id)
 
@@ -578,7 +604,7 @@ class FlatType(View):
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def post(self, request):
-        data = serialization.json_decode(request.body)
+        data = serialization.json_decode(request.body.decode('utf-8'))
 
         house = house_model.objects.get(hash_id=data['house_id'])
         data['house'] = house
@@ -610,7 +636,7 @@ class FlatType(View):
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body)
+        data = serialization.json_decode(request.body.decode('utf-8'))
 
         flat_type_model.manager.filter(hash_id=id).delete()
 
@@ -644,11 +670,9 @@ class FlatType(View):
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def delete(self, request, id):
-        try:
-            flat_type_model.manager.filter(hash_id=id).delete()
-            return generate_response(status=200)
-        except SomethingWentWrong:
-            return generate_response(status=500)
+        flat_type_model.manager.filter(hash_id=id).delete()
+
+        return generate_response(status=200)
 
 
 # def numbering_flats(request):
@@ -677,7 +701,7 @@ class FlatType(View):
 #     return JsonResponse({}, status=200)
 
 def numbering_flats(request):
-    data = serialization.json_decode(request.body)
+    data = serialization.json_decode(request.body.decode('utf-8'))
 
     with transaction.atomic():
         flats = flat_model.manager.filter(
