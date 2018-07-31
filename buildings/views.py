@@ -71,7 +71,7 @@ def decode_from_json_format(data):
     return serialization.json_decode(data)
 
 
-def encode(format, data):
+def encode_objects_in_assigned_format(format, data):
     return serializers.serialize(format, data)
 
 
@@ -85,7 +85,7 @@ def bind_data_with_form(form, data):
     return form(data)
 
 
-def fetch_from_db(model, **condition):
+def fetch_from_db(model, condition):
     return model.objects.get(**condition)
 
 
@@ -93,7 +93,7 @@ def fetch_all_from_db(model, condition={}):
     return model.objects.filter(**condition)
 
 
-def delete_from_db(model, **condition):
+def delete_from_db(model, condition):
     result = model.objects.filter(**condition).delete()
 
     if result[0]:
@@ -108,24 +108,24 @@ class SomethingWentWrong(Exception):
 
 class Building(View):
     def get(self, request, id):
-        building = fetch_from_db(building_model, **{'hash_id': id})
+        building = fetch_from_db(model=building_model, condition={'hash_id': id})
 
         return generate_response(data=model_to_dict(building), status=200)
 
     def post(self, request):
-        data = decode_from_json_format(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(building_form, data)
+        form = bind_data_with_form(form=building_form, data=data)
 
         if form.is_valid():
-            building = self.create_building(form.cleaned_data)
+            building = self.create_building(data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(building), status=200)
 
         return generate_response(data=form.errors, status=400)
 
     def create_building(self, data):
-        company = fetch_from_db(company_model, **{'hash_id': data['company_id']})
+        company = fetch_from_db(model=company_model, condition={'hash_id': data['company_id']})
 
         return building_model.objects.create(
             hash_id=helper.create_hash(),
@@ -143,14 +143,14 @@ class Building(View):
         )
 
     def put(self, request, id):
-        data = decode_from_json_format(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(building_form, data)
+        form = bind_data_with_form(form=building_form, data=data)
 
         if form.is_valid():
-            old_building = fetch_from_db(building_model, **{'hash_id': id})
+            old_building = fetch_from_db(model=building_model, condition={'hash_id': id})
 
-            new_building = self.update_building(old_building, form.cleaned_data)
+            new_building = self.update_building(building=old_building, data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(new_building), status=200)
 
@@ -172,7 +172,7 @@ class Building(View):
         return building
 
     def delete(self, request, id):
-        delete_from_db(building_model, **{'hash_id': id})
+        delete_from_db(model=building_model, condition={'hash_id': id})
 
         return generate_response(status=200)
 
@@ -183,31 +183,31 @@ def get_company_buildings(request, id):
         condition={'company_hash_id': id}
     )
 
-    company_buildings = encode(format='json', data=data)
+    company_buildings = encode_objects_in_assigned_format(format='json', data=data)
 
     return generate_response(data=company_buildings, status=200)
 
 
 class House(View):
     def get(self, request, id):
-        house = fetch_from_db(house_model, **{'hash_id': id})
+        house = fetch_from_db(model=house_model, condition={'hash_id': id})
 
         return generate_response(data=model_to_dict(house), status=200)
 
     def post(self, request):
-        data = decode_from_json_format(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(house_form, data)
+        form = bind_data_with_form(form=house_form, data=data)
 
         if form.is_valid():
-            house = self.create_house(form.cleaned_data)
+            house = self.create_house(data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(house), status=200)
 
         return generate_response(data=form.errors, status=400)
 
     def create_house(self, data):
-        building = fetch_from_db(building_model, **{'hash_id': data['building_id']})
+        building = fetch_from_db(model=building_model, condition={'hash_id': data['building_id']})
 
         return house_model.objects.create(
             hash_id=helper.create_hash(),
@@ -222,8 +222,8 @@ class House(View):
             finishing=data['finishing'],
             materials=data['materials'],
             stage_development=data['stage_development'],
-            start_development=self.get_correct_date(data['start_development']),
-            end_development=self.get_correct_date(data['end_development']),
+            start_development=self.get_correct_date(date=data['start_development']),
+            end_development=self.get_correct_date(date=data['end_development']),
         )
 
     def get_correct_date(self, date):
@@ -233,14 +233,14 @@ class House(View):
         return None
 
     def put(self, request, id):
-        data = decode_from_json_format(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(house_form, data)
+        form = bind_data_with_form(form=house_form, data=data)
 
         if form.is_valid():
-            old_house = fetch_from_db(house_model, **{'hash_id': id})
+            old_house = fetch_from_db(model=house_model, condition={'hash_id': id})
 
-            new_house = self.update_house(old_house, form.cleaned_data)
+            new_house = self.update_house(house=old_house, data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(new_house), status=200)
 
@@ -264,7 +264,7 @@ class House(View):
         return house
 
     def delete(self, request, id):
-        delete_from_db(house_model, **{'hash_id': id})
+        delete_from_db(model=house_model, condition={'hash_id': id})
 
         return generate_response(status=200)
 
@@ -275,7 +275,7 @@ def get_building_houses(request, id):
         condition={'building_hash_id': id}
     )
 
-    houses = encode(format='json', data=data)
+    houses = encode_objects_in_assigned_format(format='json', data=data)
 
     return generate_response(data=houses, status=200)
 
@@ -297,24 +297,24 @@ def get_building_houses(request, id):
 
 class FlatSchema(View):
     def get(self, request, id):
-        flats_schemas = fetch_from_db(flat_schema_model, **{'hash_id': id})
+        flats_schemas = fetch_from_db(model=flat_schema_model, condition={'hash_id': id})
 
         return generate_response(data=model_to_dict(flats_schemas), status=200)
 
     def post(self, request):
-        data = decode_from_json_format(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(flat_schema_form, data)
+        form = bind_data_with_form(form=flat_schema_form, data=data)
 
         if form.is_valid():
-            flat_schema = self.create_flat_schema(form.cleaned_data)
+            flat_schema = self.create_flat_schema(data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(flat_schema), status=200)
 
         return generate_response(data=form.errors, status=400)
 
     def create_flat_schema(self, data):
-        house = house_model.objects.get(hash_id=data['house_id'])
+        house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
 
         return flat_schema_model.objects.create(
             hash_id=helper.create_hash(),
@@ -329,14 +329,14 @@ class FlatSchema(View):
         )
 
     def put(self, request, id):
-        data = decode_from_json_format(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(flat_schema_form, data)
+        form = bind_data_with_form(form=flat_schema_form, data=data)
 
         if form.is_valid():
-            old_flat_schema = fetch_from_db(flat_schema_model, **{'hash_id': id})
+            old_flat_schema = fetch_from_db(model=flat_schema_model, condition={'hash_id': id})
 
-            new_flat_schema = self.update_flat_schema(old_flat_schema, form.cleaned_data)
+            new_flat_schema = self.update_flat_schema(flat_schema=old_flat_schema, data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(new_flat_schema), status=200)
 
@@ -355,7 +355,7 @@ class FlatSchema(View):
         return flat_schema
 
     def delete(self, request, id):
-        delete_from_db(flat_schema_model, **{'hash_id': id})
+        delete_from_db(model=flat_schema_model, condition={'hash_id': id})
 
         return generate_response(status=200)
 
@@ -369,25 +369,28 @@ class FlatSchema(View):
 
 class FloorType(View):
     def get(self, request, id):
-        floor_type = fetch_from_db(floor_type_model, **{'hash_id': id})
+        floor_type = fetch_from_db(model=floor_type_model, condition={'hash_id': id})
 
         return generate_response(data=model_to_dict(floor_type))
 
     def post(self, request):
-        data = serialization.json_decode(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(floor_type_form, data)
+        form = bind_data_with_form(form=floor_type_form, data=data)
 
         if form.is_valid():
-            floor_type = self.create_floor_type(form.cleaned_data)
+            floor_type = self.create_floor_type(data=form.cleaned_data)
 
-            return generate_response(data=encode('json', floor_type), status=200)
+            return generate_response(
+                data=encode_objects_in_assigned_format(format='json', data=floor_type),
+                status=200
+            )
 
         return generate_response(data=form.errors, status=400)
 
     def create_floor_type(self, data):
         with transaction.atomic():
-            house = house_model.objects.get(hash_id=data['house_id'])
+            house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
 
             floor_type = floor_type_model.objects.create(
                 hash_id=helper.create_hash(),
@@ -409,22 +412,25 @@ class FloorType(View):
             return floor_model.objects.bulk_create(floors)
 
     def put(self, request, id):
-        data = serialization.json_decode(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(floor_type_form, data)
+        form = bind_data_with_form(form=floor_type_form, data=data)
 
         if form.is_valid():
-            new_floor_type = self.update_floor_type(form.cleaned_data, id)
+            new_floor_type = self.update_floor_type(data=form.cleaned_data, id=id)
 
-            return generate_response(data=encode('json', new_floor_type), status=200)
+            return generate_response(
+                data=encode_objects_in_assigned_format(format='json', data=new_floor_type),
+                status=200
+            )
 
         return generate_response(data=form.errors, status=400)
 
     def update_floor_type(self, data, id):
         with transaction.atomic():
-            delete_from_db(floor_type_model, **{'hash_id': id})
+            delete_from_db(model=floor_type_model, condition={'hash_id': id})
 
-            house = house_model.objects.get(hash_id=data['house_id'])
+            house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
 
             floor_type = floor_type_model.objects.create(
                 hash_id=helper.create_hash(),
@@ -446,7 +452,7 @@ class FloorType(View):
             return floor_model.objects.bulk_create(floors)
 
     def delete(self, request, id):
-        delete_from_db(floor_type_model, **{'hash_id': id})
+        delete_from_db(model=floor_type_model, condition={'hash_id': id})
 
         return generate_response(status=200)
 
@@ -456,8 +462,11 @@ def get_house_floor_types(request, id):
         model=floor_model,
         condition={'floor_type__house_hash_id': id}
     )
-    
-    return generate_response(data=encode('json', house_floor_type), status=200)
+
+    return generate_response(
+        data=encode_objects_in_assigned_format(format='json', data=house_floor_type),
+        status=200
+    )
 
 
 class Flat(View):
