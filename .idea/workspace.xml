@@ -115,7 +115,7 @@
       <find>FlatSchema</find>
       <find>FlatSchema(</find>
       <find>FlatSch</find>
-      <find>def fetch_from_db(</find>
+      <find />
       <find>FlatType</find>
       <find>get_house_ftats_schemas</find>
       <find>FloorType</find>
