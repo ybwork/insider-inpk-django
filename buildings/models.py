@@ -87,77 +87,58 @@ class Floor(models.Model):
         ordering = ['id']
 
 
-class FlatTypeManager(models.Manager):
-    def create(self, data):
-        flat_type = self.model(
-            hash_id=helper.create_hash(),
-            house=data['house'],
-            house_hash_id=data['house_hash_id'],
-            floor_type=data['floor_type'],
-            floor_type_hash_id=data['floor_type_hash_id'],
-            coordinates=data['coordinates'],
-        )
-
-        flat_type.save()
-
-        return flat_type
-
-
 class FlatType(models.Model):
     hash_id = models.CharField(max_length=16, db_index=True)
     house = models.ForeignKey(House, on_delete=models.CASCADE)
     house_hash_id = models.CharField(max_length=16, db_index=True)
     floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE)
     floor_type_hash_id = models.CharField(max_length=16, db_index=True)
-    number_of_flats = models.PositiveIntegerField(null=True)
     coordinates = models.TextField()
 
     class Meta:
         db_table = 'building_house_flats_types'
         ordering = ['id']
 
-    manager = FlatTypeManager()
 
-
-class FlatManager(models.Manager):
-    def multiple_create(self, data):
-        flats = []
-
-        for floor in data['clone_floors']:
-            flat = Flat(
-                hash_id=helper.create_hash(),
-                house=data['house'],
-                house_hash_id=data['house_hash_id'],
-                flat_schema=data['flat_schema'],
-                flat_schema_hash_id=data['flat_schema_hash_id'],
-                flat_type=data['flat_type'],
-                flat_type_hash_id=data['flat_type_hash_id'],
-                entrance=data['entrance'],
-                number=data['number'],
-                windows=data['windows'],
-                status=data['number'],
-                floor=floor
-            )
-
-            data['number'] = 0
-
-            flats.append((
-                flat
-            ))
-
-        self.bulk_create(flats)
-
-        return flats
-
-    def update(self, flat, data):
-        flat.entrance = data['entrance']
-        flat.number = data['number']
-        flat.windows = data['windows']
-        flat.status = data['status']
-
-        flat.save()
-
-        return flat
+# class FlatManager(models.Manager):
+#     def multiple_create(self, data):
+#         flats = []
+#
+#         for floor in data['clone_floors']:
+#             flat = Flat(
+#                 hash_id=helper.create_hash(),
+#                 house=data['house'],
+#                 house_hash_id=data['house_hash_id'],
+#                 flat_schema=data['flat_schema'],
+#                 flat_schema_hash_id=data['flat_schema_hash_id'],
+#                 flat_type=data['flat_type'],
+#                 flat_type_hash_id=data['flat_type_hash_id'],
+#                 entrance=data['entrance'],
+#                 number=data['number'],
+#                 windows=data['windows'],
+#                 status=data['number'],
+#                 floor=floor
+#             )
+#
+#             data['number'] = 0
+#
+#             flats.append((
+#                 flat
+#             ))
+#
+#         self.bulk_create(flats)
+#
+#         return flats
+#
+#     def update(self, flat, data):
+#         flat.entrance = data['entrance']
+#         flat.number = data['number']
+#         flat.windows = data['windows']
+#         flat.status = data['status']
+#
+#         flat.save()
+#
+#         return flat
 
 
 class Flat(models.Model):
@@ -178,7 +159,7 @@ class Flat(models.Model):
         db_table = 'building_house_flats'
         ordering = ['id']
 
-    manager = FlatManager()
+    # manager = FlatManager()
 
 
 

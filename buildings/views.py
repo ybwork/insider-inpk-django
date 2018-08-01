@@ -608,78 +608,177 @@ class Flat(View):
 
 class FlatType(View):
     def get(self, request, id):
-        flat_type = flat_type_model.manager.get(hash_id=id)
+        flat_type = flat_model.objects.filter(flat_type__hash_id=id).first()
 
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def post(self, request):
-        data = serialization.json_decode(request.body.decode('utf-8'))
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        house = house_model.objects.get(hash_id=data['house_id'])
-        data['house'] = house
-        data['house_hash_id'] = house.hash_id
+        flat_type = self.create_flat_type(data)
 
-        floors = floor_model.manager.filter(
-            floor_type__hash_id=data['floor_type_id']
-        ).filter(
-            house_hash_id=data['house_id']
-        )
-
-        data['floor_type'] = floors.first().floor_type
-        data['floor_type_hash_id'] = floors.first().floor_type.hash_id
-
-        data['clone_floors'] = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
-
-        flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
-        data['flat_schema'] = flat_schema
-        data['flat_schema_hash_id'] = flat_schema.hash_id
-
-        with transaction.atomic():
-            flat_type = flat_type_model.manager.create(data)
-
-            data['flat_type'] = flat_type
-            data['flat_type_hash_id'] = flat_type.hash_id
-
-            flats = flat_model.manager.multiple_create(data)
+        # house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
+        #
+        # floors = floor_model.objects.filter(
+        #     floor_type__hash_id=data['floor_type_id']
+        # ).filter(
+        #     house_hash_id=data['house_id']
+        # )
+        #
+        # clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
+        #
+        # flat_schema = fetch_from_db(
+        #     model=flat_schema_model,
+        #     condition={'hash_id': data['flat_schema_id']}
+        # )
+        #
+        # with transaction.atomic():
+        #     flat_type = flat_type_model.objects.create(
+        #         hash_id=helper.create_hash(),
+        #         house=house,
+        #         house_hash_id=house.hash_id,
+        #         floor_type=floors.first().floor_type,
+        #         floor_type_hash_id=floors.first().floor_type.hash_id,
+        #         coordinates=data['coordinates'],
+        #     )
+        #
+        #     flats_objects = []
+        #     for floor in clone_floors:
+        #         flat_object = flat_model(
+        #             hash_id=helper.create_hash(),
+        #             house=house,
+        #             house_hash_id=house.hash_id,
+        #             flat_schema=flat_schema,
+        #             flat_schema_hash_id=flat_schema.hash_id,
+        #             flat_type=flat_type,
+        #             flat_type_hash_id=flat_type.hash_id,
+        #             entrance=data['entrance'],
+        #             number=data['number'],
+        #             windows=data['windows'],
+        #             status=1,
+        #             floor=floor
+        #         )
+        #
+        #         data['number'] = 0
+        #
+        #         flats_objects.append((
+        #             flat_object
+        #         ))
+        #
+        #     flats = flat_model.objects.bulk_create(flats_objects)
 
         return generate_response(data=model_to_dict(flat_type), status=200)
 
-    def put(self, request, id):
-        data = serialization.json_decode(request.body.decode('utf-8'))
+    def create_flat_type(self, data):
+        house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
 
-        flat_type_model.manager.filter(hash_id=id).delete()
-
-        house = house_model.objects.get(hash_id=data['house_id'])
-        data['house'] = house
-        data['house_hash_id'] = house.hash_id
-
-        floors = floor_model.manager.filter(
+        floors = floor_model.objects.filter(
             floor_type__hash_id=data['floor_type_id']
         ).filter(
             house_hash_id=data['house_id']
         )
 
-        data['floor_type'] = floors.first().floor_type
-        data['floor_type_hash_id'] = floors.first().floor_type.hash_id
+        clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
 
-        data['clone_floors'] = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
-
-        flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
-        data['flat_schema'] = flat_schema
-        data['flat_schema_hash_id'] = flat_schema.hash_id
+        flat_schema = fetch_from_db(
+            model=flat_schema_model,
+            condition={'hash_id': data['flat_schema_id']}
+        )
 
         with transaction.atomic():
-            flat_type = flat_type_model.manager.create(data)
+            flat_type = flat_type_model.objects.create(
+                hash_id=helper.create_hash(),
+                house=house,
+                house_hash_id=house.hash_id,
+                floor_type=floors.first().floor_type,
+                floor_type_hash_id=floors.first().floor_type.hash_id,
+                coordinates=data['coordinates'],
+            )
 
-            data['flat_type'] = flat_type
-            data['flat_type_hash_id'] = flat_type.hash_id
+            flats_objects = []
+            for floor in clone_floors:
+                flat_object = flat_model(
+                    hash_id=helper.create_hash(),
+                    house=house,
+                    house_hash_id=house.hash_id,
+                    flat_schema=flat_schema,
+                    flat_schema_hash_id=flat_schema.hash_id,
+                    flat_type=flat_type,
+                    flat_type_hash_id=flat_type.hash_id,
+                    entrance=data['entrance'],
+                    number=data['number'],
+                    windows=data['windows'],
+                    status=1,
+                    floor=floor
+                )
 
-            flats = flat_model.manager.multiple_create(data)
+                data['number'] = 0
+
+                flats_objects.append((
+                    flat_object
+                ))
+
+        return flat_model.objects.bulk_create(flats_objects)
+
+    def put(self, request, id):
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
+
+        delete_from_db(model=flat_type_model, condition={'hash_id': id})
+
+        house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
+
+        floors = floor_model.objects.filter(
+            floor_type__hash_id=data['floor_type_id']
+        ).filter(
+            house_hash_id=data['house_id']
+        )
+
+        clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
+
+        flat_schema = fetch_from_db(
+            model=flat_schema_model,
+            condition={'hash_id': data['flat_schema_id']}
+        )
+
+        with transaction.atomic():
+            flat_type = flat_type_model.objects.create(
+                hash_id=helper.create_hash(),
+                house=house,
+                house_hash_id=house.hash_id,
+                floor_type=floors.first().floor_type,
+                floor_type_hash_id=floors.first().floor_type.hash_id,
+                coordinates=data['coordinates'],
+            )
+
+            flats_objects = []
+            for floor in clone_floors:
+                flat_object = flat_model(
+                    hash_id=helper.create_hash(),
+                    house=house,
+                    house_hash_id=house.hash_id,
+                    flat_schema=flat_schema,
+                    flat_schema_hash_id=flat_schema.hash_id,
+                    flat_type=flat_type,
+                    flat_type_hash_id=flat_type.hash_id,
+                    entrance=data['entrance'],
+                    number=data['number'],
+                    windows=data['windows'],
+                    status=1,
+                    floor=floor
+                )
+
+                data['number'] = 0
+
+                flats_objects.append((
+                    flat_object
+                ))
+
+            flats = flat_model.objects.bulk_create(flats_objects)
 
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def delete(self, request, id):
-        flat_type_model.manager.filter(hash_id=id).delete()
+        delete_from_db(model=flat_type_model, condition={'hash_id': id})
 
         return generate_response(status=200)
 
