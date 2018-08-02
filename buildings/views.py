@@ -90,7 +90,11 @@ def fetch_from_db(model, condition):
 
 
 def fetch_all_from_db(model, condition={}):
-    return model.objects.filter(**condition)
+    result = model.objects.filter(**condition)
+
+    if result:
+        return result
+    raise SomethingWentWrong()
 
 
 def delete_from_db(model, condition):
@@ -617,56 +621,6 @@ class FlatType(View):
 
         flat_type = self.create_flat_type(data)
 
-        # house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
-        #
-        # floors = floor_model.objects.filter(
-        #     floor_type__hash_id=data['floor_type_id']
-        # ).filter(
-        #     house_hash_id=data['house_id']
-        # )
-        #
-        # clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
-        #
-        # flat_schema = fetch_from_db(
-        #     model=flat_schema_model,
-        #     condition={'hash_id': data['flat_schema_id']}
-        # )
-        #
-        # with transaction.atomic():
-        #     flat_type = flat_type_model.objects.create(
-        #         hash_id=helper.create_hash(),
-        #         house=house,
-        #         house_hash_id=house.hash_id,
-        #         floor_type=floors.first().floor_type,
-        #         floor_type_hash_id=floors.first().floor_type.hash_id,
-        #         coordinates=data['coordinates'],
-        #     )
-        #
-        #     flats_objects = []
-        #     for floor in clone_floors:
-        #         flat_object = flat_model(
-        #             hash_id=helper.create_hash(),
-        #             house=house,
-        #             house_hash_id=house.hash_id,
-        #             flat_schema=flat_schema,
-        #             flat_schema_hash_id=flat_schema.hash_id,
-        #             flat_type=flat_type,
-        #             flat_type_hash_id=flat_type.hash_id,
-        #             entrance=data['entrance'],
-        #             number=data['number'],
-        #             windows=data['windows'],
-        #             status=1,
-        #             floor=floor
-        #         )
-        #
-        #         data['number'] = 0
-        #
-        #         flats_objects.append((
-        #             flat_object
-        #         ))
-        #
-        #     flats = flat_model.objects.bulk_create(flats_objects)
-
         return generate_response(data=model_to_dict(flat_type), status=200)
 
     def create_flat_type(self, data):
@@ -718,62 +672,16 @@ class FlatType(View):
                     flat_object
                 ))
 
-        return flat_model.objects.bulk_create(flats_objects)
+            flat = flat_model.objects.bulk_create(flats_objects)
+
+        return flat[0]
 
     def put(self, request, id):
         data = decode_from_json_format(data=request.body.decode('utf-8'))
 
         delete_from_db(model=flat_type_model, condition={'hash_id': id})
 
-        house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
-
-        floors = floor_model.objects.filter(
-            floor_type__hash_id=data['floor_type_id']
-        ).filter(
-            house_hash_id=data['house_id']
-        )
-
-        clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
-
-        flat_schema = fetch_from_db(
-            model=flat_schema_model,
-            condition={'hash_id': data['flat_schema_id']}
-        )
-
-        with transaction.atomic():
-            flat_type = flat_type_model.objects.create(
-                hash_id=helper.create_hash(),
-                house=house,
-                house_hash_id=house.hash_id,
-                floor_type=floors.first().floor_type,
-                floor_type_hash_id=floors.first().floor_type.hash_id,
-                coordinates=data['coordinates'],
-            )
-
-            flats_objects = []
-            for floor in clone_floors:
-                flat_object = flat_model(
-                    hash_id=helper.create_hash(),
-                    house=house,
-                    house_hash_id=house.hash_id,
-                    flat_schema=flat_schema,
-                    flat_schema_hash_id=flat_schema.hash_id,
-                    flat_type=flat_type,
-                    flat_type_hash_id=flat_type.hash_id,
-                    entrance=data['entrance'],
-                    number=data['number'],
-                    windows=data['windows'],
-                    status=1,
-                    floor=floor
-                )
-
-                data['number'] = 0
-
-                flats_objects.append((
-                    flat_object
-                ))
-
-            flats = flat_model.objects.bulk_create(flats_objects)
+        flat_type = self.create_flat_type(data)
 
         return generate_response(data=model_to_dict(flat_type), status=200)
 
@@ -781,6 +689,22 @@ class FlatType(View):
         delete_from_db(model=flat_type_model, condition={'hash_id': id})
 
         return generate_response(status=200)
+
+
+def get_floor_type_flat_types(request, id):
+    flats = fetch_all_from_db(
+        model=flat_model,
+        condition={'flat_type__floor_type_hash_id': id}
+    )
+
+    floor_type = flats.first().number
+
+    flat_types = flats.filter(floor=floor_type)
+
+    return generate_response(
+        data=encode_objects_in_assigned_format(format='json', data=flat_types),
+        status=200
+    )
 
 
 # def numbering_flats(request):

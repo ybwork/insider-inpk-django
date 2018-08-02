@@ -22,7 +22,7 @@ urlpatterns = [
     path('floor-types', views.FloorType.as_view()),
     path('floor-types/<str:id>', views.FloorType.as_view()),
 
-    # path('houses/<str:id>/flats', views.get_house_flats),
+    path('floor-type/<str:id>/flat-types', views.get_floor_type_flat_types),
 
     path('flat-types', views.FlatType.as_view()),
     path('flat-types/<str:id>', views.FlatType.as_view()),

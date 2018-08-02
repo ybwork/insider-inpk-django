@@ -100,47 +100,6 @@ class FlatType(models.Model):
         ordering = ['id']
 
 
-# class FlatManager(models.Manager):
-#     def multiple_create(self, data):
-#         flats = []
-#
-#         for floor in data['clone_floors']:
-#             flat = Flat(
-#                 hash_id=helper.create_hash(),
-#                 house=data['house'],
-#                 house_hash_id=data['house_hash_id'],
-#                 flat_schema=data['flat_schema'],
-#                 flat_schema_hash_id=data['flat_schema_hash_id'],
-#                 flat_type=data['flat_type'],
-#                 flat_type_hash_id=data['flat_type_hash_id'],
-#                 entrance=data['entrance'],
-#                 number=data['number'],
-#                 windows=data['windows'],
-#                 status=data['number'],
-#                 floor=floor
-#             )
-#
-#             data['number'] = 0
-#
-#             flats.append((
-#                 flat
-#             ))
-#
-#         self.bulk_create(flats)
-#
-#         return flats
-#
-#     def update(self, flat, data):
-#         flat.entrance = data['entrance']
-#         flat.number = data['number']
-#         flat.windows = data['windows']
-#         flat.status = data['status']
-#
-#         flat.save()
-#
-#         return flat
-
-
 class Flat(models.Model):
     hash_id = models.CharField(max_length=16, null=True)
     house = models.ForeignKey(House, on_delete=models.CASCADE)
@@ -158,8 +117,6 @@ class Flat(models.Model):
     class Meta:
         db_table = 'building_house_flats'
         ordering = ['id']
-
-    # manager = FlatManager()
 
 
 
