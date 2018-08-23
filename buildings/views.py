@@ -147,6 +147,7 @@ class Building(View):
         )
 
     def put(self, request, id):
+        print(id)
         data = decode_from_json_format(data=request.body.decode('utf-8'))
 
         form = bind_data_with_form(form=building_form, data=data)
