@@ -184,6 +184,10 @@ class HouseForm(forms.Form):
     )
 
 
+class UploadFileForm(forms.Form):
+    image = forms.ImageField()
+
+
 class FlatSchemaForm(forms.Form):
     house_id = forms.CharField(
         max_length=255,
@@ -200,13 +204,14 @@ class FlatSchemaForm(forms.Form):
         }
     )
 
-    image = forms.CharField(
-        max_length=255,
-        error_messages={
-            'required': custom_error_messages['required'],
-            'max_length': custom_error_messages['max_length']
-        }
-    )
+    image = forms.ImageField()
+
+    # image = forms.FileField(
+    #     max_length=255,
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #     }
+    # )
 
     number_of_balcony = forms.IntegerField(
         error_messages={

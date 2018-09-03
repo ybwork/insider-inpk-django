@@ -12,6 +12,17 @@
     <button class="put">put</button>
     <button class="delete">delete</button>
 
+    <form id="imageForm" action="" method="POST">
+        <input id="image" type="file" name="image">
+        <input type="text" name="house_id" id="house_id" value="00344377">
+        <input type="text" name="type" id="type" value="test">
+        <input type="text" name="number_of_balcony" id="number_of_balcony" value="1">
+        <input type="text" name="number_of_loggia" id="number_of_loggia" value="1">
+        <input type="text" name="area" id="area" value="111.11">
+        <input type="text" name="price" id="price" value="111.11">
+        <button class="post-image" type="button">add image</button>
+    </form>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {#    <script SRC="">#}
 {#        $.ajax({#}
@@ -39,6 +50,36 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
+        $('.post-image').on('click', function() {
+            var data = new FormData(document.getElementById('imageForm'))
+
+            data.append('image', document.getElementById('image'));
+            <!--data.append('house_id', document.getElementById('house_id'));-->
+            <!--data.append('number_of_balcony', document.getElementById('number_of_balcony'));-->
+            <!--data.append('number_of_loggia', document.getElementById('number_of_loggia'));-->
+            <!--data.append('area', document.getElementById('area'));-->
+            <!--data.append('price', document.getElementById('price'));-->
+
+            axios({
+                method: 'POST',
+
+                headers: {
+                    'Content-type': 'multipart/form-data'
+                },
+
+                data: data,
+
+                url: 'http://172.100.2.15:8000/flats-schemas',
+
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error)
+            })
+        });
+    </script>
+
+    <script>
         $('.get').on('click', function() {
             axios({
                 method: 'GET',
@@ -57,8 +98,8 @@
                 <!--url: 'http://172.100.2.15:8000/buildings',-->
                 <!--url: 'http://172.100.2.15:8000/buildings/1a95704e',-->
                 <!--url: 'http://172.100.2.15:8000/company/0905d3a5/buildings',-->
-                <!--url: 'http://172.100.2.15:8000/buildings/6077e8aa/houses',-->
-                <!--url: 'http://172.100.2.15:8000/houses/3b1de8d2',-->
+                <!--url: 'http://172.100.2.15:8000/buildings/1a95704e/houses',-->
+                url: 'http://172.100.2.15:8000/houses/00344377',
                 <!--url: 'http://172.100.2.15:8000/houses/ed70941f/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas/81873559',-->
@@ -67,7 +108,7 @@
                 <!--url: 'http://172.100.2.15:8000/floor-types/d52b43f6'-->
                 <!--url: 'http://172.100.2.15:8000/floors'-->
                 <!--url: 'http://172.100.2.15:8000/flat-types/78ca8cc7',-->
-                url: 'http://172.100.2.15:8000/floor-type/a6035fe0/flat-types',
+                <!--url: 'http://172.100.2.15:8000/floor-type/a6035fe0/flat-types',-->
 
             }).then(function (response) {
                 console.log(response);
@@ -89,15 +130,15 @@
                     <!--password: 'asdf123',-->
                     <!--password_confirmation: 'asdf1234',-->
 
-                    <!--company_name: 'inpk',-->
-                    <!--first_name: 'admin',-->
-                    <!--last_name: 'admin',-->
-                    <!--middle_name: 'admin',-->
-                    <!--email: 'admin@gmail.com',-->
-                    <!--phone: '89081996455',-->
-                    <!--password: '1234asdf',-->
-                    <!--password_confirmation: '1234asdf',-->
-                    <!--is_agree_with_save_personal_data: 'True',-->
+                    company_name: 'inpk',
+                    first_name: 'admin',
+                    last_name: 'admin',
+                    middle_name: 'admin',
+                    email: 'admin@gmail.com',
+                    phone: '89081996455',
+                    password: '1234asdf',
+                    password_confirmation: '1234asdf',
+                    is_agree_with_save_personal_data: 'True',
 
                     <!--email: 'admin2@gmail.com',-->
                     <!--password: 'asdf1234',-->
@@ -115,18 +156,18 @@
 
                     api_key: "m9fYYw0buyXXn5HsUXJkWLbBEHuIQl8flDw2s9UuZioQmVArwyysVdU1NCELeUDy",
 
-                    <!--building_id: '1a95704e',-->
-                    <!--number_of_floors: 11,-->
-                    <!--living_floors: '1-10',-->
-                    <!--number_of_entrance: 4,-->
-                    <!--number_of_flat: 500,-->
-                    <!--street_name: 'Morozova',-->
-                    <!--number: '25-a',-->
-                    <!--finishing: 'pure',-->
-                    <!--materials: ['material', 'material', 'material'],-->
-                    <!--stage_development: 'test',-->
-                    <!--start_development: '',-->
-                    <!--end_development: '',-->
+                    building_id: '1a95704e',
+                    number_of_floors: 11,
+                    living_floors: '1-10',
+                    number_of_entrance: 4,
+                    number_of_flat: 500,
+                    street_name: 'Morozova',
+                    number: '25-a',
+                    finishing: 'pure',
+                    materials: ['material', 'material', 'material'],
+                    stage_development: 'test',
+                    start_development: '',
+                    end_development: '',
 
                     <!--house_id: '00344377',-->
                     <!--type: 'test',-->
@@ -213,7 +254,7 @@
                     currency: 'change',
                     company_id: '46c59141',
 
-                    api_key: "1CZH42NZhVEgoOGPLHgOS2hA9AXtzvmmrLVOhNrewbqEyH36lr5HQUxHIy0YHGab",
+                    <!--api_key: "1CZH42NZhVEgoOGPLHgOS2hA9AXtzvmmrLVOhNrewbqEyH36lr5HQUxHIy0YHGab",-->
 
                     <!--building_id: '1a95704e',-->
                     <!--number_of_floors: 13,-->
@@ -287,9 +328,9 @@
                 <!--url: 'http://172.100.2.15:8000/users/4bb06707'-->
                 <!--url: 'http://172.100.2.15:8000/buildings/3c6292b7'-->
                 <!--url: 'http://172.100.2.15:8000/houses/73f2f201',-->
-                <!--url: 'http://172.100.2.15:8000/flats-schemas/17389070',-->
+                url: 'http://172.100.2.15:8000/flats-schemas/592672a8',
                 <!--url: 'http://172.100.2.15:8000/floor-types/70d7adb0',-->
-                url: 'http://172.100.2.15:8000/flat-types/6edf5d3c',
+                <!--url: 'http://172.100.2.15:8000/flat-types/6edf5d3c',-->
             })
         });
     </script>

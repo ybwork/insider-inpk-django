@@ -11,6 +11,7 @@ urlpatterns = [
 
     path('houses', views.House.as_view()),
     path('houses/<str:id>', views.House.as_view()),
+    # path('houses/<str:id>', views.House.as_view()),
 
     # path('houses/<str:id>/flats-schemas', views.get_house_ftats_schemas),
 

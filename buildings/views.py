@@ -1,3 +1,6 @@
+import os
+
+import psycopg2
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
@@ -5,12 +8,17 @@ from django.db import transaction
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views import View
+from rest_framework.utils import json
 
 from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm
+from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm, UploadFileForm
+from django.conf import settings
+from django.db import connection
+
+from insider.settings import PROJECT_ROOT
 
 serialization = Serialization()
 helper = Helper()
@@ -28,6 +36,7 @@ user_model = User
 building_form = BuildingForm
 house_form = HouseForm
 flat_schema_form = FlatSchemaForm
+upload_file_form = UploadFileForm
 floor_type_form = FloorTypeForm
 
 """
@@ -195,9 +204,21 @@ def get_company_buildings(request, id):
 
 class House(View):
     def get(self, request, id):
-        house = fetch_from_db(model=house_model, condition={'hash_id': id})
+        # data = fetch_from_db(model=house_model, condition={'hash_id': id})
+        # return generate_response(data=model_to_dict(data), status=200)
 
-        return generate_response(data=model_to_dict(house), status=200)
+        house = house_model.objects.get(hash_id=id)
+
+        house_with_all_info = {
+            'properties': json.dumps(model_to_dict(house)),
+            'flats_schemas': serializers.serialize('json', house.flatschema_set.all()),
+            'floors_types': serializers.serialize('json', house.floortype_set.all()),
+            'floors': serializers.serialize('json', house.floor_set.all()),
+            'flats_types': serializers.serialize('json', house.flattype_set.all()),
+            'flats': serializers.serialize('json', house.flat_set.all()),
+        }
+
+        return generate_response(data=house_with_all_info, status=200)
 
     def post(self, request):
         data = decode_from_json_format(data=request.body.decode('utf-8'))
@@ -307,11 +328,19 @@ class FlatSchema(View):
         return generate_response(data=model_to_dict(flats_schemas), status=200)
 
     def post(self, request):
-        data = decode_from_json_format(data=request.body.decode('utf-8'))
-
-        form = bind_data_with_form(form=flat_schema_form, data=data)
+        # data = decode_from_json_format(data=request.body.decode('utf-8'))
+        form = FlatSchemaForm(request.POST, request.FILES)
 
         if form.is_valid():
+            fs = FileSystemStorage()
+
+            file = request.FILES['image']
+            file_extension = os.path.splitext(file.name)[1]
+            file_name = helper.create_hash() + file_extension
+
+            fs.save(file_name, file)
+
+            form.cleaned_data['image'] = '/media/' + file_name
             flat_schema = self.create_flat_schema(data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(flat_schema), status=200)
@@ -334,12 +363,26 @@ class FlatSchema(View):
         )
 
     def put(self, request, id):
-        data = decode_from_json_format(data=request.body.decode('utf-8'))
+        # data = decode_from_json_format(data=request.body.decode('utf-8'))
+        # form = bind_data_with_form(form=flat_schema_form, data=data)
 
-        form = bind_data_with_form(form=flat_schema_form, data=data)
+        return HttpResponse(1)
+        form = FlatSchemaForm(request.POST, request.FILES)
+
+        image_name = '38ed6676.jpg'
+        image = os.path.exists(PROJECT_ROOT + '/media/' + image_name)
 
         if form.is_valid():
             old_flat_schema = fetch_from_db(model=flat_schema_model, condition={'hash_id': id})
+
+            fs = FileSystemStorage()
+            file = request.FILES['image']
+
+            file_extension = os.path.splitext(file.name)[1]
+            file_name = helper.create_hash() + file_extension
+            fs.save(file_name, file)
+
+            form.cleaned_data['image'] = '/static/img/' + file_name
 
             new_flat_schema = self.update_flat_schema(flat_schema=old_flat_schema, data=form.cleaned_data)
 
@@ -360,7 +403,11 @@ class FlatSchema(View):
         return flat_schema
 
     def delete(self, request, id):
-        delete_from_db(model=flat_schema_model, condition={'hash_id': id})
+        # delete_from_db(model=flat_schema_model, condition={'hash_id': id})
+
+        flat_schema = flat_schema_model.objects.get(hash_id=id)
+        os.remove(PROJECT_ROOT + flat_schema.image)
+        flat_schema.delete()
 
         return generate_response(status=200)
 
