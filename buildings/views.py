@@ -1,12 +1,11 @@
 import os
 
-import psycopg2
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
 from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, QueryDict
 from django.views import View
 from rest_framework.utils import json
 
@@ -14,9 +13,7 @@ from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm, UploadFileForm
-from django.conf import settings
-from django.db import connection
+from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm
 
 from insider.settings import PROJECT_ROOT
 
@@ -36,8 +33,9 @@ user_model = User
 building_form = BuildingForm
 house_form = HouseForm
 flat_schema_form = FlatSchemaForm
-upload_file_form = UploadFileForm
 floor_type_form = FloorTypeForm
+
+fs = FileSystemStorage()
 
 """
     company_id = request.user.company_id
@@ -74,6 +72,23 @@ floor_type_form = FloorTypeForm
     response["Access-Control-Allow-Origin"] = "*"
     return response
 """
+
+
+def create_image_name(image):
+    image_extension = os.path.splitext(image.name)[1]
+    return helper.create_hash() + image_extension
+
+
+def save_image_in_dir(name, image):
+    fs.save(name, image)
+
+
+def delete_image_from_dir(path_to_image):
+    os.remove(PROJECT_ROOT + path_to_image)
+
+
+def is_image_exists(name):
+    return os.path.exists(PROJECT_ROOT + '/media/' + name)
 
 
 def decode_from_json_format(data):
@@ -156,7 +171,6 @@ class Building(View):
         )
 
     def put(self, request, id):
-        print(id)
         data = decode_from_json_format(data=request.body.decode('utf-8'))
 
         form = bind_data_with_form(form=building_form, data=data)
@@ -205,6 +219,7 @@ def get_company_buildings(request, id):
 class House(View):
     def get(self, request, id):
         # data = fetch_from_db(model=house_model, condition={'hash_id': id})
+
         # return generate_response(data=model_to_dict(data), status=200)
 
         house = house_model.objects.get(hash_id=id)
@@ -329,18 +344,17 @@ class FlatSchema(View):
 
     def post(self, request):
         # data = decode_from_json_format(data=request.body.decode('utf-8'))
-        form = FlatSchemaForm(request.POST, request.FILES)
+
+        form = bind_data_with_form(form=flat_schema_form, data=request.POST)
 
         if form.is_valid():
-            fs = FileSystemStorage()
+            if request.FILES:
+                image_name = create_image_name(image=request.FILES['image'])
+                save_image_in_dir(name=image_name, image=request.FILES['image'])
+                form.cleaned_data['image'] = '/media/' + image_name
+            else:
+                form.cleaned_data['image'] = ''
 
-            file = request.FILES['image']
-            file_extension = os.path.splitext(file.name)[1]
-            file_name = helper.create_hash() + file_extension
-
-            fs.save(file_name, file)
-
-            form.cleaned_data['image'] = '/media/' + file_name
             flat_schema = self.create_flat_schema(data=form.cleaned_data)
 
             return generate_response(data=model_to_dict(flat_schema), status=200)
@@ -364,25 +378,26 @@ class FlatSchema(View):
 
     def put(self, request, id):
         # data = decode_from_json_format(data=request.body.decode('utf-8'))
-        # form = bind_data_with_form(form=flat_schema_form, data=data)
 
-        return HttpResponse(1)
-        form = FlatSchemaForm(request.POST, request.FILES)
+        if request.content_type.startswith('multipart'):
+            data, files = request.parse_file_upload(request.META, request)
+            flat_schema = data.dict()
+        else:
+            files = False
+            flat_schema = QueryDict(request.body).dict()
 
-        image_name = '38ed6676.jpg'
-        image = os.path.exists(PROJECT_ROOT + '/media/' + image_name)
+        form = bind_data_with_form(form=flat_schema_form, data=flat_schema)
 
         if form.is_valid():
             old_flat_schema = fetch_from_db(model=flat_schema_model, condition={'hash_id': id})
 
-            fs = FileSystemStorage()
-            file = request.FILES['image']
-
-            file_extension = os.path.splitext(file.name)[1]
-            file_name = helper.create_hash() + file_extension
-            fs.save(file_name, file)
-
-            form.cleaned_data['image'] = '/static/img/' + file_name
+            if files:
+                delete_image_from_dir(old_flat_schema.image)
+                image_name = create_image_name(image=files['image'])
+                save_image_in_dir(name=image_name, image=files['image'])
+                form.cleaned_data['image'] = '/media/' + image_name
+            else:
+                form.cleaned_data['image'] = old_flat_schema.image
 
             new_flat_schema = self.update_flat_schema(flat_schema=old_flat_schema, data=form.cleaned_data)
 
@@ -406,7 +421,10 @@ class FlatSchema(View):
         # delete_from_db(model=flat_schema_model, condition={'hash_id': id})
 
         flat_schema = flat_schema_model.objects.get(hash_id=id)
-        os.remove(PROJECT_ROOT + flat_schema.image)
+
+        if flat_schema.image:
+            delete_image_from_dir(flat_schema.image)
+
         flat_schema.delete()
 
         return generate_response(status=200)
@@ -426,11 +444,19 @@ class FloorType(View):
         return generate_response(data=model_to_dict(floor_type))
 
     def post(self, request):
-        data = decode_from_json_format(data=request.body.decode('utf-8'))
+        # data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(form=floor_type_form, data=data)
+        form = bind_data_with_form(form=floor_type_form, data=request.POST)
 
         if form.is_valid():
+
+            if request.FILES:
+                image_name = create_image_name(image=request.FILES['image'])
+                save_image_in_dir(name=image_name, image=request.FILES['image'])
+                form.cleaned_data['image'] = '/media/' + image_name
+            else:
+                form.cleaned_data['image'] = ''
+
             floor_type = self.create_floor_type(data=form.cleaned_data)
 
             return generate_response(
@@ -448,6 +474,8 @@ class FloorType(View):
                 hash_id=helper.create_hash(),
                 house=house,
                 house_hash_id=house.hash_id,
+                number=data['number'],
+                clone_floors=data['clone_floors'],
                 image=data['image'],
                 number_of_flats=data['number_of_flats']
             )
@@ -464,11 +492,28 @@ class FloorType(View):
             return floor_model.objects.bulk_create(floors)
 
     def put(self, request, id):
-        data = decode_from_json_format(data=request.body.decode('utf-8'))
+        # data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        form = bind_data_with_form(form=floor_type_form, data=data)
+        if request.content_type.startswith('multipart'):
+            data, files = request.parse_file_upload(request.META, request)
+            floor_type = data.dict()
+        else:
+            files = False
+            floor_type = QueryDict(request.body).dict()
+
+        form = bind_data_with_form(form=floor_type_form, data=floor_type)
 
         if form.is_valid():
+            old_floor_type = fetch_from_db(model=floor_type_model, condition={'hash_id': id})
+
+            if files:
+                delete_image_from_dir(old_floor_type.image)
+                image_name = create_image_name(image=files['image'])
+                save_image_in_dir(name=image_name, image=files['image'])
+                form.cleaned_data['image'] = '/media/' + image_name
+            else:
+                form.cleaned_data['image'] = old_floor_type.image
+
             new_floor_type = self.update_floor_type(data=form.cleaned_data, id=id)
 
             return generate_response(
@@ -489,6 +534,8 @@ class FloorType(View):
                 house=house,
                 house_hash_id=house.hash_id,
                 image=data['image'],
+                number=data['number'],
+                clone_floors=data['clone_floors'],
                 number_of_flats=data['number_of_flats']
             )
 
@@ -504,17 +551,27 @@ class FloorType(View):
             return floor_model.objects.bulk_create(floors)
 
     def delete(self, request, id):
-        delete_from_db(model=floor_type_model, condition={'hash_id': id})
+        # delete_from_db(model=floor_type_model, condition={'hash_id': id})
+
+        floor_type = floor_type_model.objects.get(hash_id=id)
+
+        if floor_type.image:
+            delete_image_from_dir(floor_type.image)
+
+        floor_type.delete()
 
         return generate_response(status=200)
 
 
 def get_house_floor_types(request, id):
     house_floor_type = fetch_all_from_db(
-        model=floor_model,
-        condition={'floor_type__house_hash_id': id}
+        model=floor_type_model,
+        condition={'house_hash_id': id}
     )
-
+    # house_floor_type = floor_type_model.objects.filter(house_hash_id=id)
+    # return HttpResponse(house_floor_type)
+    # for val in house_floor_type:
+    #     return HttpResponse(val.number_of_flats)
     return generate_response(
         data=encode_objects_in_assigned_format(format='json', data=house_floor_type),
         status=200

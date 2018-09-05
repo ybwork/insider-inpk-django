@@ -12,40 +12,57 @@
     <button class="put">put</button>
     <button class="delete">delete</button>
 
-    <form id="imageForm" action="" method="POST">
+    <br>
+    <br>
+    <!--<form id="imageForm">-->
+        <!--<input id="image" type="file" name="image">-->
+        <!--<input type="text" name="house_id" id="house_id" value="00344377">-->
+        <!--<input type="text" name="type" id="type" value="test">-->
+        <!--<input type="text" name="number_of_balcony" id="number_of_balcony" value="1">-->
+        <!--<input type="text" name="number_of_loggia" id="number_of_loggia" value="1">-->
+        <!--<input type="text" name="area" id="area" value="111.11">-->
+        <!--<input type="text" name="price" id="price" value="111.11">-->
+        <!--<button class="post-image" type="button">add image</button>-->
+    <!--</form>-->
+
+    <!--<br>-->
+    <!--<br>-->
+    <!--<form id="imageFormChange">-->
+        <!--<input id="image" type="file" name="image">-->
+        <!--<input type="text" name="house_id" id="house_id" value="00344377">-->
+        <!--<input type="text" name="type" id="type" value="changed">-->
+        <!--<input type="text" name="number_of_balcony" id="number_of_balcony" value="7">-->
+        <!--<input type="text" name="number_of_loggia" id="number_of_loggia" value="7">-->
+        <!--<input type="text" name="area" id="area" value="222.22">-->
+        <!--<input type="text" name="price" id="price" value="222.22">-->
+        <!--<button class="put-image" type="button">change image</button>-->
+    <!--</form>-->
+
+    <!-- Floor type -->
+
+    <!--<br>-->
+    <!--<br>-->
+    <!--<form id="imageFloorForm">-->
+        <!--<input id="image" type="file" name="image">-->
+        <!--<input type="text" name="house_id" id="house_id" value="00344377">-->
+        <!--<input type="text" name="type" id="type" value="changed">-->
+        <!--<input type="text" name="clone_floors" id="clone_floors" value="1, 2, 3, 4">-->
+        <!--<input type="text" name="number_of_flats" id="number_of_flats" value="25">-->
+        <!--<button class="post-floor-type" type="button">change image</button>-->
+    <!--</form>-->
+
+    <!--<br>-->
+    <!--<br>-->
+    <form id="imageFloorFormChange">
         <input id="image" type="file" name="image">
         <input type="text" name="house_id" id="house_id" value="00344377">
-        <input type="text" name="type" id="type" value="test">
-        <input type="text" name="number_of_balcony" id="number_of_balcony" value="1">
-        <input type="text" name="number_of_loggia" id="number_of_loggia" value="1">
-        <input type="text" name="area" id="area" value="111.11">
-        <input type="text" name="price" id="price" value="111.11">
-        <button class="post-image" type="button">add image</button>
+        <input type="text" name="type" id="type" value="changed">
+        <input type="text" name="clone_floors" id="clone_floors" value="1, 2, 3, 4">
+        <input type="text" name="number_of_flats" id="number_of_flats" value="5">
+        <button class="put-floor-type" type="button">change image</button>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-{#    <script SRC="">#}
-{#        $.ajax({#}
-{#            url: 'http://127.0.0.1:8000/login/',#}
-{#            type: 'POST',#}
-{#            contentType: false,#}
-{#            cache: false,#}
-{#            processType: false,#}
-{##}
-{#            headers: {#}
-{#                "X-CSRFToken": '{{ csrf_token }}'#}
-{#            },#}
-{##}
-{#            success: function (data) {#}
-{#                var response = $.parseJSON(data);#}
-{#            },#}
-{##}
-{#            error: function (e) {#}
-{#                var error = e.responseJSON;#}
-{#            }#}
-{#        {);#}
-{#    </script>#}
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -54,11 +71,6 @@
             var data = new FormData(document.getElementById('imageForm'))
 
             data.append('image', document.getElementById('image'));
-            <!--data.append('house_id', document.getElementById('house_id'));-->
-            <!--data.append('number_of_balcony', document.getElementById('number_of_balcony'));-->
-            <!--data.append('number_of_loggia', document.getElementById('number_of_loggia'));-->
-            <!--data.append('area', document.getElementById('area'));-->
-            <!--data.append('price', document.getElementById('price'));-->
 
             axios({
                 method: 'POST',
@@ -70,6 +82,75 @@
                 data: data,
 
                 url: 'http://172.100.2.15:8000/flats-schemas',
+
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error)
+            })
+        });
+
+        $('.put-image').on('click', function() {
+            var data = new FormData(document.getElementById('imageFormChange'))
+
+            data.append('image', document.getElementById('image'));
+
+            axios({
+                method: 'PUT',
+
+                headers: {
+                    'Content-type': 'multipart/form-data'
+                },
+
+                data: data,
+
+                url: 'http://172.100.2.15:8000/flats-schemas/8c008648',
+
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error)
+            })
+        });
+
+        $('.post-floor-type').on('click', function() {
+            var data = new FormData(document.getElementById('imageFloorForm'))
+
+            data.append('image', document.getElementById('image'));
+
+            axios({
+                method: 'POST',
+
+                headers: {
+                    'Content-type': 'multipart/form-data'
+                },
+
+                data: data,
+
+                url: 'http://172.100.2.15:8000/floor-types',
+
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error)
+            })
+        });
+
+        $('.put-floor-type').on('click', function() {
+            var data = new FormData(document.getElementById('imageFloorFormChange'))
+
+            data.append('image', document.getElementById('image'));
+
+            axios({
+                method: 'PUT',
+
+                headers: {
+                    'Content-type': 'multipart/form-data'
+                },
+
+                data: data,
+
+                url: 'http://172.100.2.15:8000/floor-types/3889be30',
 
             }).then(function (response) {
                 console.log(response);
@@ -89,7 +170,7 @@
                 },
 
                 params: {
-                    api_key: '1CZH42NZhVEgoOGPLHgOS2hA9AXtzvmmrLVOhNrewbqEyH36lr5HQUxHIy0YHGab',
+                    api_key: 'm9fYYw0buyXXn5HsUXJkWLbBEHuIQl8flDw2s9UuZioQmVArwyysVdU1NCELeUDy',
                 },
 
                 <!--url: 'http://172.100.2.15:8000/confirm/email/883e66a8',-->
@@ -99,11 +180,11 @@
                 <!--url: 'http://172.100.2.15:8000/buildings/1a95704e',-->
                 <!--url: 'http://172.100.2.15:8000/company/0905d3a5/buildings',-->
                 <!--url: 'http://172.100.2.15:8000/buildings/1a95704e/houses',-->
-                url: 'http://172.100.2.15:8000/houses/00344377',
+                <!--url: 'http://172.100.2.15:8000/houses/00344377',-->
                 <!--url: 'http://172.100.2.15:8000/houses/ed70941f/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas/81873559',-->
-                <!--url: 'http://172.100.2.15:8000/houses/00344377/floor-types',-->
+                url: 'http://172.100.2.15:8000/houses/00344377/floor-types',
                 <!--url: 'http://172.100.2.15:8000/floor-types'-->
                 <!--url: 'http://172.100.2.15:8000/floor-types/d52b43f6'-->
                 <!--url: 'http://172.100.2.15:8000/floors'-->
@@ -130,15 +211,15 @@
                     <!--password: 'asdf123',-->
                     <!--password_confirmation: 'asdf1234',-->
 
-                    company_name: 'inpk',
-                    first_name: 'admin',
-                    last_name: 'admin',
-                    middle_name: 'admin',
-                    email: 'admin@gmail.com',
-                    phone: '89081996455',
-                    password: '1234asdf',
-                    password_confirmation: '1234asdf',
-                    is_agree_with_save_personal_data: 'True',
+                    <!--company_name: 'inpk',-->
+                    <!--first_name: 'admin',-->
+                    <!--last_name: 'admin',-->
+                    <!--middle_name: 'admin',-->
+                    <!--email: 'admin@gmail.com',-->
+                    <!--phone: '89081996455',-->
+                    <!--password: '1234asdf',-->
+                    <!--password_confirmation: '1234asdf',-->
+                    <!--is_agree_with_save_personal_data: 'True',-->
 
                     <!--email: 'admin2@gmail.com',-->
                     <!--password: 'asdf1234',-->
@@ -156,18 +237,18 @@
 
                     api_key: "m9fYYw0buyXXn5HsUXJkWLbBEHuIQl8flDw2s9UuZioQmVArwyysVdU1NCELeUDy",
 
-                    building_id: '1a95704e',
-                    number_of_floors: 11,
-                    living_floors: '1-10',
-                    number_of_entrance: 4,
-                    number_of_flat: 500,
-                    street_name: 'Morozova',
-                    number: '25-a',
-                    finishing: 'pure',
-                    materials: ['material', 'material', 'material'],
-                    stage_development: 'test',
-                    start_development: '',
-                    end_development: '',
+                    <!--building_id: '1a95704e',-->
+                    <!--number_of_floors: 11,-->
+                    <!--living_floors: '1-10',-->
+                    <!--number_of_entrance: 4,-->
+                    <!--number_of_flat: 500,-->
+                    <!--street_name: 'Morozova',-->
+                    <!--number: '25-a',-->
+                    <!--finishing: 'pure',-->
+                    <!--materials: ['material', 'material', 'material'],-->
+                    <!--stage_development: 'test',-->
+                    <!--start_development: '',-->
+                    <!--end_development: '',-->
 
                     <!--house_id: '00344377',-->
                     <!--type: 'test',-->
@@ -182,14 +263,14 @@
                     <!--clone_floors: '1, 2, 3, 4',-->
                     <!--number_of_flats: 25,-->
 
-                    house_id: '00344377',
-                    floor_type_id: 'a6035fe0',
-                    flat_schema_id: '816f1fe6',
-                    entrance: 1,
-                    number: 5,
-                    windows: ['test', 'test2'],
-                    coordinates: '213.22, 749.22',
-                    clone_floors: [1, 2, 3, 4],
+                    <!--house_id: '00344377',-->
+                    <!--floor_type_id: 'a6035fe0',-->
+                    <!--flat_schema_id: '816f1fe6',-->
+                    <!--entrance: 1,-->
+                    <!--number: 5,-->
+                    <!--windows: ['test', 'test2'],-->
+                    <!--coordinates: '213.22, 749.22',-->
+                    <!--clone_floors: [1, 2, 3, 4],-->
 
                     <!--house_id: 'f12865f7',-->
                     <!--clone_floors: [1, 2, 3, 4],-->
@@ -216,7 +297,7 @@
                 <!--url: 'http://172.100.2.15:8000/houses',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/floor-types',-->
-                url: 'http://172.100.2.15:8000/flat-types',
+                <!--url: 'http://172.100.2.15:8000/flat-types',-->
                 <!--url: 'http://172.100.2.15:8000/flats/numbering',-->
             }).then(function (response) {
                 console.log(response);
@@ -328,8 +409,8 @@
                 <!--url: 'http://172.100.2.15:8000/users/4bb06707'-->
                 <!--url: 'http://172.100.2.15:8000/buildings/3c6292b7'-->
                 <!--url: 'http://172.100.2.15:8000/houses/73f2f201',-->
-                url: 'http://172.100.2.15:8000/flats-schemas/592672a8',
-                <!--url: 'http://172.100.2.15:8000/floor-types/70d7adb0',-->
+                <!--url: 'http://172.100.2.15:8000/flats-schemas/50028a46',-->
+                url: 'http://172.100.2.15:8000/floor-types/5b24bc93',
                 <!--url: 'http://172.100.2.15:8000/flat-types/6edf5d3c',-->
             })
         });

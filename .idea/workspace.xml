@@ -4,14 +4,9 @@
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/easy-install.pth" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/easy-install.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/pip-script.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/pip-script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/pip3-script.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/pip3-script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,24 +34,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/insider/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="66" column="12" selection-start-line="66" selection-end-line="66" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="330" column="69" selection-start-line="330" selection-start-column="69" selection-end-line="330" selection-end-column="69" />
+            <state relative-caret-position="2005">
+              <caret line="187" column="66" lean-forward="true" selection-start-line="187" selection-start-column="66" selection-end-line="187" selection-end-column="66" />
               <folding>
-                <marker date="1535986616593" expanded="true" signature="1973:2394" ph="..." />
-                <marker date="1535986616593" expanded="true" signature="7584:8128" ph="..." />
-                <marker date="1535986616593" expanded="true" signature="9771:10204" ph="..." />
+                <marker date="1536149163195" expanded="true" signature="10578:11122" ph="..." />
+                <marker date="1536149163195" expanded="true" signature="12772:13205" ph="..." />
               </folding>
             </state>
           </provider>
@@ -65,8 +50,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="21" />
+            <state relative-caret-position="-352">
+              <caret line="5" selection-start-line="5" selection-end-line="32" selection-end-column="49" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -77,8 +62,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="342" column="41" selection-start-line="342" selection-start-column="41" selection-end-line="342" selection-end-column="41" />
+            <state relative-caret-position="91">
+              <caret line="458" selection-start-line="458" selection-end-line="458" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -89,8 +74,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="102" column="10" selection-start-line="102" selection-start-column="6" selection-end-line="102" selection-end-column="10" />
+            <state relative-caret-position="66">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -98,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="190" column="20" selection-start-line="190" selection-start-column="6" selection-end-line="190" selection-end-column="20" />
+            <state relative-caret-position="91">
+              <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
             </state>
           </provider>
         </entry>
@@ -119,11 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ArrayAgg</find>
-      <find>decode('utf-8')</find>
-      <find>is_method_get</find>
-      <find>get_building_houses</find>
-      <find>house_model</find>
       <find>fetch_all_from_db</find>
       <find>fetch_from_db</find>
       <find>__</find>
@@ -149,6 +129,11 @@
       <find>def delete_from_db</find>
       <find>PROJECT</find>
       <find>PROJECT_ROOT</find>
+      <find>is_image_exists</find>
+      <find>floor_type_model</find>
+      <find>что то</find>
+      <find>clone_floors</find>
+      <find>get_house_floor_types</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -180,12 +165,12 @@
         <option value="$PROJECT_DIR$/auth/forms.py" />
         <option value="$PROJECT_DIR$/auth/views.py" />
         <option value="$PROJECT_DIR$/auth/middleware.py" />
-        <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/insider/settings.py" />
         <option value="$PROJECT_DIR$/buildings/urls.py" />
-        <option value="$PROJECT_DIR$/buildings/forms.py" />
-        <option value="$PROJECT_DIR$/buildings/views.py" />
         <option value="$PROJECT_DIR$/templates/index/index.html" />
+        <option value="$PROJECT_DIR$/buildings/models.py" />
+        <option value="$PROJECT_DIR$/buildings/views.py" />
+        <option value="$PROJECT_DIR$/buildings/forms.py" />
       </list>
     </option>
   </component>
@@ -203,7 +188,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -215,7 +200,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,16 +207,22 @@
               <item name="insider" type="b2602c69:ProjectViewProjectNode" />
               <item name="insider" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="insider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="insider" type="462c0819:PsiDirectoryNode" />
+              <item name="buildings" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/django-rest/insider2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -305,18 +295,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18324608" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18324608" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50860137" side_tool="true" weight="0.4184028" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5093493" side_tool="true" weight="0.4184028" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49139866" weight="0.4184028" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4906507" visible="true" weight="0.4184028" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -329,29 +318,30 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295107" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1697831" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" id="Database" order="4" weight="0.3295107" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4938838" weight="0.42881945" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5061162" side_tool="true" weight="0.4357639" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295107" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +352,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/buildings/views.py</url>
+          <line>568</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -372,16 +369,10 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180710-112648-74909072.log" />
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180710-113717-70190896.log" />
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180710-153811-65582672.log" />
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180711-092929-77281776.log" />
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180711-111604-68539472.log" />
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180711-111652-66946288.log" />
     <entry file="file://$PROJECT_DIR$/templates/mails/20180711-111834-72922416.log" />
     <entry file="file://$PROJECT_DIR$/templates/mails/20180711-140221-68842224.log" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/views.py">
@@ -441,13 +432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insider/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -469,13 +453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2090">
-          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -539,45 +516,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema2_UTMIlCj.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema_oRiVqYx.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema_DSKsvlC.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/0-users.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
+    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema2_UTMIlCj.png" />
+    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema.png" />
+    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema2.png" />
+    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema_oRiVqYx.png" />
+    <entry file="file://$PROJECT_DIR$/insider/media/flatSchema_DSKsvlC.png" />
+    <entry file="file://$PROJECT_DIR$/insider/media/0-users.jpg" />
+    <entry file="file://$PROJECT_DIR$/insider/media/2.jpg" />
+    <entry file="file://$PROJECT_DIR$/insider/services.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="190" column="20" selection-start-line="190" selection-start-column="6" selection-end-line="190" selection-end-column="20" />
+        <state relative-caret-position="369">
+          <caret line="33" column="21" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insider/media/2.jpg">
+    <entry file="file://$PROJECT_DIR$/insider/media/1b0bbf16.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/media/2e9a2465.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/media/4da9912b.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/media/20bb589c.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/insider/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="66" column="12" selection-start-line="66" selection-end-line="66" selection-end-column="12" />
+        <state relative-caret-position="1012">
+          <caret line="71" column="34" selection-start-line="71" selection-start-column="34" selection-end-line="71" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1858">
+          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/media/3a9de601.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/media/d90a2b4b.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#632#669#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2005">
+          <caret line="187" column="66" lean-forward="true" selection-start-line="187" selection-start-column="66" selection-end-line="187" selection-end-column="66" />
+          <folding>
+            <marker date="1536149163195" expanded="true" signature="10578:11122" ph="..." />
+            <marker date="1536149163195" expanded="true" signature="12772:13205" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="102" column="10" selection-start-line="102" selection-start-column="6" selection-end-line="102" selection-end-column="10" />
+        <state relative-caret-position="66">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -586,40 +595,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="21" />
+        <state relative-caret-position="-352">
+          <caret line="5" selection-start-line="5" selection-end-line="32" selection-end-column="49" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insider/services.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="33" column="21" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="342" column="41" selection-start-line="342" selection-start-column="41" selection-end-line="342" selection-end-column="41" />
+        <state relative-caret-position="91">
+          <caret line="458" selection-start-line="458" selection-end-line="458" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
+    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="330" column="69" selection-start-line="330" selection-start-column="69" selection-end-line="330" selection-end-column="69" />
-          <folding>
-            <marker date="1535986616593" expanded="true" signature="1973:2394" ph="..." />
-            <marker date="1535986616593" expanded="true" signature="7584:8128" ph="..." />
-            <marker date="1535986616593" expanded="true" signature="9771:10204" ph="..." />
-          </folding>
+        <state relative-caret-position="91">
+          <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
         </state>
       </provider>
     </entry>

@@ -2,6 +2,7 @@ from django.db import models
 from auth.models import Company
 from insider.services import Validation, Helper
 
+
 validation = Validation()
 helper = Helper()
 
@@ -67,6 +68,8 @@ class FloorType(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE)
     house_hash_id = models.CharField(max_length=16, db_index=True, null=True)
     image = models.CharField(max_length=255, null=True)
+    number = models.IntegerField(null=True)
+    clone_floors = models.CharField(max_length=255, null=True)
     number_of_flats = models.PositiveIntegerField(null=True)
 
     class Meta:
