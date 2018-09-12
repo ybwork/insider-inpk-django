@@ -200,15 +200,6 @@ class FlatSchemaForm(forms.Form):
         }
     )
 
-    # image = forms.ImageField()
-
-    # image = forms.FileField(
-    #     max_length=255,
-    #     error_messages={
-    #         'required': custom_error_messages['required'],
-    #     }
-    # )
-
     number_of_balcony = forms.IntegerField(
         error_messages={
             'required': custom_error_messages['required'],
@@ -245,14 +236,6 @@ class FloorTypeForm(forms.Form):
         }
     )
 
-    # image = forms.CharField(
-    #     max_length=255,
-    #     required=False,
-    #     error_messages={
-    #         'max_length': custom_error_messages['max_length']
-    #     }
-    # )
-
     number = forms.IntegerField(
         error_messages={
             'required': custom_error_messages['required'],
@@ -274,3 +257,5 @@ class FloorTypeForm(forms.Form):
             'format': custom_error_messages['format']
         }
     )
+
+# class FlatTypeForm(forms.Form):

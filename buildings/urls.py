@@ -13,7 +13,7 @@ urlpatterns = [
     path('houses/<str:id>', views.House.as_view()),
     # path('houses/<str:id>', views.House.as_view()),
 
-    # path('houses/<str:id>/flats-schemas', views.get_house_ftats_schemas),
+    path('houses/<str:id>/flats-schemas', views.get_house_ftats_schemas),
 
     path('flats-schemas', views.FlatSchema.as_view()),
     path('flats-schemas/<str:id>', views.FlatSchema.as_view()),

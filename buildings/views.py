@@ -114,24 +114,11 @@ def fetch_from_db(model, condition):
 
 
 def fetch_all_from_db(model, condition={}):
-    result = model.objects.filter(**condition)
-
-    if result:
-        return result
-    raise SomethingWentWrong()
+    return model.objects.filter(**condition)
 
 
 def delete_from_db(model, condition):
-    result = model.objects.filter(**condition).delete()
-
-    if result[0]:
-        return result
-
-    raise SomethingWentWrong()
-
-
-class SomethingWentWrong(Exception):
-    pass
+    return model.objects.filter(**condition).delete()
 
 
 class Building(View):
@@ -218,22 +205,9 @@ def get_company_buildings(request, id):
 
 class House(View):
     def get(self, request, id):
-        # data = fetch_from_db(model=house_model, condition={'hash_id': id})
+        data = fetch_from_db(model=house_model, condition={'hash_id': id})
 
-        # return generate_response(data=model_to_dict(data), status=200)
-
-        house = house_model.objects.get(hash_id=id)
-
-        house_with_all_info = {
-            'properties': json.dumps(model_to_dict(house)),
-            'flats_schemas': serializers.serialize('json', house.flatschema_set.all()),
-            'floors_types': serializers.serialize('json', house.floortype_set.all()),
-            'floors': serializers.serialize('json', house.floor_set.all()),
-            'flats_types': serializers.serialize('json', house.flattype_set.all()),
-            'flats': serializers.serialize('json', house.flat_set.all()),
-        }
-
-        return generate_response(data=house_with_all_info, status=200)
+        return generate_response(data=model_to_dict(data), status=200)
 
     def post(self, request):
         data = decode_from_json_format(data=request.body.decode('utf-8'))
@@ -320,21 +294,6 @@ def get_building_houses(request, id):
 
     return generate_response(data=houses, status=200)
 
-# def get_house_floors(request, id):
-#     data = floor_model.manager.filter(house_hash_id=id)
-#
-#     house_floors = serializers.serialize('json', data)
-#
-#     return JsonResponse(house_floors, status=200, safe=False)
-
-
-# def get_house_flats(request, id):
-#     data = flat_model.manager.filter(house_hash_id=id)
-#
-#     house_flats = serializers.serialize('json', data)
-#
-#     return JsonResponse(house_flats, status=200, safe=False)
-
 
 class FlatSchema(View):
     def get(self, request, id):
@@ -343,8 +302,6 @@ class FlatSchema(View):
         return generate_response(data=model_to_dict(flats_schemas), status=200)
 
     def post(self, request):
-        # data = decode_from_json_format(data=request.body.decode('utf-8'))
-
         form = bind_data_with_form(form=flat_schema_form, data=request.POST)
 
         if form.is_valid():
@@ -377,8 +334,6 @@ class FlatSchema(View):
         )
 
     def put(self, request, id):
-        # data = decode_from_json_format(data=request.body.decode('utf-8'))
-
         if request.content_type.startswith('multipart'):
             data, files = request.parse_file_upload(request.META, request)
             flat_schema = data.dict()
@@ -418,8 +373,6 @@ class FlatSchema(View):
         return flat_schema
 
     def delete(self, request, id):
-        # delete_from_db(model=flat_schema_model, condition={'hash_id': id})
-
         flat_schema = flat_schema_model.objects.get(hash_id=id)
 
         if flat_schema.image:
@@ -429,12 +382,14 @@ class FlatSchema(View):
 
         return generate_response(status=200)
 
-# def get_house_ftats_schemas(request, id):
-#     data = flat_schema_model.manager.filter(house_hash_id=id)
-#
-#     house_flats_schemas = serializers.serialize('json', data)
-#
-#     return JsonResponse(house_flats_schemas, status=200, safe=False)
+
+def get_house_ftats_schemas(request, id):
+    data = fetch_all_from_db(model=flat_schema_model, condition={'house_hash_id': id})
+
+    return generate_response(
+        data=encode_objects_in_assigned_format(format='json', data=data),
+        status=200
+    )
 
 
 class FloorType(View):
@@ -444,12 +399,9 @@ class FloorType(View):
         return generate_response(data=model_to_dict(floor_type))
 
     def post(self, request):
-        # data = decode_from_json_format(data=request.body.decode('utf-8'))
-
         form = bind_data_with_form(form=floor_type_form, data=request.POST)
 
         if form.is_valid():
-
             if request.FILES:
                 image_name = create_image_name(image=request.FILES['image'])
                 save_image_in_dir(name=image_name, image=request.FILES['image'])
@@ -459,10 +411,7 @@ class FloorType(View):
 
             floor_type = self.create_floor_type(data=form.cleaned_data)
 
-            return generate_response(
-                data=encode_objects_in_assigned_format(format='json', data=floor_type),
-                status=200
-            )
+            return generate_response(data=model_to_dict(floor_type), status=200)
 
         return generate_response(data=form.errors, status=400)
 
@@ -489,11 +438,11 @@ class FloorType(View):
                 number='%s' % number
             ) for number in data['clone_floors'].split(','))
 
-            return floor_model.objects.bulk_create(floors)
+            floor_model.objects.bulk_create(floors)
+
+            return floor_type
 
     def put(self, request, id):
-        # data = decode_from_json_format(data=request.body.decode('utf-8'))
-
         if request.content_type.startswith('multipart'):
             data, files = request.parse_file_upload(request.META, request)
             floor_type = data.dict()
@@ -516,10 +465,7 @@ class FloorType(View):
 
             new_floor_type = self.update_floor_type(data=form.cleaned_data, id=id)
 
-            return generate_response(
-                data=encode_objects_in_assigned_format(format='json', data=new_floor_type),
-                status=200
-            )
+            return generate_response(data=model_to_dict(new_floor_type), status=200)
 
         return generate_response(data=form.errors, status=400)
 
@@ -548,11 +494,11 @@ class FloorType(View):
                 number='%s' % number
             ) for number in data['clone_floors'].split(','))
 
-            return floor_model.objects.bulk_create(floors)
+            floor_model.objects.bulk_create(floors)
+
+            return floor_type
 
     def delete(self, request, id):
-        # delete_from_db(model=floor_type_model, condition={'hash_id': id})
-
         floor_type = floor_type_model.objects.get(hash_id=id)
 
         if floor_type.image:
@@ -568,10 +514,7 @@ def get_house_floor_types(request, id):
         model=floor_type_model,
         condition={'house_hash_id': id}
     )
-    # house_floor_type = floor_type_model.objects.filter(house_hash_id=id)
-    # return HttpResponse(house_floor_type)
-    # for val in house_floor_type:
-    #     return HttpResponse(val.number_of_flats)
+
     return generate_response(
         data=encode_objects_in_assigned_format(format='json', data=house_floor_type),
         status=200
@@ -620,101 +563,6 @@ class Flat(View):
         return HttpResponse(status=200, reason='OK')
 
 
-# class FlatType(View):
-#     def get(self, request):
-#         return HttpResponse('get flat type')
-#
-#     def post(self, request):
-#         data = serialization.json_decode(request.body)
-#         # return HttpResponse(data['number_of_flats_in_entrance'][num]['number_of'])
-#
-#         # TO DO
-#         # len(data['flats'])
-#         # self.is_correct_number_of_flats(data)
-#
-#         flat_type = self.create_flat_type(data)
-#
-#         return HttpResponse(flat_type)
-#
-#     def create_flat_type(self, data):
-#         with transaction.atomic():
-#             house = house_model.objects.get(hash_id=data['house_id'])
-#             flat_schema = flat_schema_model.objects.get(hash_id=data['flat_schema_id'])
-#             floor_type = floor_type_model.objects.get(hash_id=data['floor_type_id'])
-#
-#             # flat_type = flat_type_model.objects.create(
-#             #     hash_id=helper.create_hash(),
-#             #     house=house,
-#             #     house_hash_id=house.hash_id,
-#             #     floor_type=floor_type,
-#             #     floor_type_hash_id=floor_type.hash_id,
-#             #     coordinates=data['coordinates'],
-#             # )
-#
-#             # flats = (flat_model(
-#             #     hash_id=helper.create_hash(),
-#             #     house=house,
-#             #     house_hash_id=house.hash_id,
-#             #     flat_schema=flat_schema,
-#             #     flat_schema_hash_id=flat_schema.hash_id,
-#             #     flat_type=flat_type,
-#             #     flat_type_hash_id=flat_type.hash_id,
-#             #     entrance=data['entrance'],
-#             #     number=0,
-#             #     area=data['area'],
-#             #     price=data['price'],
-#             #     windows=data['windows'],
-#             #     status=data['status'],
-#             #     floor='%s' % floor
-#             # )for floor in data['clone_floors'])
-#
-#             flats_objects = []
-#
-#             for floor in data['clone_floors']:
-#
-#                 for flat_type in data['flats']:
-#
-#                     if floor == data['clone_floors'][0]:
-#                         num = flat_type['number']
-#                     else:
-#                         number_entrance = str(flat_type['entrance'])
-#                         number_of_flats_in_entrance = data['number_of_flats_in_entrance'][number_entrance]['number_of']
-#                         flat_type['number'] += number_of_flats_in_entrance
-#
-#                     flat_object = flat_model(
-#                         hash_id=helper.create_hash(),
-#                         house=house,
-#                         house_hash_id=house.hash_id,
-#                         flat_schema=flat_schema,
-#                         flat_schema_hash_id=flat_schema.hash_id,
-#                         # flat_type=flat_type,
-#                         # flat_type_hash_id=flat_type.hash_id,
-#                         entrance=flat_type['entrance'],
-#                         number=flat_type['number'],
-#                         area=flat_type['area'],
-#                         price=flat_type['price'],
-#                         windows=flat_type['windows'],
-#                         status=flat_type['status'],
-#                         floor=floor,
-#                         coordinates=flat_type['coordinates'],
-#                     )
-#
-#                     flats_objects.append((
-#                         flat_object
-#                     ))
-#
-#             flat_model.objects.bulk_create(flats_objects)
-#
-#             return data['clone_floors']
-#
-#     def put(self, request, id):
-#         flat = flat_model.manager.filter(flat_type__hash_id=id).update()
-#         return HttpResponse(flat)
-#
-#     def delete(self, request, id):
-#         return HttpResponse('delete flat type')
-
-
 class FlatType(View):
     def get(self, request, id):
         flat_type = flat_model.objects.filter(flat_type__hash_id=id).first()
@@ -738,6 +586,7 @@ class FlatType(View):
         )
 
         clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
+        clone_floors.reverse()
 
         flat_schema = fetch_from_db(
             model=flat_schema_model,
@@ -751,11 +600,14 @@ class FlatType(View):
                 house_hash_id=house.hash_id,
                 floor_type=floors.first().floor_type,
                 floor_type_hash_id=floors.first().floor_type.hash_id,
+                number=data['number'],
                 coordinates=data['coordinates'],
             )
 
             flats_objects = []
             for floor in clone_floors:
+                print(clone_floors)
+
                 flat_object = flat_model(
                     hash_id=helper.create_hash(),
                     house=house,
@@ -797,55 +649,25 @@ class FlatType(View):
 
 
 def get_floor_type_flat_types(request, id):
-    flats = fetch_all_from_db(
-        model=flat_model,
-        condition={'flat_type__floor_type_hash_id': id}
-    )
-
-    floor_type = flats.first().number
-
-    flat_types = flats.filter(floor=floor_type)
+    flats_types = fetch_all_from_db(model=flat_type_model, condition={'floor_type_hash_id': id})
 
     return generate_response(
-        data=encode_objects_in_assigned_format(format='json', data=flat_types),
+        data=encode_objects_in_assigned_format(format='json', data=flats_types),
         status=200
     )
 
-
-# def numbering_flats(request):
-#     data = serialization.json_decode(request.body)
-#
-#     number_flat = 1
-#     number_of_entrance = data['number_of_entrance'] + 1
-#
-#     with transaction.atomic():
-#         for entrance in range(1, number_of_entrance):
-#
-#             for clone_floor in data['clone_floors']:
-#                 flats = flat_model.manager.filter(
-#                     house_hash_id=data['house_id']
-#                 ).filter(
-#                     floor=clone_floor
-#                 ).filter(
-#                     entrance=entrance
-#                 )
-#
-#                 for flat in flats:
-#                     flat.number = number_flat
-#                     flat.save()
-#                     number_flat += 1
-#
-#     return JsonResponse({}, status=200)
 
 def numbering_flats(request):
     data = serialization.json_decode(request.body.decode('utf-8'))
 
     with transaction.atomic():
-        flats = flat_model.manager.filter(
-            house_hash_id=data['house_id']
+        flats = fetch_all_from_db(
+            model=flat_model,
+            condition={'house_hash_id': data['house_id']}
         )
 
         number_of_entrance = flats.values('entrance').distinct().count() + 1
+
         number_first_flat = flats.first().number
 
         for entrance in range(1, number_of_entrance):
