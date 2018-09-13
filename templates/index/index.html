@@ -261,31 +261,31 @@
                     <!-- Floor type -->
                     <!--house_id: '00344377',-->
                     <!--image: 'path/to/image',-->
-                    <!--clone_floors: '1, 2, 3, 4',-->
+                    <!--clone_floors: '4, 2, 3',-->
+                    <!--number: 1,-->
                     <!--number_of_flats: 25,-->
 
                     <!-- Flat type -->
-                    house_id: '2151697f',
-                    floor_type_id: '36bb2680',
-                    flat_schema_id: '6d8a21f0',
-                    entrance: 1,
-                    number: 80,
-                    windows: ['dfdf', 'dfdfdf'],
-                    coordinates: '213.22, 749.22',
-                    <!--clone_floors: [6, 7, 8],-->
-
                     <!--house_id: '2151697f',-->
-                    <!--number_of_flats_in_entrance: {-->
-                        <!--1: {-->
-                            <!--number_of: 4,-->
-                        <!--},-->
-                        <!--2: {-->
-                            <!--number_of: 6,-->
-                        <!--},-->
-                        <!--&lt;!&ndash;3: {&ndash;&gt;-->
-                            <!--&lt;!&ndash;number_of: 4,&ndash;&gt;-->
-                        <!--&lt;!&ndash;}&ndash;&gt;-->
-                    <!--},-->
+                    <!--floor_type_id: 'bfe63b5c',-->
+                    <!--flat_schema_id: '6d8a21f0',-->
+                    <!--entrance: 1,-->
+                    <!--number: 4,-->
+                    <!--windows: ['one', 'two'],-->
+                    <!--coordinates: '213.22, 749.22',-->
+
+                    house_id: '2151697f',
+                    number_of_flats_in_entrance: {
+                        1: {
+                            number_of: 4,
+                        },
+                        2: {
+                            number_of: 6,
+                        },
+                        3: {
+                            number_of: 4,
+                        }
+                    },
                 },
 
                 <!--url: 'http://172.100.2.15:8000/password/reset',-->
@@ -298,8 +298,8 @@
                 <!--url: 'http://172.100.2.15:8000/houses',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/floor-types',-->
-                url: 'http://172.100.2.15:8000/flat-types',
-                <!--url: 'http://172.100.2.15:8000/flats/numbering',-->
+                <!--url: 'http://172.100.2.15:8000/flat-types',-->
+                url: 'http://172.100.2.15:8000/flats/numbering',
             }).then(function (response) {
                 console.log('then')
                 console.log(response)

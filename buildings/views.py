@@ -13,7 +13,7 @@ from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm
+from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm, FlatTypeForm
 
 from insider.settings import PROJECT_ROOT
 
@@ -34,6 +34,7 @@ building_form = BuildingForm
 house_form = HouseForm
 flat_schema_form = FlatSchemaForm
 floor_type_form = FloorTypeForm
+flat_type_form = FlatTypeForm
 
 fs = FileSystemStorage()
 
@@ -429,18 +430,25 @@ class FloorType(View):
                 number_of_flats=data['number_of_flats']
             )
 
+            floors_numbers = self.create_floors_numbers(data)
+
             floors = (floor_model(
                 hash_id=helper.create_hash(),
                 house=house,
                 house_hash_id=house.hash_id,
                 floor_type=floor_type,
                 floor_type_hash_id=floor_type.hash_id,
-                number='%s' % number
-            ) for number in data['clone_floors'].split(','))
+                number='%s' % floor_number
+            ) for floor_number in floors_numbers)
 
             floor_model.objects.bulk_create(floors)
 
             return floor_type
+
+    def create_floors_numbers(self, data):
+        new_clone_floors = data['clone_floors'].split(',')
+        new_clone_floors.insert(0, data['number'])
+        return new_clone_floors
 
     def put(self, request, id):
         if request.content_type.startswith('multipart'):
@@ -572,9 +580,29 @@ class FlatType(View):
     def post(self, request):
         data = decode_from_json_format(data=request.body.decode('utf-8'))
 
-        flat_type = self.create_flat_type(data)
+        form = bind_data_with_form(form=flat_type_form, data=data)
 
-        return generate_response(data=model_to_dict(flat_type), status=200)
+        if form.is_valid():
+            # last_flat_type = flat_type_model.objects.filter(
+            #     house_hash_id=form.cleaned_data['house_id']
+            # ).filter(
+            #     entrance=form.cleaned_data['entrance']
+            # ).last()
+
+            # if not last_flat_type:
+            #     flat_type = self.create_flat_type(form.cleaned_data)
+            #     return generate_response(data=model_to_dict(flat_type), status=200)
+            #
+            # if form.cleaned_data['number'] <= last_flat_type.number:
+            #     return generate_response(status=400)
+            # elif form.cleaned_data['number'] > last_flat_type.number + 1:
+            #     return generate_response(status=400)
+
+            flat_type = self.create_flat_type(form.cleaned_data)
+
+            return generate_response(data=model_to_dict(flat_type), status=200)
+
+        return generate_response(data=form.errors, status=400)
 
     def create_flat_type(self, data):
         house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
@@ -586,7 +614,7 @@ class FlatType(View):
         )
 
         clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
-        clone_floors.reverse()
+        clone_floors.sort()
 
         flat_schema = fetch_from_db(
             model=flat_schema_model,
@@ -601,12 +629,12 @@ class FlatType(View):
                 floor_type=floors.first().floor_type,
                 floor_type_hash_id=floors.first().floor_type.hash_id,
                 number=data['number'],
+                entrance=data['entrance'],
                 coordinates=data['coordinates'],
             )
 
             flats_objects = []
             for floor in clone_floors:
-                print(clone_floors)
 
                 flat_object = flat_model(
                     hash_id=helper.create_hash(),

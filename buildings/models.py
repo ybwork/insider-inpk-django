@@ -97,6 +97,7 @@ class FlatType(models.Model):
     floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE)
     floor_type_hash_id = models.CharField(max_length=16, db_index=True)
     number = models.IntegerField(null=True)
+    entrance = models.IntegerField(null=True)
     coordinates = models.TextField()
 
     class Meta:
