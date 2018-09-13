@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/buildings/migrations/0009_flattype_entrance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/60b819bd.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/9cc13698.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/fb3bc87e.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/fccddf28.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/media/11d91188.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/media/47ea3d38.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/media/11d91188.svg" beforeDir="false" afterPath="$PROJECT_DIR$/insider/media/447bee18.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/media/47ea3d38.svg" beforeDir="false" afterPath="$PROJECT_DIR$/insider/media/9b02f09a.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/insider/media/62db67c4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/media/92a8224a.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/media/92a8224a.svg" beforeDir="false" afterPath="$PROJECT_DIR$/insider/media/a31d8563.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,10 +52,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
+            <state relative-caret-position="340">
               <caret line="286" column="25" selection-start-line="286" selection-start-column="25" selection-end-line="286" selection-end-column="25" />
               <folding>
                 <marker date="1536849702372" expanded="true" signature="10634:11042" ph="..." />
@@ -73,10 +78,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2073">
+            <state relative-caret-position="186">
               <caret line="590" lean-forward="true" selection-start-line="590" selection-end-line="590" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -586,24 +591,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2073">
-          <caret line="590" lean-forward="true" selection-start-line="590" selection-end-line="590" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
+        <state relative-caret-position="340">
           <caret line="286" column="25" selection-start-line="286" selection-start-column="25" selection-end-line="286" selection-end-column="25" />
           <folding>
             <marker date="1536849702372" expanded="true" signature="10634:11042" ph="..." />
             <marker date="1536849702372" expanded="true" signature="10923:11019" ph="..." />
             <marker date="1536849702372" expanded="true" signature="12748:13181" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="590" lean-forward="true" selection-start-line="590" selection-end-line="590" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
