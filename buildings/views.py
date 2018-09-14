@@ -7,7 +7,6 @@ from django.db import transaction
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse, QueryDict
 from django.views import View
-from rest_framework.utils import json
 
 from auth.models import Company
 from auth.models import User
@@ -583,16 +582,16 @@ class FlatType(View):
         form = bind_data_with_form(form=flat_type_form, data=data)
 
         if form.is_valid():
-            # last_flat_type = flat_type_model.objects.filter(
-            #     house_hash_id=form.cleaned_data['house_id']
-            # ).filter(
-            #     entrance=form.cleaned_data['entrance']
-            # ).last()
+            last_flat_type = flat_type_model.objects.filter(
+                house_hash_id=form.cleaned_data['house_id']
+            ).filter(
+                entrance=form.cleaned_data['entrance']
+            ).last()
 
-            # if not last_flat_type:
-            #     flat_type = self.create_flat_type(form.cleaned_data)
-            #     return generate_response(data=model_to_dict(flat_type), status=200)
-            #
+            if not last_flat_type and form.cleaned_data['entrance'] == 1:
+                flat_type = self.create_flat_type(form.cleaned_data)
+                return generate_response(data=model_to_dict(flat_type), status=200)
+
             # if form.cleaned_data['number'] <= last_flat_type.number:
             #     return generate_response(status=400)
             # elif form.cleaned_data['number'] > last_flat_type.number + 1:

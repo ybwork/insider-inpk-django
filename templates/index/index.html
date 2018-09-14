@@ -266,26 +266,26 @@
                     <!--number_of_flats: 25,-->
 
                     <!-- Flat type -->
-                    <!--house_id: '2151697f',-->
-                    <!--floor_type_id: 'bfe63b5c',-->
-                    <!--flat_schema_id: '6d8a21f0',-->
-                    <!--entrance: 1,-->
-                    <!--number: 4,-->
-                    <!--windows: ['one', 'two'],-->
-                    <!--coordinates: '213.22, 749.22',-->
-
                     house_id: '2151697f',
-                    number_of_flats_in_entrance: {
-                        1: {
-                            number_of: 4,
-                        },
-                        2: {
-                            number_of: 6,
-                        },
-                        3: {
-                            number_of: 4,
-                        }
-                    },
+                    floor_type_id: 'bfe63b5c',
+                    flat_schema_id: '6d8a21f0',
+                    entrance: 1,
+                    number: 1,
+                    windows: ['one', 'two'],
+                    coordinates: '213.22, 749.22',
+
+                    <!--house_id: '2151697f',-->
+                    <!--number_of_flats_in_entrance: {-->
+                        <!--1: {-->
+                            <!--number_of: 4,-->
+                        <!--},-->
+                        <!--2: {-->
+                            <!--number_of: 6,-->
+                        <!--},-->
+                        <!--3: {-->
+                            <!--number_of: 4,-->
+                        <!--}-->
+                    <!--},-->
                 },
 
                 <!--url: 'http://172.100.2.15:8000/password/reset',-->
@@ -298,8 +298,8 @@
                 <!--url: 'http://172.100.2.15:8000/houses',-->
                 <!--url: 'http://172.100.2.15:8000/flats-schemas',-->
                 <!--url: 'http://172.100.2.15:8000/floor-types',-->
-                <!--url: 'http://172.100.2.15:8000/flat-types',-->
-                url: 'http://172.100.2.15:8000/flats/numbering',
+                url: 'http://172.100.2.15:8000/flat-types',
+                <!--url: 'http://172.100.2.15:8000/flats/numbering',-->
             }).then(function (response) {
                 console.log('then')
                 console.log(response)
