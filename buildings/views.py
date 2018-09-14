@@ -1,3 +1,4 @@
+import json
 import os
 
 from django.contrib.postgres.aggregates import ArrayAgg
@@ -303,7 +304,7 @@ class FlatSchema(View):
 
     def post(self, request):
         form = bind_data_with_form(form=flat_schema_form, data=request.POST)
-
+        # return HttpResponse(form.errors)
         if form.is_valid():
             if request.FILES:
                 image_name = create_image_name(image=request.FILES['image'])
@@ -517,13 +518,25 @@ class FloorType(View):
 
 
 def get_house_floor_types(request, id):
-    house_floor_type = fetch_all_from_db(
-        model=floor_type_model,
-        condition={'house_hash_id': id}
-    )
+    floor_types = floor_type_model.objects.filter(house_hash_id=id)
+
+    flat_types = flat_type_model.objects.filter(house_hash_id=id)
+
+    floor_types_with_marking_enable = []
+    for floor_type in floor_types.values():
+        number_of_marked_flats = flat_types.filter(floor_type_hash_id=floor_type['hash_id']).count()
+
+        if floor_type['number'] == 1:
+            floor_type['marking_enable'] = True
+        elif floor_type['number_of_flats'] == number_of_marked_flats:
+            floor_type['marking_enable'] = True
+        else:
+            floor_type['marking_enable'] = False
+
+        floor_types_with_marking_enable.append(floor_type)
 
     return generate_response(
-        data=encode_objects_in_assigned_format(format='json', data=house_floor_type),
+        data=floor_types_with_marking_enable,
         status=200
     )
 
@@ -582,15 +595,25 @@ class FlatType(View):
         form = bind_data_with_form(form=flat_type_form, data=data)
 
         if form.is_valid():
-            last_flat_type = flat_type_model.objects.filter(
-                house_hash_id=form.cleaned_data['house_id']
-            ).filter(
-                entrance=form.cleaned_data['entrance']
-            ).last()
+            # return HttpResponse(form.cleaned_data)
 
-            if not last_flat_type and form.cleaned_data['entrance'] == 1:
-                flat_type = self.create_flat_type(form.cleaned_data)
-                return generate_response(data=model_to_dict(flat_type), status=200)
+            # entrance = form.cleaned_data['entrance']
+
+            # Validation
+            flat_types = flat_type_model.objects.filter(
+                house_hash_id=form.cleaned_data['house_id']
+            )
+
+            floor_type = floor_type_model.objects.get(hash_id=data['floor_type_id'])
+
+            # Если этаж первый и на этаже нет ни одной, то создай без валидации.
+            if floor_type.number == 1 and not flat_types.filter(floor_type_hash_id=floor_type.hash_id):
+                return HttpResponse('yes')
+            return HttpResponse('no')
+
+            # if not last_flat_type and form.cleaned_data['entrance'] == 1:
+            #     flat_type = self.create_flat_type(form.cleaned_data)
+            #     return generate_response(data=model_to_dict(flat_type), status=200)
 
             # if form.cleaned_data['number'] <= last_flat_type.number:
             #     return generate_response(status=400)
@@ -602,6 +625,11 @@ class FlatType(View):
             return generate_response(data=model_to_dict(flat_type), status=200)
 
         return generate_response(data=form.errors, status=400)
+
+    def is_exists_flat_types_on_entrance(self, flat_types, entrance):
+        if flat_types.filter(entrance=entrance):
+            return True
+        return False
 
     def create_flat_type(self, data):
         house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
