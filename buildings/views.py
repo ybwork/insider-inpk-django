@@ -5,6 +5,7 @@ from django.contrib.postgres.aggregates import ArrayAgg
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
+from django.db.models import Max, Min
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse, QueryDict
 from django.views import View
@@ -673,7 +674,7 @@ class FlatType(View):
         number_of_flats_on_floor = floor_types.filter(hash_id=hash_id_previous_floor_type)[0].number_of_flats
         number_of_marked_flats_on_floor = flats.filter(floor=previous_floor).count()
 
-        if number_of_flats_on_floor == number_of_marked_flats_on_floor:
+        if number_of_marked_flats_on_floor >= number_of_flats_on_floor:
             return True
         return False
 
@@ -788,17 +789,24 @@ def numbering_flats(request):
 
         number_first_flat = flats.first().number
 
-        for entrance in range(1, number_of_entrance):
-            number_of_flats_in_etrance = data['number_of_flats_in_entrance'][str(entrance)]['number_of']
+        number_of_max_floor_in_house = flats.aggregate(Max('floor'))['floor__max'] + 1
 
-            flats_by_entrance = flats.filter(entrance=entrance)
+        for floor in range(1, number_of_max_floor_in_house):
 
-            for flat in flats_by_entrance:
-                if flat.number:
-                    number_first_flat = flat.number
+            for entrance in range(1, number_of_entrance):
+                # number_of_flats_in_etrance = data['number_of_flats_in_entrance'][str(entrance)]['number_of']
 
-                flat.number = number_first_flat
-                flat.save()
-                number_first_flat += number_of_flats_in_etrance
+                number_of_flats_in_etrance_on_floor = flats.filter(floor=floor).filter(entrance=entrance).count()
+                # return HttpResponse(number_first_flat)
+                flats_by_entrance = flats.filter(entrance=entrance)
+
+                for flat in flats_by_entrance:
+                    if flat.number:
+                        number_first_flat = flat.number
+
+                    flat.number = number_first_flat
+                    flat.save()
+                    # number_first_flat += number_of_flats_in_etrance
+                    number_first_flat += number_of_flats_in_etrance_on_floor
 
     return JsonResponse({}, status=200)

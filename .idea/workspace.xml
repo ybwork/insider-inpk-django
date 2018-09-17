@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html" afterDir="false" />
     </list>
@@ -42,16 +41,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="270" column="44" selection-start-line="270" selection-start-column="44" selection-end-line="270" selection-end-column="44" />
+            <state relative-caret-position="274">
+              <caret line="186" column="76" lean-forward="true" selection-start-line="186" selection-start-column="76" selection-end-line="186" selection-end-column="76" />
               <folding>
-                <marker date="1537185327884" expanded="true" signature="10330:10626" ph="..." />
-                <marker date="1537185327884" expanded="true" signature="10628:11117" ph="..." />
-                <marker date="1537185327884" expanded="true" signature="10973:11087" ph="..." />
-                <marker date="1537185327884" expanded="true" signature="12826:13259" ph="..." />
+                <marker date="1537190453565" expanded="true" signature="10330:10673" ph="..." />
+                <marker date="1537190453565" expanded="true" signature="12425:12858" ph="..." />
               </folding>
             </state>
           </provider>
@@ -60,8 +57,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="159">
+              <caret line="20" column="67" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="67" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -69,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="626" column="84" selection-start-line="626" selection-start-column="84" selection-end-line="626" selection-end-column="84" />
+            <state relative-caret-position="193">
+              <caret line="530" column="47" lean-forward="true" selection-start-line="530" selection-start-column="47" selection-end-line="530" selection-end-column="47" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -131,7 +128,6 @@
       <find>get_house_ftats_schemas</find>
       <find>encode_objects_in_assigned_format</find>
       <find>houses/082eaf4d/floor-types</find>
-      <find>get_house_floor_types</find>
       <find>FlatType</find>
       <find>def decode_from_json_format</find>
       <find>.append</find>
@@ -144,6 +140,7 @@
       <find>def encode_objects_in_assigned_format</find>
       <find>floor_type</find>
       <find>flat_type_hash_id</find>
+      <find>get_house_floor_types</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -179,8 +176,8 @@
         <option value="$PROJECT_DIR$/buildings/urls.py" />
         <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/buildings/forms.py" />
-        <option value="$PROJECT_DIR$/buildings/views.py" />
         <option value="$PROJECT_DIR$/templates/index/index.html" />
+        <option value="$PROJECT_DIR$/buildings/views.py" />
       </list>
     </option>
   </component>
@@ -310,7 +307,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.48840687" visible="true" weight="0.46180555" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48840687" weight="0.46180555" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -561,10 +558,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
+    <entry file="file://$PROJECT_DIR$/buildings/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="83">
+          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -578,35 +575,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/models.py">
+    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+        <state relative-caret-position="159">
+          <caret line="20" column="67" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="67" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="626" column="84" selection-start-line="626" selection-start-column="84" selection-end-line="626" selection-end-column="84" />
+        <state relative-caret-position="274">
+          <caret line="186" column="76" lean-forward="true" selection-start-line="186" selection-start-column="76" selection-end-line="186" selection-end-column="76" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1537190453565" expanded="true" signature="10330:10673" ph="..." />
+            <marker date="1537190453565" expanded="true" signature="12425:12858" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
+    <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="270" column="44" selection-start-line="270" selection-start-column="44" selection-end-line="270" selection-end-column="44" />
+        <state relative-caret-position="193">
+          <caret line="530" column="47" lean-forward="true" selection-start-line="530" selection-start-column="47" selection-end-line="530" selection-end-column="47" />
           <folding>
-            <marker date="1537185327884" expanded="true" signature="10330:10626" ph="..." />
-            <marker date="1537185327884" expanded="true" signature="10628:11117" ph="..." />
-            <marker date="1537185327884" expanded="true" signature="10973:11087" ph="..." />
-            <marker date="1537185327884" expanded="true" signature="12826:13259" ph="..." />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
