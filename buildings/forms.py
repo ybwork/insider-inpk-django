@@ -212,6 +212,13 @@ class FlatSchemaForm(forms.Form):
         }
     )
 
+    number_of_rooms = forms.IntegerField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'format': custom_error_messages['format']
+        }
+    )
+
     area = forms.DecimalField(
         error_messages={
             'required': custom_error_messages['required'],

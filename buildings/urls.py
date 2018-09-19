@@ -28,6 +28,7 @@ urlpatterns = [
     path('flat-types/<str:id>', views.FlatType.as_view()),
 
     path('flats/numbering', views.numbering_flats),
+    path('houses/<str:id>/flats', views.get_house_flats),
     # path('flats', views.Flat.as_view()),
     # path('flats/<str:id>', views.Flat.as_view()),
 ]

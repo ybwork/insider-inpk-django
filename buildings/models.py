@@ -55,6 +55,7 @@ class FlatSchema(models.Model):
     image = models.CharField(max_length=255, blank=True, default='')
     number_of_balcony = models.PositiveSmallIntegerField(blank=True, null=True)
     number_of_loggia = models.PositiveSmallIntegerField(blank=True, null=True)
+    number_of_rooms = models.PositiveIntegerField(null=True)
     area = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
