@@ -3,8 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/media/b9b98ae0.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/media/c45035de.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/app.f98669b534c56a715e492faf67595254.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/app.f98669b534c56a715e492faf67595254.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/flat-03.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/flat-03.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/app.e08a93878b2c746b9023.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/app.e08a93878b2c746b9023.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/vendor.d9a5293f8ff4226fd282.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/vendor.d9a5293f8ff4226fd282.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index1.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,21 +49,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
+            <state relative-caret-position="22">
               <caret line="28" column="28" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="186" column="76" lean-forward="true" selection-start-line="186" selection-start-column="76" selection-end-line="186" selection-end-column="76" />
-              <folding>
-                <marker date="1537190453565" expanded="true" signature="10330:10673" ph="..." />
-                <marker date="1537190453565" expanded="true" signature="12425:12858" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -57,8 +58,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="20" column="67" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="67" />
+            <state relative-caret-position="154">
+              <caret line="19" column="67" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="67" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -69,8 +70,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="530" column="47" lean-forward="true" selection-start-line="530" selection-start-column="47" selection-end-line="530" selection-end-column="47" />
+            <state relative-caret-position="-347">
+              <caret line="635" column="76" selection-start-line="635" selection-start-column="76" selection-end-line="635" selection-end-column="76" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -81,8 +82,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+            <state relative-caret-position="215">
+              <caret line="98" column="33" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -93,8 +94,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="293" column="32" selection-start-line="293" selection-start-column="32" selection-end-line="293" selection-end-column="32" />
+            <state relative-caret-position="76">
+              <caret line="246" column="22" selection-start-line="246" selection-start-column="22" selection-end-line="246" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -111,10 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>class House</find>
-      <find>serializers.serialize</find>
-      <find>safe</find>
-      <find>def generate_response</find>
       <find>class</find>
       <find>uu</find>
       <find>create_hash</find>
@@ -140,6 +137,10 @@
       <find>def encode_objects_in_assigned_format</find>
       <find>floor_type</find>
       <find>flat_type_hash_id</find>
+      <find>number_of_flats_in_etrance_on_floor</find>
+      <find>is_exists_flats_on_pevious_floor</find>
+      <find>floors</find>
+      <find>is_flat_exists</find>
       <find>get_house_floor_types</find>
     </findStrings>
     <replaceStrings>
@@ -165,7 +166,6 @@
         <option value="$PROJECT_DIR$/auth/models.py" />
         <option value="$PROJECT_DIR$/insider/services.py" />
         <option value="$PROJECT_DIR$/auth/urls.py" />
-        <option value="$PROJECT_DIR$/insider/views.py" />
         <option value="$PROJECT_DIR$/templates/reset_password/reset_password.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -173,10 +173,12 @@
         <option value="$PROJECT_DIR$/auth/views.py" />
         <option value="$PROJECT_DIR$/auth/middleware.py" />
         <option value="$PROJECT_DIR$/insider/settings.py" />
-        <option value="$PROJECT_DIR$/buildings/urls.py" />
-        <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/buildings/forms.py" />
+        <option value="$PROJECT_DIR$/buildings/models.py" />
+        <option value="$PROJECT_DIR$/insider/views.py" />
+        <option value="$PROJECT_DIR$/templates/index/index1.html" />
         <option value="$PROJECT_DIR$/templates/index/index.html" />
+        <option value="$PROJECT_DIR$/buildings/urls.py" />
         <option value="$PROJECT_DIR$/buildings/views.py" />
       </list>
     </option>
@@ -195,7 +197,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -297,17 +299,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.18324608" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" weight="0.19521317" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5115931" side_tool="true" weight="0.46180555" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5123411" side_tool="true" weight="0.46006945" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48840687" weight="0.46180555" />
+      <window_info id="Structure" order="1" sideWeight="0.5034722" side_tool="true" weight="0.18324608" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48765895" weight="0.46006945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -320,31 +323,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295107" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1697831" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
-      <window_info anchor="right" id="Database" order="4" weight="0.3295107" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4938838" weight="0.42881945" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5061162" side_tool="true" weight="0.4357639" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.3295107" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -368,7 +347,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180711-140221-68842224.log" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2679">
@@ -537,20 +515,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insider/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="28" column="28" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/serializers/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
@@ -558,48 +522,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/models.py">
+    <entry file="file://$PROJECT_DIR$/insider/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+        <state relative-caret-position="88">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="278" column="18" lean-forward="true" selection-start-line="278" selection-start-column="18" selection-end-line="278" selection-end-column="18" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1537345054143" expanded="true" signature="10323:10665" ph="..." />
+            <marker date="1537345054143" expanded="true" signature="12424:12857" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
+    <entry file="file://$PROJECT_DIR$/insider/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="293" column="32" selection-start-line="293" selection-start-column="32" selection-end-line="293" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="20" column="67" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="22">
+          <caret line="28" column="28" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="186" column="76" lean-forward="true" selection-start-line="186" selection-start-column="76" selection-end-line="186" selection-end-column="76" />
+        <state relative-caret-position="220">
+          <caret line="11" column="63" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="246" column="22" selection-start-line="246" selection-start-column="22" selection-end-line="246" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="19" column="67" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="67" />
           <folding>
-            <marker date="1537190453565" expanded="true" signature="10330:10673" ph="..." />
-            <marker date="1537190453565" expanded="true" signature="12425:12858" ph="..." />
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="98" column="33" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="530" column="47" lean-forward="true" selection-start-line="530" selection-start-column="47" selection-end-line="530" selection-end-column="47" />
+        <state relative-caret-position="-347">
+          <caret line="635" column="76" selection-start-line="635" selection-start-column="76" selection-end-line="635" selection-end-column="76" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

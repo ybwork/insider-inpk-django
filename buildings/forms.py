@@ -244,6 +244,7 @@ class FloorTypeForm(forms.Form):
     )
 
     clone_floors = forms.CharField(
+        required=False,
         max_length=255,
         error_messages={
             'required': custom_error_messages['required'],

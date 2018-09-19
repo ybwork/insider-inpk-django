@@ -305,7 +305,7 @@ class FlatSchema(View):
 
     def post(self, request):
         form = bind_data_with_form(form=flat_schema_form, data=request.POST)
-        # return HttpResponse(form.errors)
+
         if form.is_valid():
             if request.FILES:
                 image_name = create_image_name(image=request.FILES['image'])
@@ -404,6 +404,7 @@ class FloorType(View):
         form = bind_data_with_form(form=floor_type_form, data=request.POST)
 
         if form.is_valid():
+
             if request.FILES:
                 image_name = create_image_name(image=request.FILES['image'])
                 save_image_in_dir(name=image_name, image=request.FILES['image'])
@@ -447,8 +448,13 @@ class FloorType(View):
             return floor_type
 
     def create_floors_numbers(self, data):
-        new_clone_floors = data['clone_floors'].split(',')
+        new_clone_floors = []
+
+        if data['clone_floors']:
+            new_clone_floors = data['clone_floors'].split(',')
+
         new_clone_floors.insert(0, data['number'])
+
         return new_clone_floors
 
     def put(self, request, id):
@@ -520,21 +526,32 @@ class FloorType(View):
 
 def get_house_floor_types(request, id):
     floor_types = floor_type_model.objects.filter(house_hash_id=id)
-
     flat_types = flat_type_model.objects.filter(house_hash_id=id)
 
     floor_types_with_marking_enable = []
-    for floor_type in floor_types.values():
-        number_of_marked_flats = flat_types.filter(floor_type_hash_id=floor_type['hash_id']).count()
 
-        if floor_type['number'] == 1:
-            floor_type['marking_enable'] = True
-        elif floor_type['number_of_flats'] == number_of_marked_flats:
-            floor_type['marking_enable'] = True
-        else:
-            floor_type['marking_enable'] = False
+    if floor_types:
+        previous_floor_type_hash_id = floor_types.first().hash_id
+        for floor_type in floor_types.values():
+            number_of_marked_flats_on_previous_floor = flat_types.filter(
+                floor_type_hash_id=previous_floor_type_hash_id
+            ).count()
 
-        floor_types_with_marking_enable.append(floor_type)
+            number_of_flats_on_previous_floor_type = floor_types.filter(
+                hash_id=previous_floor_type_hash_id
+            )[0].number_of_flats
+
+            if number_of_flats_on_previous_floor_type == number_of_marked_flats_on_previous_floor:
+                floor_type['marking_enable'] = True
+            else:
+                floor_type['marking_enable'] = False
+
+            if floor_type['number'] == 1:
+                floor_type['marking_enable'] = True
+
+            previous_floor_type_hash_id = floor_type['hash_id']
+
+            floor_types_with_marking_enable.append(floor_type)
 
     return generate_response(
         data=floor_types_with_marking_enable,
@@ -604,21 +621,27 @@ class FlatType(View):
 
             flats = flat_model.objects.filter(house_hash_id=data['house_id'])
 
+            # На этом этаже не может быть больше квартир чем должно быть.
+            if not self.is_exists_available_flats_for_marking(floor_types, flat_types, form.cleaned_data):
+                return generate_response(
+                    data={'message': ['Нельзя разметить больше квартир, чем должно быть на этаже']},
+                    status=400
+                )
+
+            # Если нет ни одной квартиры, то создавай без валидации
             if not flats:
                 flat_type = self.create_flat_type(form.cleaned_data)
                 return generate_response(data=model_to_dict(flat_type), status=200)
 
             # Если квартира с таким номером уже существует, то выдай ошибку.
             if self.is_flat_exists(flat_types, form.cleaned_data):
-                print(1)
                 return generate_response(
                     data={'message': ['Квартира с таким нормером уже существует']},
                     status=400
                 )
 
-            # Если не первый этаж нет квартир на предыдущем этаже, то выдай ошибку.
+            # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку.
             if floor_types.filter(hash_id=data['floor_type_id'])[0].number != 1 and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
-                print(2)
                 return generate_response(
                     data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                     status=400
@@ -626,7 +649,6 @@ class FlatType(View):
 
             # Если не первый этаж и на предыдущем размеченны не все, то выдай ошибку.
             if floor_types.filter(hash_id=data['floor_type_id'])[0].number != 1 and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
-                print(3)
                 return generate_response(
                     data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                     status=400
@@ -639,7 +661,6 @@ class FlatType(View):
 
             # Если номер квартиры равен номеру последней квартиры на этаже плюс один, то создай.
             if not self.is_flat_number_by_order(flat_types, form.cleaned_data):
-                print(4)
                 return generate_response(
                     data={'message': ['Номера квартир на этаже должны идти по порядку']},
                     status=400
@@ -651,9 +672,16 @@ class FlatType(View):
 
         return generate_response(data=form.errors, status=400)
 
+    def is_exists_available_flats_for_marking(self, floor_types, flat_types, data):
+        max_number_of_flats = floor_types.filter(hash_id=data['floor_type_id'])[0].number_of_flats
+        current_number_of_makred_flats = flat_types.filter(floor_type_hash_id=data['floor_type_id']).count()
+
+        if current_number_of_makred_flats >= max_number_of_flats:
+            return False
+        return True
+
     def is_exists_flats_on_pevious_floor(self, floor_types, flats, data):
         previous_floor = floor_types.filter(hash_id=data['floor_type_id'])[0].number - 1
-
         flats = flat_model.objects.filter(floor=previous_floor).first()
 
         if flats:
@@ -698,14 +726,16 @@ class FlatType(View):
     def create_flat_type(self, data):
         house = fetch_from_db(model=house_model, condition={'hash_id': data['house_id']})
 
-        floors = floor_model.objects.filter(
-            floor_type__hash_id=data['floor_type_id']
-        ).filter(
+        floor_type = floor_type_model.objects.filter(
             house_hash_id=data['house_id']
-        )
+        ).filter(
+            hash_id=data['floor_type_id']
+        ).first()
 
-        clone_floors = floors.aggregate(clone_floors=ArrayAgg('number'))['clone_floors']
-        clone_floors.sort()
+        clone_floors = []
+        if floor_type.clone_floors:
+            clone_floors = floor_type.clone_floors.split(',')
+        clone_floors.insert(0, floor_type.number)
 
         flat_schema = fetch_from_db(
             model=flat_schema_model,
@@ -717,8 +747,8 @@ class FlatType(View):
                 hash_id=helper.create_hash(),
                 house=house,
                 house_hash_id=house.hash_id,
-                floor_type=floors.first().floor_type,
-                floor_type_hash_id=floors.first().floor_type.hash_id,
+                floor_type=floor_type,
+                floor_type_hash_id=floor_type.hash_id,
                 number=data['number'],
                 entrance=data['entrance'],
                 coordinates=data['coordinates'],
@@ -726,7 +756,6 @@ class FlatType(View):
 
             flats_objects = []
             for floor in clone_floors:
-
                 flat_object = flat_model(
                     hash_id=helper.create_hash(),
                     house=house,
@@ -786,27 +815,32 @@ def numbering_flats(request):
         )
 
         number_of_entrance = flats.values('entrance').distinct().count() + 1
+        floor_types = floor_type_model.objects.filter(house_hash_id=data['house_id'])
 
-        number_first_flat = flats.first().number
+        for entrance in range(1, number_of_entrance):
 
-        number_of_max_floor_in_house = flats.aggregate(Max('floor'))['floor__max'] + 1
+            for floor_type in floor_types:
+                floors = []
+                if floor_type.clone_floors:
+                    floors = floor_type.clone_floors.split(',')
+                floors.insert(0, str(floor_type.number))
 
-        for floor in range(1, number_of_max_floor_in_house):
+                for floor in floors:
+                    if int(floor) == 1:
+                        previous_floor = 1
+                    else:
+                        previous_floor = int(floor) - 1
 
-            for entrance in range(1, number_of_entrance):
-                # number_of_flats_in_etrance = data['number_of_flats_in_entrance'][str(entrance)]['number_of']
+                    last_flat_number = flats.filter(entrance=entrance).filter(floor=previous_floor).last().number
+                    flats_in_entrance_on_floor = flats.filter(entrance=entrance).filter(floor=floor)
 
-                number_of_flats_in_etrance_on_floor = flats.filter(floor=floor).filter(entrance=entrance).count()
-                # return HttpResponse(number_first_flat)
-                flats_by_entrance = flats.filter(entrance=entrance)
-
-                for flat in flats_by_entrance:
-                    if flat.number:
-                        number_first_flat = flat.number
-
-                    flat.number = number_first_flat
-                    flat.save()
-                    # number_first_flat += number_of_flats_in_etrance
-                    number_first_flat += number_of_flats_in_etrance_on_floor
+                    for flat in flats_in_entrance_on_floor:
+                        if flat.number:
+                            flat.number = flat.number
+                            flat.save()
+                        else:
+                            last_flat_number += 1
+                            flat.number = last_flat_number
+                            flat.save()
 
     return JsonResponse({}, status=200)

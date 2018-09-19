@@ -11,7 +11,6 @@ urlpatterns = [
 
     path('houses', views.House.as_view()),
     path('houses/<str:id>', views.House.as_view()),
-    # path('houses/<str:id>', views.House.as_view()),
 
     path('houses/<str:id>/flats-schemas', views.get_house_ftats_schemas),
 
@@ -29,8 +28,8 @@ urlpatterns = [
     path('flat-types/<str:id>', views.FlatType.as_view()),
 
     path('flats/numbering', views.numbering_flats),
-    path('flats', views.Flat.as_view()),
-    path('flats/<str:id>', views.Flat.as_view()),
+    # path('flats', views.Flat.as_view()),
+    # path('flats/<str:id>', views.Flat.as_view()),
 ]
 
 # http://127.0.0.1:8000/buildings/1/houses
