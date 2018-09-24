@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index_simple.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index_simple.html" afterDir="false" />
@@ -42,14 +41,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index_simple.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index_simple.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="293" column="41" lean-forward="true" selection-start-line="293" selection-start-column="41" selection-end-line="293" selection-end-column="41" />
+            <state relative-caret-position="208">
+              <caret line="386" column="66" selection-start-line="386" selection-start-column="66" selection-end-line="386" selection-end-column="66" />
               <folding>
-                <marker date="1537449509629" expanded="true" signature="10490:10832" ph="..." />
-                <marker date="1537449509629" expanded="true" signature="12584:13084" ph="..." />
+                <marker date="1537800076974" expanded="true" signature="12538:13038" ph="..." />
               </folding>
             </state>
           </provider>
@@ -58,8 +56,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="31" column="36" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="36" />
+            <state relative-caret-position="-198">
+              <caret line="9" column="63" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="63" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -67,14 +65,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="640" column="32" selection-start-line="640" selection-start-column="32" selection-end-line="640" selection-end-column="32" />
+            <state relative-caret-position="252">
+              <caret line="839" column="60" selection-start-line="839" selection-start-column="60" selection-end-line="839" selection-end-column="60" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1537450028837" expanded="true" signature="30087:30357" ph="..." />
               </folding>
             </state>
           </provider>
@@ -83,8 +80,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="117" column="12" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="12" />
+            <state relative-caret-position="142">
+              <caret line="118" column="40" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="40" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -95,7 +92,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1508">
+            <state relative-caret-position="-1992">
               <caret line="214" column="19" selection-start-line="214" selection-start-column="4" selection-end-line="214" selection-end-column="19" />
             </state>
           </provider>
@@ -113,13 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create_hash</find>
-      <find>def delete_from_db</find>
-      <find>PROJECT</find>
-      <find>PROJECT_ROOT</find>
-      <find>is_image_exists</find>
-      <find>floor_type_model</find>
-      <find>что то</find>
       <find>clone_floors</find>
       <find>get_house_ftats_schemas</find>
       <find>encode_objects_in_assigned_format</find>
@@ -140,9 +130,16 @@
       <find>is_exists_flats_on_pevious_floor</find>
       <find>floors</find>
       <find>get_house_floor_types</find>
-      <find>get_house_flats</find>
       <find>is_exists_available_flats_for_marking</find>
+      <find>get_building</find>
+      <find>get_flats_by_type</find>
+      <find>get_building_houses</find>
+      <find>get_house_flats</find>
+      <find>get_flats_with_number_of_by_type</find>
+      <find>class FlatT</find>
+      <find>is_flat_number_by_order</find>
       <find>is_flat_exists</find>
+      <find>Номера квартир на этаже должны идти по порядку</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -180,8 +177,8 @@
         <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/buildings/forms.py" />
         <option value="$PROJECT_DIR$/buildings/urls.py" />
-        <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
         <option value="$PROJECT_DIR$/buildings/views.py" />
+        <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
       </list>
     </option>
   </component>
@@ -309,14 +306,15 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" weight="0.2303665" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" weight="0.1697831" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.513089" side_tool="true" weight="0.45833334" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5138369" side_tool="true" weight="0.45833334" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49847096" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info id="Structure" order="1" sideWeight="0.5034722" side_tool="true" weight="0.18324608" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.486911" weight="0.45833334" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48616305" weight="0.45833334" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -329,7 +327,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295107" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,51 +547,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1508">
+        <state relative-caret-position="-1992">
           <caret line="214" column="19" selection-start-line="214" selection-start-column="4" selection-end-line="214" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="117" column="12" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="12" />
+        <state relative-caret-position="142">
+          <caret line="118" column="40" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="40" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
+    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="293" column="41" lean-forward="true" selection-start-line="293" selection-start-column="41" selection-end-line="293" selection-end-column="41" />
+        <state relative-caret-position="-198">
+          <caret line="9" column="63" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="63" />
           <folding>
-            <marker date="1537449509629" expanded="true" signature="10490:10832" ph="..." />
-            <marker date="1537449509629" expanded="true" signature="12584:13084" ph="..." />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="640" column="32" selection-start-line="640" selection-start-column="32" selection-end-line="640" selection-end-column="32" />
+        <state relative-caret-position="252">
+          <caret line="839" column="60" selection-start-line="839" selection-start-column="60" selection-end-line="839" selection-end-column="60" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1537450028837" expanded="true" signature="30087:30357" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="386" column="66" selection-start-line="386" selection-start-column="66" selection-end-line="386" selection-end-column="66" />
+          <folding>
+            <marker date="1537800076974" expanded="true" signature="12538:13038" ph="..." />
           </folding>
         </state>
       </provider>
