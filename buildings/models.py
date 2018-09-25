@@ -97,6 +97,8 @@ class FlatType(models.Model):
     house_hash_id = models.CharField(max_length=16, db_index=True)
     floor_type = models.ForeignKey(FloorType, on_delete=models.CASCADE)
     floor_type_hash_id = models.CharField(max_length=16, db_index=True)
+    flat_schema = models.ForeignKey(FlatSchema, on_delete=models.CASCADE)
+    flat_schema_hash_id = models.CharField(max_length=16, db_index=True)
     number = models.IntegerField(null=True)
     entrance = models.IntegerField(null=True)
     coordinates = models.TextField()

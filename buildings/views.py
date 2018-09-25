@@ -200,7 +200,7 @@ def get_company_buildings(request, id):
     buildings = building_model.objects.filter(company_hash_id=id)
 
     for building in buildings:
-        buildings_flats = []
+        buildings_flats = {}
 
         flats_by_type = {}
 
@@ -221,8 +221,8 @@ def get_company_buildings(request, id):
                 else:
                     flats_by_type[flat_schema.type] = flats.count()
 
-        buildings_flats.append(flats_by_type)
-        buildings_flats.append(model_to_dict(building))
+        buildings_flats['flats_by_type'] = flats_by_type
+        buildings_flats['building'] = model_to_dict(building)
 
         buildings_with_number_of_flats_by_type.append(buildings_flats)
 
@@ -600,48 +600,6 @@ def get_house_floor_types(request, id):
     )
 
 
-# class Flat(View):
-#     def get(self, request):
-#         flat = serializers.serialize('json', flat_model.manager.all())
-#
-#         return JsonResponse(flat, status=200, safe=False)
-#
-#     def post(self, request):
-#         data = serialization.json_decode(request.body.decode('utf-8'))
-#
-#         house = house_model.manager.get(hash_id=data['house_id'])
-#         data['house'] = house
-#         data['house_hash_id'] = house.hash_id
-#
-#         floor = floor_model.manager.get(hash_id=data['floor_id'])
-#         data['floor'] = floor
-#         data['floor_hash_id'] = floor.hash_id
-#
-#         flat_schema = flat_schema_model.manager.get(hash_id=data['planing_id'])
-#         data['flat_schema'] = flat_schema
-#         data['flat_schema_hash_id'] = flat_schema.hash_id
-#
-#         flat = flat_model.manager.create(data)
-#
-#         response = JsonResponse(model_to_dict(flat), status=200)
-#         response['Access-Control-Allow-Origin'] = '*'
-#         return response
-#
-#     def put(self, request, id):
-#         data = serialization.json_decode(request.body.decode('utf-8'))
-#
-#         old_flat = flat_model.manager.get(hash_id=id)
-#
-#         new_flat = flat_model.manager.update(old_flat, data)
-#
-#         return JsonResponse(model_to_dict(new_flat), status=200, reason='OK')
-#
-#     def delete(self, request, id):
-#         flat_model.manager.filter(hash_id=id).delete()
-#
-#         return HttpResponse(status=200, reason='OK')
-
-
 class FlatType(View):
     def get(self, request, id):
         flat_type = flat_model.objects.filter(flat_type__hash_id=id).first()
@@ -713,7 +671,7 @@ class FlatType(View):
                     data={'message': ['Номера квартир на этаже должны идти по порядку']},
                     status=400
                 )
-
+            return HttpResponse(form.cleaned_data)
             flat_type = self.create_flat_type(form.cleaned_data)
 
             return generate_response(data=model_to_dict(flat_type), status=200)
@@ -812,6 +770,8 @@ class FlatType(View):
                 house_hash_id=house.hash_id,
                 floor_type=floor_type,
                 floor_type_hash_id=floor_type.hash_id,
+                flat_schema=flat_schema,
+                flat_schema_hash_id=flat_schema.hash_id,
                 number=data['number'],
                 entrance=data['entrance'],
                 coordinates=data['coordinates'],
@@ -850,18 +810,69 @@ class FlatType(View):
         form = bind_data_with_form(form=flat_type_form, data=data)
 
         if form.is_valid():
+            house = house_model.objects.filter(hash_id=form.cleaned_data['house_id']).first()
+
             flat_types = flat_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
 
             flats = flat_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
 
+            floor_types = floor_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
+
             if self.is_house_marked(flats):
                 if not self.is_edit_first_flat(flat_types, id):
                     return generate_response(
-                        data={'message': ['Для автоматической перенумерации измените номер 1 квартиры.']},
+                        data={'message': ['Для автоматической перенумерации измените номер 1-ой квартиры.']},
                         status=400
                     )
 
-                return HttpResponse('There is auto numbering')
+                start_number = form.cleaned_data['number']
+
+                for floor_type in floor_types:
+
+                    clone_floors = []
+                    if floor_type.clone_floors:
+                        clone_floors = floor_type.clone_floors.split(',')
+                    clone_floors.insert(0, floor_type.number)
+
+                    for entrance in range(1, house.number_of_entrance + 1):
+                        flats_types_by_entrance = flat_types.filter(entrance=entrance)
+
+                        for flat_type in flats_types_by_entrance:
+
+                            # flat_type.number = start_number
+                            # flat_type.save()
+
+                            start_number += 1
+
+                            flats_objects = []
+                            for floor in clone_floors:
+                                return HttpResponse(clone_floors)
+                                flat_object = flat_model(
+                                    hash_id=helper.create_hash(),
+                                    house=house,
+                                    house_hash_id=house.hash_id,
+                                    flat_schema=flat_type.flat_schema,
+                                    flat_schema_hash_id=flat_type.flat_schema_hash_id,
+                                    flat_type=flat_type,
+                                    flat_type_hash_id=flat_type.hash_id,
+                                    entrance=data['entrance'],
+                                    number=data['number'],
+                                    windows=data['windows'],
+                                    status=1,
+                                    floor=floor
+                                )
+
+                                data['number'] = start_number
+
+                                flats_objects.append((
+                                    flat_object
+                                ))
+
+                            flat = flat_model.objects.bulk_create(flats_objects)
+
+
+
+                            return HttpResponse(flat_type.number)
             else:
                 floor_types = floor_type_model.objects.filter(
                     house_hash_id=form.cleaned_data['house_id']
@@ -971,10 +982,6 @@ def numbering_flats(request):
             condition={'house_hash_id': data['house_id']}
         )
 
-        if not is_exists_flats_for_numbering(flats):
-            return HttpResponse(1)
-        return HttpResponse(2)
-
         number_of_entrance = flats.values('entrance').distinct().count() + 1
         floor_types = floor_type_model.objects.filter(house_hash_id=data['house_id'])
 
@@ -1004,12 +1011,6 @@ def numbering_flats(request):
                             flat.save()
 
     return JsonResponse({}, status=200)
-
-
-def is_exists_flats_for_numbering(flats):
-    if flats.filter(number=0):
-        return False
-    return True
 
 
 def get_house_flats(request, id):
@@ -1064,3 +1065,45 @@ def get_flats_with_number_of_by_type(flat_schemas, flats):
         number_of_flats_by_type.append(number_of_flat_by_type)
 
     return number_of_flats_by_type
+
+
+# class Flat(View):
+#     def get(self, request):
+#         flat = serializers.serialize('json', flat_model.manager.all())
+#
+#         return JsonResponse(flat, status=200, safe=False)
+#
+#     def post(self, request):
+#         data = serialization.json_decode(request.body.decode('utf-8'))
+#
+#         house = house_model.manager.get(hash_id=data['house_id'])
+#         data['house'] = house
+#         data['house_hash_id'] = house.hash_id
+#
+#         floor = floor_model.manager.get(hash_id=data['floor_id'])
+#         data['floor'] = floor
+#         data['floor_hash_id'] = floor.hash_id
+#
+#         flat_schema = flat_schema_model.manager.get(hash_id=data['planing_id'])
+#         data['flat_schema'] = flat_schema
+#         data['flat_schema_hash_id'] = flat_schema.hash_id
+#
+#         flat = flat_model.manager.create(data)
+#
+#         response = JsonResponse(model_to_dict(flat), status=200)
+#         response['Access-Control-Allow-Origin'] = '*'
+#         return response
+#
+#     def put(self, request, id):
+#         data = serialization.json_decode(request.body.decode('utf-8'))
+#
+#         old_flat = flat_model.manager.get(hash_id=id)
+#
+#         new_flat = flat_model.manager.update(old_flat, data)
+#
+#         return JsonResponse(model_to_dict(new_flat), status=200, reason='OK')
+#
+#     def delete(self, request, id):
+#         flat_model.manager.filter(hash_id=id).delete()
+#
+#         return HttpResponse(status=200, reason='OK')
