@@ -195,14 +195,38 @@ class Building(View):
 
 
 def get_company_buildings(request, id):
-    data = fetch_all_from_db(
-        model=building_model,
-        condition={'company_hash_id': id}
-    )
+    buildings_with_number_of_flats_by_type = []
 
-    company_buildings = encode_objects_in_assigned_format(format='json', data=data)
+    buildings = building_model.objects.filter(company_hash_id=id)
 
-    return generate_response(data=company_buildings, status=200)
+    for building in buildings:
+        buildings_flats = []
+
+        flats_by_type = {}
+
+        houses = house_model.objects.filter(building_hash_id=building.hash_id)
+
+        for house in houses:
+            flats_schemas = flat_schema_model.objects.filter(house_hash_id=house.hash_id)
+
+            for flat_schema in flats_schemas:
+                flats = flat_model.objects.filter(
+                    house_hash_id=house.hash_id
+                ).filter(
+                    flat_schema_hash_id=flat_schema.hash_id
+                )
+
+                if flat_schema.type in flats_by_type:
+                    flats_by_type[flat_schema.type] += flats.count()
+                else:
+                    flats_by_type[flat_schema.type] = flats.count()
+
+        buildings_flats.append(flats_by_type)
+        buildings_flats.append(model_to_dict(building))
+
+        buildings_with_number_of_flats_by_type.append(buildings_flats)
+
+    return generate_response(data=buildings_with_number_of_flats_by_type, status=200)
 
 
 class House(View):
