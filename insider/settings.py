@@ -51,7 +51,7 @@ STATICFILES_DIRS = (
 )
 
 MIDDLEWARE = [
-    'auth.middleware.AuthMiddleware',
+    # 'auth.middleware.AuthMiddleware',
     'django.middleware.security.SecurityMiddleware',
     # 'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/auth/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth/middleware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/insider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index_simple.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index_simple.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+            <state relative-caret-position="132">
+              <caret line="54" column="39" lean-forward="true" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -47,22 +46,10 @@
       <file leaf-file-name="index_simple.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="208" selection-start-line="208" selection-end-line="209" selection-end-column="45" />
+            <state relative-caret-position="-188">
+              <caret line="389" column="68" selection-start-line="389" selection-start-column="68" selection-end-line="389" selection-end-column="68" />
               <folding>
-                <marker date="1537964852378" expanded="true" signature="12769:13269" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="middleware.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/auth/middleware.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <marker date="1537965895364" expanded="true" signature="12771:13271" ph="..." />
               </folding>
             </state>
           </provider>
@@ -71,7 +58,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-88">
+            <state relative-caret-position="110">
               <caret line="5" column="66" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="66" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -80,23 +67,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/insider/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="875" column="17" lean-forward="true" selection-start-line="875" selection-start-column="17" selection-end-line="875" selection-end-column="17" />
+            <state relative-caret-position="-404">
+              <caret line="664" column="32" lean-forward="true" selection-start-line="664" selection-start-column="32" selection-end-line="664" selection-end-column="32" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1537962807155" expanded="true" signature="29525:29751" ph="..." />
               </folding>
             </state>
           </provider>
@@ -200,11 +177,11 @@
         <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/buildings/migrations/0013_auto_20180925_1733.py" />
         <option value="$PROJECT_DIR$/auth/views.py" />
-        <option value="$PROJECT_DIR$/insider/settings.py" />
-        <option value="$PROJECT_DIR$/buildings/views.py" />
         <option value="$PROJECT_DIR$/insider/urls.py" />
         <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
         <option value="$PROJECT_DIR$/auth/middleware.py" />
+        <option value="$PROJECT_DIR$/insider/settings.py" />
+        <option value="$PROJECT_DIR$/buildings/views.py" />
       </list>
     </option>
   </component>
@@ -222,7 +199,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -239,16 +216,6 @@
           <expand>
             <path>
               <item name="insider" type="b2602c69:ProjectViewProjectNode" />
-              <item name="insider" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="insider" type="b2602c69:ProjectViewProjectNode" />
-              <item name="insider" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="insider" type="b2602c69:ProjectViewProjectNode" />
-              <item name="insider" type="462c0819:PsiDirectoryNode" />
               <item name="insider" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -337,7 +304,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" weight="0.23335826" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" weight="0.17352282" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5168287" side_tool="true" weight="0.45833334" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
@@ -485,13 +452,6 @@
     <entry file="file://$PROJECT_DIR$/insider/media/flatSchema_DSKsvlC.png" />
     <entry file="file://$PROJECT_DIR$/insider/media/0-users.jpg" />
     <entry file="file://$PROJECT_DIR$/insider/media/2.jpg" />
-    <entry file="file://$PROJECT_DIR$/insider/services.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="33" column="21" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/insider/media/1b0bbf16.jpg" />
     <entry file="file://$PROJECT_DIR$/insider/media/2e9a2465.jpg" />
     <entry file="file://$PROJECT_DIR$/insider/media/4da9912b.jpg" />
@@ -554,6 +514,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/auth/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth/middleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="50" column="36" lean-forward="true" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="54" column="39" lean-forward="true" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/services.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="33" column="21" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="66" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="501">
@@ -571,60 +575,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auth/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/settings.py">
+    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+        <state relative-caret-position="-188">
+          <caret line="389" column="68" selection-start-line="389" selection-start-column="68" selection-end-line="389" selection-end-column="68" />
+          <folding>
+            <marker date="1537965895364" expanded="true" signature="12771:13271" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="875" column="17" lean-forward="true" selection-start-line="875" selection-start-column="17" selection-end-line="875" selection-end-column="17" />
+        <state relative-caret-position="-404">
+          <caret line="664" column="32" lean-forward="true" selection-start-line="664" selection-start-column="32" selection-end-line="664" selection-end-column="32" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1537962807155" expanded="true" signature="29525:29751" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="5" column="66" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/insider/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="208" selection-start-line="208" selection-end-line="209" selection-end-column="45" />
-          <folding>
-            <marker date="1537964852378" expanded="true" signature="12769:13269" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth/middleware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

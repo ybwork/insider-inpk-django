@@ -1,6 +1,6 @@
 import re
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.utils.deprecation import MiddlewareMixin
 
 from auth.models import User
