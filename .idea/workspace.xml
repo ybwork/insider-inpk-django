@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth/middleware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/media/fe69ffca.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index_simple.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index_simple.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +38,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="28" column="28" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="28" />
+            <state relative-caret-position="154">
+              <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -46,10 +47,22 @@
       <file leaf-file-name="index_simple.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="388" column="66" selection-start-line="388" selection-start-column="66" selection-end-line="388" selection-end-column="66" />
+            <state relative-caret-position="106">
+              <caret line="208" selection-start-line="208" selection-end-line="209" selection-end-column="45" />
               <folding>
-                <marker date="1537882828257" expanded="true" signature="12674:13174" ph="..." />
+                <marker date="1537964852378" expanded="true" signature="12769:13269" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="middleware.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/auth/middleware.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,7 +71,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
+            <state relative-caret-position="-88">
               <caret line="5" column="66" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="66" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -67,13 +80,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/insider/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="84">
-              <caret line="1002" lean-forward="true" selection-start-line="1002" selection-end-line="1002" />
+              <caret line="875" column="17" lean-forward="true" selection-start-line="875" selection-start-column="17" selection-end-line="875" selection-end-column="17" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+                <marker date="1537962807155" expanded="true" signature="29525:29751" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,7 +105,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1034">
+            <state relative-caret-position="501">
               <caret line="98" column="46" lean-forward="true" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -94,7 +117,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4642">
+            <state relative-caret-position="501">
               <caret line="214" column="19" selection-start-line="214" selection-start-column="4" selection-end-line="214" selection-end-column="19" />
             </state>
           </provider>
@@ -123,7 +146,6 @@
       <find>add(</find>
       <find>ad</find>
       <find>def encode_objects_in_assigned_format</find>
-      <find>floor_type</find>
       <find>flat_type_hash_id</find>
       <find>number_of_flats_in_etrance_on_floor</find>
       <find>is_exists_flats_on_pevious_floor</find>
@@ -142,6 +164,7 @@
       <find>get_company_buildings</find>
       <find>is_exists_flats_for_numbering</find>
       <find>save(</find>
+      <find>floor_type</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -161,7 +184,6 @@
         <option value="$PROJECT_DIR$/auth/serializers.py" />
         <option value="$PROJECT_DIR$/auth/middlewares.py" />
         <option value="$PROJECT_DIR$/auth/services.py" />
-        <option value="$PROJECT_DIR$/insider/urls.py" />
         <option value="$PROJECT_DIR$/templates/404/404.html" />
         <option value="$PROJECT_DIR$/auth/models.py" />
         <option value="$PROJECT_DIR$/insider/services.py" />
@@ -170,18 +192,19 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/auth/forms.py" />
-        <option value="$PROJECT_DIR$/auth/views.py" />
-        <option value="$PROJECT_DIR$/auth/middleware.py" />
-        <option value="$PROJECT_DIR$/insider/settings.py" />
         <option value="$PROJECT_DIR$/templates/index/index1.html" />
         <option value="$PROJECT_DIR$/templates/index/index.html" />
         <option value="$PROJECT_DIR$/buildings/forms.py" />
         <option value="$PROJECT_DIR$/buildings/urls.py" />
         <option value="$PROJECT_DIR$/insider/views.py" />
-        <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
         <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/buildings/migrations/0013_auto_20180925_1733.py" />
+        <option value="$PROJECT_DIR$/auth/views.py" />
+        <option value="$PROJECT_DIR$/insider/settings.py" />
         <option value="$PROJECT_DIR$/buildings/views.py" />
+        <option value="$PROJECT_DIR$/insider/urls.py" />
+        <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
+        <option value="$PROJECT_DIR$/auth/middleware.py" />
       </list>
     </option>
   </component>
@@ -199,7 +222,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -216,6 +239,16 @@
           <expand>
             <path>
               <item name="insider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="insider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="insider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="insider" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="insider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="insider" type="462c0819:PsiDirectoryNode" />
               <item name="insider" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -302,15 +335,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" weight="0.23335826" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5153328" side_tool="true" weight="0.45833334" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5168287" side_tool="true" weight="0.45833334" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4973822" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info id="Structure" order="1" sideWeight="0.5034722" side_tool="true" weight="0.18324608" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.48466715" visible="true" weight="0.45833334" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48317128" weight="0.45833334" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -348,9 +382,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180711-170358-68317808.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/mails/20180711-171513-74530896.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -408,13 +439,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auth/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="9" column="54" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
@@ -442,20 +466,6 @@
     <entry file="file://$PROJECT_DIR$/buildings/migrations/0001_initial.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1980" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-220">
-          <caret line="67" column="36" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth/middleware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="41" column="29" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="29" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/img/1.svg">
@@ -486,22 +496,8 @@
     <entry file="file://$PROJECT_DIR$/insider/media/2e9a2465.jpg" />
     <entry file="file://$PROJECT_DIR$/insider/media/4da9912b.jpg" />
     <entry file="file://$PROJECT_DIR$/insider/media/20bb589c.jpg" />
-    <entry file="file://$PROJECT_DIR$/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1858">
-          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/insider/media/3a9de601.jpg" />
     <entry file="file://$PROJECT_DIR$/insider/media/d90a2b4b.png" />
-    <entry file="file://$PROJECT_DIR$/insider/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/serializers/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
@@ -509,24 +505,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="28" column="28" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index/index_vue.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" column="63" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4642">
-          <caret line="214" column="19" selection-start-line="214" selection-start-column="4" selection-end-line="214" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -551,9 +533,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/auth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="329" column="20" selection-start-line="329" selection-start-column="20" selection-end-line="329" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
+        <state relative-caret-position="501">
           <caret line="98" column="46" lean-forward="true" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -561,9 +564,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="214" column="19" selection-start-line="214" selection-start-column="4" selection-end-line="214" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="875" column="17" lean-forward="true" selection-start-line="875" selection-start-column="17" selection-end-line="875" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1537962807155" expanded="true" signature="29525:29751" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
+        <state relative-caret-position="-88">
           <caret line="5" column="66" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="66" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -571,22 +602,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/insider/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="388" column="66" selection-start-line="388" selection-start-column="66" selection-end-line="388" selection-end-column="66" />
+        <state relative-caret-position="106">
+          <caret line="208" selection-start-line="208" selection-end-line="209" selection-end-column="45" />
           <folding>
-            <marker date="1537882828257" expanded="true" signature="12674:13174" ph="..." />
+            <marker date="1537964852378" expanded="true" signature="12769:13269" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/views.py">
+    <entry file="file://$PROJECT_DIR$/auth/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="1002" lean-forward="true" selection-start-line="1002" selection-end-line="1002" />
+        <state relative-caret-position="44">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -20,7 +20,7 @@ import insider
 from insider import views
 
 urlpatterns = [
-    path('', insider.views.index, name='home'),
+    path('home', insider.views.index, name='home'),
     path('', include('auth.urls')),
     path('', include('buildings.urls')),
 ]

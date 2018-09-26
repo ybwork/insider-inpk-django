@@ -811,11 +811,8 @@ class FlatType(View):
 
         if form.is_valid():
             house = house_model.objects.filter(hash_id=form.cleaned_data['house_id']).first()
-
             flat_types = flat_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
-
             flats = flat_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
-
             floor_types = floor_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
 
             if self.is_house_marked(flats):
@@ -825,54 +822,54 @@ class FlatType(View):
                         status=400
                     )
 
-                start_number = form.cleaned_data['number']
+                flat_type_new_number = 0
+                flat_new_number = form.cleaned_data['number']
 
-                for floor_type in floor_types:
+                for entrance in range(1, house.number_of_entrance + 1):
+                    for floor_type in floor_types:
+                        # print(entrance)
+                        # print(flat_type_new_number)
+                        # print(flat_new_number)
 
-                    clone_floors = []
-                    if floor_type.clone_floors:
-                        clone_floors = floor_type.clone_floors.split(',')
-                    clone_floors.insert(0, floor_type.number)
+                        # return HttpResponse(floor_types)
 
-                    for entrance in range(1, house.number_of_entrance + 1):
-                        flats_types_by_entrance = flat_types.filter(entrance=entrance)
+                        if floor_type.number == 1:
+                            flat_type_new_number = form.cleaned_data['number']
+                        else:
+                            flat_type_new_number = flat_new_number
 
-                        for flat_type in flats_types_by_entrance:
+                        flat_types_by_entrance_floor_type = flat_types.filter(
+                            entrance=entrance
+                        ).filter(
+                            floor_type_hash_id=floor_type.hash_id
+                        )
 
-                            # flat_type.number = start_number
-                            # flat_type.save()
+                        clone_floors = []
+                        if floor_type.clone_floors:
+                            clone_floors = floor_type.clone_floors.split(',')
+                        clone_floors.insert(0, floor_type.number)
 
-                            start_number += 1
+                        # return HttpResponse(floor_type.number)
 
-                            flats_objects = []
+                        for flat_type in flat_types_by_entrance_floor_type:
+                            return HttpResponse(flat_type)
+                            flat_type.number = flat_type_new_number
+                            flat_type.save()
+                            flat_type_new_number += 1
+
                             for floor in clone_floors:
-                                return HttpResponse(clone_floors)
-                                flat_object = flat_model(
-                                    hash_id=helper.create_hash(),
-                                    house=house,
-                                    house_hash_id=house.hash_id,
-                                    flat_schema=flat_type.flat_schema,
-                                    flat_schema_hash_id=flat_type.flat_schema_hash_id,
-                                    flat_type=flat_type,
-                                    flat_type_hash_id=flat_type.hash_id,
-                                    entrance=data['entrance'],
-                                    number=data['number'],
-                                    windows=data['windows'],
-                                    status=1,
+                                old_flat = flats.filter(
+                                    flat_type_hash_id=flat_type.hash_id
+                                ).filter(
                                     floor=floor
-                                )
+                                ).first()
 
-                                data['number'] = start_number
+                                number_of_flats_on_floor_type_in_entrance = flat_types_by_entrance_floor_type.count()
+                                old_flat.number = flat_new_number
+                                old_flat.save()
+                                flat_new_number += number_of_flats_on_floor_type_in_entrance
 
-                                flats_objects.append((
-                                    flat_object
-                                ))
-
-                            flat = flat_model.objects.bulk_create(flats_objects)
-
-
-
-                            return HttpResponse(flat_type.number)
+                    return HttpResponse(floor_type.number)
             else:
                 floor_types = floor_type_model.objects.filter(
                     house_hash_id=form.cleaned_data['house_id']
