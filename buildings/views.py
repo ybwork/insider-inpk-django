@@ -620,6 +620,11 @@ class FlatType(View):
 
             flats = flat_model.objects.filter(house_hash_id=data['house_id'])
 
+            # Если нет ни одной квартиры, то создавай без валидации
+            if not flats:
+                flat_type = self.create_flat_type(form.cleaned_data)
+                return generate_response(data=model_to_dict(flat_type), status=200)
+
             # Если не валидный номер подъезда, то выдай ошибку
             if not self.valid_entrance(flat_types, form.cleaned_data):
                 return generate_response(
@@ -641,24 +646,19 @@ class FlatType(View):
                     status=400
                 )
 
-            # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку. (изменить, потому что типовым этажом может быть второй)
-            if floor_types.filter(hash_id=data['floor_type_id'])[0].number != 1 and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
+            # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку.
+            if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
                 return generate_response(
                     data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                     status=400
                 )
 
-            # Если не первый этаж и на предыдущем размеченны не все, то выдай ошибку. (изменить, потому что типовым этажом может быть второй)
-            if floor_types.filter(hash_id=data['floor_type_id'])[0].number != 1 and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
+            # Если не первый типовой этаж и на предыдущем размеченны не все, то выдай ошибку.
+            if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
                 return generate_response(
                     data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                     status=400
                 )
-
-            # Если нет ни одной квартиры, то создавай без валидации
-            if not flats:
-                flat_type = self.create_flat_type(form.cleaned_data)
-                return generate_response(data=model_to_dict(flat_type), status=200)
 
             # Если на этаже нет ни одной, то создай без проверки на последовательность.
             if not self.is_exists_flats_on_floor_in_entrance(flat_types, form.cleaned_data):
@@ -708,11 +708,25 @@ class FlatType(View):
             return True
         return False
 
+    def is_first_floor_type(self, floor_types, data):
+        first_floor_type_number = floor_types.filter(
+            house_hash_id=data['house_id']
+        ).aggregate(Min('number'))['number__min']
+
+        current_floor_type_number = floor_types.filter(hash_id=data['floor_type_id'])[0].number
+
+        if current_floor_type_number == first_floor_type_number:
+            return True
+        return False
+
+    def is_marked_previous_entrance(self):
+        pass
+
     def is_marked_previous_floor(self, floor_types, flat_types, flats, data):
         if not flats:
             return True
 
-        if floor_types.filter(hash_id=data['floor_type_id'])[0].number == 1:
+        if self.is_first_floor_type(floor_types, data):
             return True
 
         previous_floor = floor_types.filter(hash_id=data['floor_type_id'])[0].number - 1
@@ -735,7 +749,6 @@ class FlatType(View):
         if flat_types.filter(floor_type_hash_id=data['floor_type_id']).filter(entrance=data['entrance']):
             return True
         return False
-
 
     def is_flat_number_by_order(self, flat_types, data):
         last_flat_type_in_entrance = flat_types.filter(entrance=data['entrance']).last()
@@ -789,6 +802,7 @@ class FlatType(View):
                     flat_type_hash_id=flat_type.hash_id,
                     entrance=data['entrance'],
                     number=data['number'],
+                    price=flat_schema.price,
                     windows=data['windows'],
                     status=1,
                     floor=floor
@@ -891,17 +905,14 @@ class FlatType(View):
                     )
 
                 # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку.
-                if floor_types.filter(hash_id=data['floor_type_id'])[
-                    0].number != 1 and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
+                if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
                     return generate_response(
                         data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                         status=400
                     )
 
                 # Если не первый этаж и на предыдущем размеченны не все, то выдай ошибку.
-                if floor_types.filter(hash_id=data['floor_type_id'])[
-                    0].number != 1 and not self.is_marked_previous_floor(floor_types, flat_types, flats,
-                                                                     form.cleaned_data):
+                if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
                     return generate_response(
                         data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                         status=400
@@ -1023,11 +1034,13 @@ def get_flats_by_floor(flat_schemas, flats):
         flats_floor = []
 
         for flat in flats.filter(floor=floor).values():
-            number_of_rooms = flat_schemas.filter(
+            flat_schema = flat_schemas.filter(
                 hash_id=flat['flat_schema_hash_id']
-            ).first().number_of_rooms
+            ).first()
 
-            flat['number_of_rooms'] = number_of_rooms
+            flat['number_of_rooms'] = flat_schema.number_of_rooms
+            flat['flat_schema'] = flat_schema.type
+            flat['area'] = flat_schema.area
 
             flats_floor.append(flat)
 
