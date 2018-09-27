@@ -634,11 +634,6 @@ class FlatType(View):
                     status=400
                 )
 
-            # Если нет ни одной квартиры, то создавай без валидации
-            if not flats:
-                flat_type = self.create_flat_type(form.cleaned_data)
-                return generate_response(data=model_to_dict(flat_type), status=200)
-
             # Если квартира с таким номером уже существует, то выдай ошибку.
             if self.is_flat_exists(flat_types, form.cleaned_data):
                 return generate_response(
@@ -646,21 +641,26 @@ class FlatType(View):
                     status=400
                 )
 
-            # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку.
+            # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку. (изменить, потому что типовым этажом может быть второй)
             if floor_types.filter(hash_id=data['floor_type_id'])[0].number != 1 and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
                 return generate_response(
                     data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                     status=400
                 )
 
-            # Если не первый этаж и на предыдущем размеченны не все, то выдай ошибку.
+            # Если не первый этаж и на предыдущем размеченны не все, то выдай ошибку. (изменить, потому что типовым этажом может быть второй)
             if floor_types.filter(hash_id=data['floor_type_id'])[0].number != 1 and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
                 return generate_response(
                     data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
                     status=400
                 )
 
-            # Если на этаже нет ни одной, то создай без валидации.
+            # Если нет ни одной квартиры, то создавай без валидации
+            if not flats:
+                flat_type = self.create_flat_type(form.cleaned_data)
+                return generate_response(data=model_to_dict(flat_type), status=200)
+
+            # Если на этаже нет ни одной, то создай без проверки на последовательность.
             if not self.is_exists_flats_on_floor_in_entrance(flat_types, form.cleaned_data):
                 flat_type = self.create_flat_type(form.cleaned_data)
                 return generate_response(data=model_to_dict(flat_type), status=200)
@@ -671,7 +671,7 @@ class FlatType(View):
                     data={'message': ['Номера квартир на этаже должны идти по порядку']},
                     status=400
                 )
-            return HttpResponse(form.cleaned_data)
+
             flat_type = self.create_flat_type(form.cleaned_data)
 
             return generate_response(data=model_to_dict(flat_type), status=200)
@@ -811,67 +811,53 @@ class FlatType(View):
 
         if form.is_valid():
             house = house_model.objects.filter(hash_id=form.cleaned_data['house_id']).first()
+            floor_types = floor_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
             flat_types = flat_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
             flats = flat_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
-            floor_types = floor_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
 
             if self.is_house_marked(flats):
+
                 if not self.is_edit_first_flat(flat_types, id):
                     return generate_response(
                         data={'message': ['Для автоматической перенумерации измените номер 1-ой квартиры.']},
                         status=400
                     )
 
-                flat_type_new_number = form.cleaned_data['number']
-                # flat_new_number = 0
+                flat_type_number = form.cleaned_data['number']
+                flat_last_new_number = 0
                 for entrance in range(1, house.number_of_entrance + 1):
-
                     for floor_type in floor_types:
-
                         clone_floors = []
                         if floor_type.clone_floors:
                             clone_floors = floor_type.clone_floors.split(',')
                         clone_floors.insert(0, floor_type.number)
 
-                        if entrance > 1:
-                            last_floor_type = floor_type.clone_floors.split(',').pop()
-                            flat_type_new_number = flats.filter(
-                                floor=last_floor_type
-                            ).filter(
-                                entrance=entrance
-                            ).last().number
-
-                        flat_types_by_entrance_floor_type = flat_types.filter(
-                            entrance=entrance
-                        ).filter(
+                        flat_types_in_entrance = flat_types.filter(
                             floor_type_hash_id=floor_type.hash_id
+                        ).filter(
+                            entrance=entrance
                         )
 
-                        # return HttpResponse(flat_type_new_number)
+                        if floor_type.number > floor_types.first().number or entrance > 1:
+                            flat_type_number = flat_last_new_number + 1
 
-                        for flat_type in flat_types_by_entrance_floor_type:
-                            # return HttpResponse(floor_type.number)
-                            flat_type.number = flat_type_new_number
+                        for flat_type in flat_types_in_entrance:
+                            flat_type.number = flat_type_number
                             flat_type.save()
-                            flat_type_new_number += 1
+                            flat_type_number += 1
 
-                            flat_type_number = flat_type.number
-                            for floor in clone_floors:
-                                old_flat = flats.filter(
-                                    flat_type_hash_id=flat_type.hash_id
-                                ).filter(
-                                    floor=floor
-                                ).first()
+                            flat_number = flat_type.number
 
-                                number_of_flats_on_floor_type_in_entrance = flat_types_by_entrance_floor_type.count()
+                            number_of_flats_on_floor_type_in_entrance = flat_types_in_entrance.count()
 
-                                # return HttpResponse(number_of_flats_on_floor_type_in_entrance)
+                            flat_type_flats = flats.filter(flat_type_hash_id=flat_type.hash_id)
+                            for flat in flat_type_flats:
+                                flat.number = flat_number
+                                flat.save()
+                                flat_number += number_of_flats_on_floor_type_in_entrance
+                                flat_last_new_number = flat.number
 
-                                old_flat.number = flat_type_number
-                                old_flat.save()
-                                flat_type_number += number_of_flats_on_floor_type_in_entrance
-
-                return HttpResponse('cool')
+                return generate_response(data={}, status=200)
             else:
                 floor_types = floor_type_model.objects.filter(
                     house_hash_id=form.cleaned_data['house_id']
