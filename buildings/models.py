@@ -121,6 +121,7 @@ class Flat(models.Model):
     number = models.PositiveIntegerField()
     windows = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    area = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     status = models.PositiveIntegerField(blank=True, null=True)
 
     class Meta:

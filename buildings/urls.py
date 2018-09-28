@@ -29,9 +29,9 @@ urlpatterns = [
 
     path('flats/numbering', views.numbering_flats),
     path('houses/<str:id>/flats', views.get_house_flats),
+    path('flats', views.Flat.as_view()),
+    path('flats/<str:id>', views.Flat.as_view()),
     # path('houses/<str:id>/test-flats', views.test),
-    # path('flats', views.Flat.as_view()),
-    # path('flats/<str:id>', views.Flat.as_view()),
 ]
 
 # http://127.0.0.1:8000/buildings/1/houses

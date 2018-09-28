@@ -321,3 +321,79 @@ class FlatTypeForm(forms.Form):
             'max_length': custom_error_messages['max_length']
         }
     )
+
+
+class FlatForm(forms.Form):
+    # house_id = forms.CharField(
+    #     max_length=255,
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+    #
+    # flat_schema_id = forms.CharField(
+    #     max_length=255,
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+    #
+    # flat_type_id = forms.CharField(
+    #     max_length=255,
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+    #
+    # floor = forms.IntegerField(
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+    #
+    # entrance = forms.IntegerField(
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+    #
+    # number = forms.IntegerField(
+    #     error_messages={
+    #         'required': custom_error_messages['required'],
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+    #
+    # windows = forms.CharField(
+    #     max_length=255,
+    #     required=False,
+    #     error_messages={
+    #         'max_length': custom_error_messages['max_length']
+    #     }
+    # )
+
+    status = forms.IntegerField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+        }
+    )
+
+    price = forms.DecimalField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+        }
+    )
+
+    area = forms.DecimalField(
+        error_messages={
+            'required': custom_error_messages['required'],
+            'max_length': custom_error_messages['max_length'],
+        }
+    )

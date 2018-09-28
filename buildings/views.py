@@ -8,13 +8,14 @@ from django.db import transaction
 from django.db.models import Max, Min
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse, QueryDict
+from django.shortcuts import get_object_or_404
 from django.views import View
 
 from auth.models import Company
 from auth.models import User
 from buildings.models import Building, House, FlatSchema, Floor, Flat, FloorType, FlatType
 from insider.services import Serialization, Helper
-from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm, FlatTypeForm
+from buildings.forms import BuildingForm, HouseForm, FlatSchemaForm, FloorTypeForm, FlatTypeForm, FlatForm
 
 from insider.settings import PROJECT_ROOT
 
@@ -36,6 +37,7 @@ house_form = HouseForm
 flat_schema_form = FlatSchemaForm
 floor_type_form = FloorTypeForm
 flat_type_form = FlatTypeForm
+flat_form = FlatForm
 
 fs = FileSystemStorage()
 
@@ -803,6 +805,7 @@ class FlatType(View):
                     entrance=data['entrance'],
                     number=data['number'],
                     price=flat_schema.price,
+                    area=flat_schema.area,
                     windows=data['windows'],
                     status=1,
                     floor=floor
@@ -1065,43 +1068,55 @@ def get_flats_with_number_of_by_type(flat_schemas, flats):
     return number_of_flats_by_type
 
 
-# class Flat(View):
-#     def get(self, request):
-#         flat = serializers.serialize('json', flat_model.manager.all())
-#
-#         return JsonResponse(flat, status=200, safe=False)
-#
-#     def post(self, request):
-#         data = serialization.json_decode(request.body.decode('utf-8'))
-#
-#         house = house_model.manager.get(hash_id=data['house_id'])
-#         data['house'] = house
-#         data['house_hash_id'] = house.hash_id
-#
-#         floor = floor_model.manager.get(hash_id=data['floor_id'])
-#         data['floor'] = floor
-#         data['floor_hash_id'] = floor.hash_id
-#
-#         flat_schema = flat_schema_model.manager.get(hash_id=data['planing_id'])
-#         data['flat_schema'] = flat_schema
-#         data['flat_schema_hash_id'] = flat_schema.hash_id
-#
-#         flat = flat_model.manager.create(data)
-#
-#         response = JsonResponse(model_to_dict(flat), status=200)
-#         response['Access-Control-Allow-Origin'] = '*'
-#         return response
-#
-#     def put(self, request, id):
-#         data = serialization.json_decode(request.body.decode('utf-8'))
-#
-#         old_flat = flat_model.manager.get(hash_id=id)
-#
-#         new_flat = flat_model.manager.update(old_flat, data)
-#
-#         return JsonResponse(model_to_dict(new_flat), status=200, reason='OK')
-#
-#     def delete(self, request, id):
-#         flat_model.manager.filter(hash_id=id).delete()
-#
-#         return HttpResponse(status=200, reason='OK')
+class Flat(View):
+    # def get(self, request):
+    #     flat = serializers.serialize('json', flat_model.manager.all())
+    #
+    #     return JsonResponse(flat, status=200, safe=False)
+
+    # def post(self, request):
+    #     data = serialization.json_decode(request.body.decode('utf-8'))
+    #
+    #     house = house_model.manager.get(hash_id=data['house_id'])
+    #     data['house'] = house
+    #     data['house_hash_id'] = house.hash_id
+    #
+    #     floor = floor_model.manager.get(hash_id=data['floor_id'])
+    #     data['floor'] = floor
+    #     data['floor_hash_id'] = floor.hash_id
+    #
+    #     flat_schema = flat_schema_model.manager.get(hash_id=data['planing_id'])
+    #     data['flat_schema'] = flat_schema
+    #     data['flat_schema_hash_id'] = flat_schema.hash_id
+    #
+    #     flat = flat_model.manager.create(data)
+    #
+    #     response = JsonResponse(model_to_dict(flat), status=200)
+    #     response['Access-Control-Allow-Origin'] = '*'
+    #     return response
+
+    def put(self, request, id):
+        data = decode_from_json_format(data=request.body.decode('utf-8'))
+
+        form = bind_data_with_form(form=flat_form, data=data)
+
+        if form.is_valid():
+            old_flat = get_object_or_404(flat_model, hash_id=id)
+
+            new_flat = self.update_flat(old_flat, data)
+
+            return generate_response(data=model_to_dict(new_flat), status=200)
+
+        return generate_response(data=form.errors, status=400)
+
+    def update_flat(self, old_flat, data):
+        old_flat.price = data['price']
+        old_flat.status = data['status']
+        old_flat.area = data['area']
+        old_flat.save()
+        return old_flat
+
+    # def delete(self, request, id):
+    #     flat_model.manager.filter(hash_id=id).delete()
+    #
+    #     return HttpResponse(status=200, reason='OK')
