@@ -193,7 +193,7 @@ class FlatSchemaForm(forms.Form):
     )
 
     type = forms.CharField(
-        max_length=100,
+        max_length=255,
         error_messages={
             'required': custom_error_messages['required'],
             'max_length': custom_error_messages['max_length']

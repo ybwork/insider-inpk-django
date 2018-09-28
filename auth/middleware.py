@@ -32,7 +32,8 @@ class AuthMiddleware(MiddlewareMixin):
             return None
 
     def is_available_path(self, request):
-        path_in_url = re.search('/home|/login|/register|/confirm|/reset', request.path)
+        # если dev, то добавить /home| в начало
+        path_in_url = re.search('/login|/register|/confirm|/reset', request.path)
 
         if path_in_url:
             return True

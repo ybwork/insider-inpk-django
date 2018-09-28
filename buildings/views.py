@@ -325,8 +325,8 @@ def get_building_houses(request, id):
 
         number_of_flats_by_type = []
 
-        if not flat_schemas or not flats:
-            return number_of_flats_by_type
+        # if not flat_schemas or not flats:
+        #     return generate_response(data=number_of_flats_by_type, status=200)
 
         flats_by_type = {
             'house': model_to_dict(house),
@@ -372,7 +372,7 @@ class FlatSchema(View):
             image=data['image'],
             number_of_balcony=data['number_of_balcony'],
             number_of_loggia=data['number_of_loggia'],
-            number_of_romms=data['number_of_rooms'],
+            number_of_rooms=data['number_of_rooms'],
             area=data['area'],
             price=data['price'],
         )
@@ -398,9 +398,19 @@ class FlatSchema(View):
             else:
                 form.cleaned_data['image'] = old_flat_schema.image
 
-            new_flat_schema = self.update_flat_schema(flat_schema=old_flat_schema, data=form.cleaned_data)
+            # new_flat_schema = self.update_flat_schema(flat_schema=old_flat_schema, data=form.cleaned_data)
 
-            return generate_response(data=model_to_dict(new_flat_schema), status=200)
+            flat_schema.type = form.cleaned_data['type']
+            flat_schema.image = form.cleaned_data['image']
+            flat_schema.number_of_balcony = form.cleaned_data['number_of_balcony']
+            flat_schema.number_of_loggia = form.cleaned_data['number_of_loggia']
+            flat_schema.number_of_rooms = form.cleaned_data['number_of_rooms'],
+            flat_schema.area = form.cleaned_data['area']
+            flat_schema.price = form.cleaned_data['price']
+
+            flat_schema.save()
+
+            return generate_response(data=model_to_dict(flat_schema), status=200)
 
         return generate_response(data=form.errors, status=400)
 
