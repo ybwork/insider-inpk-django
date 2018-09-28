@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index_simple.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index_simple.html" afterDir="false" />
     </list>
@@ -47,10 +43,10 @@
       <file leaf-file-name="index_simple.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
-              <caret line="398" column="61" selection-start-line="398" selection-start-column="61" selection-end-line="398" selection-end-column="61" />
+            <state relative-caret-position="1198">
+              <caret line="192" column="62" selection-start-line="192" selection-start-column="62" selection-end-line="192" selection-end-column="62" />
               <folding>
-                <marker date="1538121204078" expanded="true" signature="12799:13299" ph="..." />
+                <marker date="1538128355659" expanded="true" signature="12799:13299" ph="..." />
               </folding>
             </state>
           </provider>
@@ -59,8 +55,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="33" selection-start-line="33" selection-end-line="33" selection-end-column="53" />
+            <state relative-caret-position="396">
+              <caret line="30" column="55" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="55" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -71,8 +67,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="1118" selection-start-line="1118" selection-end-line="1121" selection-end-column="54" />
+            <state relative-caret-position="304">
+              <caret line="1044" column="50" selection-start-line="1044" selection-start-column="50" selection-end-line="1044" selection-end-column="50" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -135,7 +131,6 @@
       <find>is_exists_flats_for_numbering</find>
       <find>save(</find>
       <find>floor_type</find>
-      <find>get_house_flats</find>
       <find>flats_with_number_of_by_type</find>
       <find>get_house_ftats_schemas</find>
       <find>valid_entrance</find>
@@ -143,6 +138,7 @@
       <find>is_exists_flats_on_pevious_floor</find>
       <find>is_first_floor_type</find>
       <find>create_flat_type</find>
+      <find>get_house_flats</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -516,30 +512,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1198">
+          <caret line="192" column="62" selection-start-line="192" selection-start-column="62" selection-end-line="192" selection-end-column="62" />
+          <folding>
+            <marker date="1538128355659" expanded="true" signature="12799:13299" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="33" selection-start-line="33" selection-end-line="33" selection-end-column="53" />
+        <state relative-caret-position="396">
+          <caret line="30" column="55" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="55" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="398" column="61" selection-start-line="398" selection-start-column="61" selection-end-line="398" selection-end-column="61" />
-          <folding>
-            <marker date="1538121204078" expanded="true" signature="12799:13299" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="1118" selection-start-line="1118" selection-end-line="1121" selection-end-column="54" />
+        <state relative-caret-position="304">
+          <caret line="1044" column="50" selection-start-line="1044" selection-start-column="50" selection-end-line="1044" selection-end-column="50" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

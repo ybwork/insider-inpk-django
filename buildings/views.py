@@ -1043,7 +1043,6 @@ def get_flats_by_floor(flat_schemas, flats):
 
             flat['number_of_rooms'] = flat_schema.number_of_rooms
             flat['flat_schema'] = flat_schema.type
-            flat['area'] = flat_schema.area
 
             flats_floor.append(flat)
 
