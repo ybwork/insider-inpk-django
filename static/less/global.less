@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background-image: linear-gradient( 135deg, #E9F6FF 11.2%, #F8F5FF 91.2% );
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  overflow-y: scroll;
+}
+
+.grid(@c: 3; @cg: 2rem; @rg: 2rem) {
+	display: grid;
+	grid-template-columns: repeat(@c, 1fr);
+	grid-column-gap: @cg;
+	grid-row-gap: @rg;
+}
+
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s ease;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}

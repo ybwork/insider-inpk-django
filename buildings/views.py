@@ -599,7 +599,7 @@ def get_house_floor_types(request, id):
             else:
                 floor_type['marking_enable'] = False
 
-            if floor_type['number'] == 1:
+            if floor_type['number'] == floor_types.aggregate(Min('number'))['number__min']:
                 floor_type['marking_enable'] = True
 
             previous_floor_type_hash_id = floor_type['hash_id']
@@ -640,35 +640,50 @@ class FlatType(View):
             # Если не валидный номер подъезда, то выдай ошибку
             if not self.valid_entrance(flat_types, form.cleaned_data):
                 return generate_response(
-                    data={'message': ['Размечайте подъезды по очерёдно']},
+                    data={
+                        'message': 'Размечайте подъезды по очерёдно',
+                        'single_error': True
+                    },
                     status=400
                 )
 
             # Если на этом этаже больше квартир чем должно быть.
             if not self.is_exists_available_flats_for_marking(floor_types, flat_types, form.cleaned_data):
                 return generate_response(
-                    data={'message': ['Нельзя разметить больше квартир, чем должно быть на этаже']},
+                    data={
+                        'message': 'Нельзя разметить больше квартир, чем должно быть на этаже',
+                        'single_error': True
+                    },
                     status=400
                 )
 
             # Если квартира с таким номером уже существует, то выдай ошибку.
             if self.is_flat_exists(flat_types, form.cleaned_data):
                 return generate_response(
-                    data={'message': ['Квартира с таким нормером уже существует']},
+                    data={
+                        'message': 'Квартира с таким нормером уже существует',
+                        'single_error': True
+                    },
                     status=400
                 )
 
             # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку.
             if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
                 return generate_response(
-                    data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
+                    data={
+                        'message': 'Для разметки этого этажа нужно разметить предыдущий',
+                        'single_error': True
+                    },
                     status=400
                 )
 
             # Если не первый типовой этаж и на предыдущем размеченны не все, то выдай ошибку.
             if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
                 return generate_response(
-                    data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
+                    data={
+                        'message': 'Для разметки этого этажа нужно разметить предыдущий',
+                        'single_error': True
+                    },
                     status=400
                 )
 
@@ -680,7 +695,10 @@ class FlatType(View):
             # Если номер квартиры не равен номеру последней квартиры на этаже плюс один, то выдай ошибку.
             if not self.is_flat_number_by_order(flat_types, form.cleaned_data):
                 return generate_response(
-                    data={'message': ['Номера квартир на этаже должны идти по порядку']},
+                    data={
+                        'message': 'Номера квартир на этаже должны идти по порядку',
+                        'single_error': True
+                    },
                     status=400
                 )
 
@@ -753,7 +771,7 @@ class FlatType(View):
         return False
 
     def is_flat_exists(self, flat_types, data):
-        if flat_types.filter(number=data['number']):
+        if flat_types.filter(house_hash_id=data['house_id']).filter(number=data['number']):
             return True
         return False
 
@@ -898,7 +916,10 @@ class FlatType(View):
                     # Если квартира с таким номером уже существует, то выдай ошибку.
                     if self.is_flat_exists(flat_types, form.cleaned_data):
                         return generate_response(
-                            data={'message': ['Квартира с таким нормером уже существует']},
+                            data={
+                                'message': 'Квартира с таким нормером уже существует',
+                                'single_error': True
+                            },
                             status=400
                         )
 
@@ -906,28 +927,40 @@ class FlatType(View):
                     # Если не валидный номер подъезда, то выдай ошибку
                     if not self.valid_entrance(flat_types, form.cleaned_data):
                         return generate_response(
-                            data={'message': ['Размечайте подъезды по очереди']},
+                            data={
+                                'message': 'Размечайте подъезды по очереди',
+                                'single_error': True
+                            },
                             status=400
                         )
 
                 # Если на этом этаже больше квартир чем должно быть.
                 if not self.is_exists_available_flats_for_marking(floor_types, flat_types, form.cleaned_data):
                     return generate_response(
-                        data={'message': ['Нельзя разметить больше квартир, чем должно быть на этаже']},
+                        data={
+                            'message': 'Нельзя разметить больше квартир, чем должно быть на этаже',
+                            'single_error': True
+                        },
                         status=400
                     )
 
                 # Если не первый этаж и нет квартир на предыдущем этаже, то выдай ошибку.
                 if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_exists_flats_on_pevious_floor(floor_types, flats, form.cleaned_data):
                     return generate_response(
-                        data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
+                        data={
+                            'message': 'Для разметки этого этажа нужно разметить предыдущий',
+                            'single_error': True
+                        },
                         status=400
                     )
 
                 # Если не первый этаж и на предыдущем размеченны не все, то выдай ошибку.
                 if not self.is_first_floor_type(floor_types, form.cleaned_data) and not self.is_marked_previous_floor(floor_types, flat_types, flats, form.cleaned_data):
                     return generate_response(
-                        data={'message': ['Для разметки этого этажа нужно разметить предыдущий']},
+                        data={
+                            'message': 'Для разметки этого этажа нужно разметить предыдущий',
+                            'single_error': True
+                        },
                         status=400
                     )
 
@@ -945,7 +978,10 @@ class FlatType(View):
 
                 if form.cleaned_data['number'] != last_flat_type_in_entrance.number + 1:
                     return generate_response(
-                        data={'message': ['Номера квартир на этаже должны идти по порядку']},
+                        data={
+                            'message': 'Номера квартир на этаже должны идти по порядку',
+                            'single_error': True
+                        },
                         status=400
                     )
 
@@ -975,6 +1011,15 @@ class FlatType(View):
 
 def get_floor_type_flat_types(request, id):
     flats_types = fetch_all_from_db(model=flat_type_model, condition={'floor_type_hash_id': id})
+
+    # floor_type = floor_type_model.objects.get(hash_id=id)
+    #
+    # house_flat_schemas = flat_schema_model.objects.filter(house_hash_id=floor_type.house_hash_id)
+    #
+    # data = {
+    #     'flats_types': encode_objects_in_assigned_format(format='json', data=flats_types),
+    #     'flat_schemas': encode_objects_in_assigned_format(format='json', data=house_flat_schemas)
+    # }
 
     return generate_response(
         data=encode_objects_in_assigned_format(format='json', data=flats_types),
@@ -1029,7 +1074,7 @@ def get_house_flats(request, id):
     flats_with_number_of_by_type = {}
 
     if not flat_schemas or not flats:
-        return flats_with_number_of_by_type
+        return generate_response(data=flats_with_number_of_by_type, status=200)
 
     flats_with_number_of_by_type['flats'] = get_flats_by_floor(flat_schemas, flats)
     flats_with_number_of_by_type['number_of_flats_by_type'] = get_flats_with_number_of_by_type(flat_schemas, flats)
@@ -1050,6 +1095,7 @@ def get_flats_by_floor(flat_schemas, flats):
             flat_schema = flat_schemas.filter(
                 hash_id=flat['flat_schema_hash_id']
             ).first()
+
 
             flat['number_of_rooms'] = flat_schema.number_of_rooms
             flat['flat_schema'] = flat_schema.type
