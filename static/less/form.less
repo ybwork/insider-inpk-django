@@ -31,6 +31,49 @@ input {
 			    padding: 10px;
 			    position: relative;
 			    width: 100%;
+			    outline:none;
+			    @media @mobile {
+					padding: 10px 0;
+				}
+	    		&:focus {
+	    			~ .form-group__input_bar {
+	    				&:before {
+	    					width: 100%;
+	    				}
+	    			}
+	    		}
+	    		&.error {
+	    			~ .form-group__input_bar {
+	    				&:before {
+	    					width: 100%;
+	    					background-color: @color-red;
+	    				}
+	    			}
+	    		}
+	    	}
+		    &_bar {
+		    	&:before {
+					content: '';
+					height: 2px;
+					width: 0;
+					bottom: 0px;
+					position: absolute;
+					background-color: @color-base;
+	    			transition: all .5s cubic-bezier(0.165, 0.84, 0.44, 1);
+					left: 0%;
+		    	}
+			}
+	    }
+	    &__select {
+	    	position: relative;
+	    	select {
+		    	background-color: transparent;
+			    border: none;
+			    border-bottom: 2px solid #c6c6c6;
+			    padding: 10px;
+			    position: relative;
+			    width: 100%;
+			    outline:none;
 			    @media @mobile {
 					padding: 10px 0;
 				}
@@ -75,7 +118,7 @@ input {
 
 
 
-input[type="checkbox"] {
+input.toggle[type="checkbox"] {
 	display: none;
 	&.error {
 		+ label {
@@ -94,6 +137,8 @@ input[type="checkbox"] {
 	+ label {
 		cursor: pointer;
 		padding-left: 60px;
+		padding-top: 5px;
+    	padding-bottom: 5px;
 		position: relative;
 		display: flex;
 		font-size: 0.875rem;

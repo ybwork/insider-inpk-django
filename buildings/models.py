@@ -102,6 +102,7 @@ class FlatType(models.Model):
     number = models.IntegerField(null=True)
     entrance = models.IntegerField(null=True)
     coordinates = models.TextField()
+    windows = models.TextField(blank=True)
 
     class Meta:
         db_table = 'building_house_flats_types'

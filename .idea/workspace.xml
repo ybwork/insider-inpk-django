@@ -2,26 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/buildings/migrations/0016_flattype_windows.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/02aa7e3e.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/10cbd204.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/2aee63de.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/391539ae.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/3a701084.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/3e831a28.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/579a4e8a.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/57d15757.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/5d3518a8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/5ef68684.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/7a039d19.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/985cf46e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/a8a9f88c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/b13b90e1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/c3d41cf7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/d8dd9d2b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/da842110.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insider/media/e36e2cfb.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/app.cf889f857d91180ba919fcdc3080b3ef.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/app.cf889f857d91180ba919fcdc3080b3ef.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/3db812e91.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/052b78cf.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/1c504738.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/22932cc4.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/27f8faf4.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/2c983083.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/320830ae.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/33edeb93.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/3db812e9.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/3db812e91.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/45595df2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/5bb66947.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/855ceabd.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/a0a49c0f.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/a5ddc715.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/bc198b4b.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/c9622deb.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/eca2e74a.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/efb4e0f2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/f1f80c39.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/media/f86de708.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/app.1ac1d476d04e2d7fd16a.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/app.1ac1d476d04e2d7fd16a.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/media/5fcc2bff.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/app.99e156a1418209f26ef1c41799be6254.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/app.99e156a1418209f26ef1c41799be6254.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/normalize.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/uikit-rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/uikit-rtl.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/uikit.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/uikit.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/app.0b652e4836946f643291.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/app.0b652e4836946f643291.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/app.bc8dcada5e4c5b71ef63f848990712c6.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/app.bc8dcada5e4c5b71ef63f848990712c6.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/app.e0359d61823b96a8cf7c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/app.e0359d61823b96a8cf7c.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/uikit-icons.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/uikit-icons.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/uikit.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/uikit.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/vendor.9223e321367680280dc0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/vendor.9223e321367680280dc0.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/less/button.less" beforeDir="false" afterPath="$PROJECT_DIR$/static/less/button.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/less/color.less" beforeDir="false" afterPath="$PROJECT_DIR$/static/less/color.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/less/form.less" beforeDir="false" afterPath="$PROJECT_DIR$/static/less/form.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index_vue.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index_vue.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,11 +87,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/insider/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="26" column="60" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="61">
-              <caret line="26" column="37" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="37" />
+            <state relative-caret-position="660">
+              <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -65,8 +111,26 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6402">
-              <caret line="385" column="21" selection-start-line="385" selection-start-column="21" selection-end-line="385" selection-end-column="21" />
+            <state relative-caret-position="80">
+              <caret line="521" column="49" selection-start-line="521" selection-start-column="49" selection-end-line="521" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/buildings/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1743">
+              <caret line="104" column="42" selection-start-line="104" selection-start-column="42" selection-end-line="104" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/buildings/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="234" column="9" lean-forward="true" selection-start-line="234" selection-start-column="9" selection-end-line="234" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -83,12 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>is_flat_number_by_order</find>
-      <find>Номера квартир на этаже должны идти по порядку</find>
-      <find>get_company_buildings</find>
-      <find>is_exists_flats_for_numbering</find>
-      <find>save(</find>
-      <find>floor_type</find>
       <find>flats_with_number_of_by_type</find>
       <find>get_house_ftats_schemas</find>
       <find>valid_entrance</find>
@@ -107,12 +165,18 @@
       <find>update_api_key(data)</find>
       <find>flats</find>
       <find>number_of_rooms</find>
-      <find>get_house_flats</find>
       <find>get_floor_type_flat_types</find>
       <find>print(</find>
       <find>flat_schemas</find>
       <find>FlatType</find>
       <find>get_house_floor_types</find>
+      <find>FlatSchema</find>
+      <find>windo</find>
+      <find>numbering_flats</find>
+      <find>get_house_flats</find>
+      <find>Houses</find>
+      <find>class House</find>
+      <find>new_floor_type = self.update_floor_type(data=form.cleaned_data, id=id)</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -143,16 +207,16 @@
         <option value="$PROJECT_DIR$/templates/index/index1.html" />
         <option value="$PROJECT_DIR$/templates/index/index.html" />
         <option value="$PROJECT_DIR$/buildings/migrations/0013_auto_20180925_1733.py" />
-        <option value="$PROJECT_DIR$/insider/settings.py" />
-        <option value="$PROJECT_DIR$/buildings/models.py" />
         <option value="$PROJECT_DIR$/buildings/urls.py" />
         <option value="$PROJECT_DIR$/auth/middleware.py" />
         <option value="$PROJECT_DIR$/insider/urls.py" />
         <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
-        <option value="$PROJECT_DIR$/buildings/forms.py" />
         <option value="$PROJECT_DIR$/auth/views.py" />
         <option value="$PROJECT_DIR$/insider/views.py" />
+        <option value="$PROJECT_DIR$/buildings/models.py" />
+        <option value="$PROJECT_DIR$/insider/settings.py" />
         <option value="$PROJECT_DIR$/templates/index/index_vue.html" />
+        <option value="$PROJECT_DIR$/buildings/forms.py" />
         <option value="$PROJECT_DIR$/buildings/views.py" />
       </list>
     </option>
@@ -183,7 +247,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -195,6 +258,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -274,16 +338,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4965278" visible="true" weight="0.18623784" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" visible="true" weight="0.2026926" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.51907253" side_tool="true" weight="0.45833334" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5198205" side_tool="true" weight="0.45833334" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4973822" weight="0.3298611" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info id="Structure" order="1" sideWeight="0.5034722" side_tool="true" weight="0.18324608" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48092744" weight="0.45833334" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.48017952" visible="true" weight="0.41319445" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -397,16 +460,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/auth/middleware.py" />
-    <entry file="file://$PROJECT_DIR$/insider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/auth/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
@@ -417,16 +470,6 @@
     <entry file="file://$PROJECT_DIR$/auth/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2562">
-          <caret line="397" column="39" selection-start-line="397" selection-start-column="39" selection-end-line="397" selection-end-column="39" />
-          <folding>
-            <marker date="1538145673266" expanded="true" signature="12799:13299" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/insider/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -434,10 +477,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/insider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="26" column="60" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="372" selection-start-line="372" selection-end-line="383" selection-end-column="53" />
+          <folding>
+            <marker date="1538145673266" expanded="true" signature="12799:13299" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="37" />
+        <state relative-caret-position="660">
+          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -451,24 +514,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
+    <entry file="file://$PROJECT_DIR$/buildings/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2432">
-          <caret line="195" column="22" selection-start-line="195" selection-start-column="22" selection-end-line="195" selection-end-column="22" />
+        <state relative-caret-position="1743">
+          <caret line="104" column="42" selection-start-line="104" selection-start-column="42" selection-end-line="104" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/models.py">
+    <entry file="file://$PROJECT_DIR$/buildings/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+        <state relative-caret-position="114">
+          <caret line="234" column="9" lean-forward="true" selection-start-line="234" selection-start-column="9" selection-end-line="234" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6402">
-          <caret line="385" column="21" selection-start-line="385" selection-start-column="21" selection-end-line="385" selection-end-column="21" />
+        <state relative-caret-position="80">
+          <caret line="521" column="49" selection-start-line="521" selection-start-column="49" selection-end-line="521" selection-end-column="49" />
         </state>
       </provider>
     </entry>

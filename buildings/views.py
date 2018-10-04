@@ -398,19 +398,17 @@ class FlatSchema(View):
             else:
                 form.cleaned_data['image'] = old_flat_schema.image
 
-            # new_flat_schema = self.update_flat_schema(flat_schema=old_flat_schema, data=form.cleaned_data)
+            old_flat_schema.type = form.cleaned_data['type']
+            old_flat_schema.image = form.cleaned_data['image']
+            old_flat_schema.number_of_balcony = form.cleaned_data['number_of_balcony']
+            old_flat_schema.number_of_loggia = form.cleaned_data['number_of_loggia']
+            old_flat_schema.number_of_rooms = form.cleaned_data['number_of_rooms']
+            old_flat_schema.area = form.cleaned_data['area']
+            old_flat_schema.price = form.cleaned_data['price']
 
-            flat_schema.type = form.cleaned_data['type']
-            flat_schema.image = form.cleaned_data['image']
-            flat_schema.number_of_balcony = form.cleaned_data['number_of_balcony']
-            flat_schema.number_of_loggia = form.cleaned_data['number_of_loggia']
-            flat_schema.number_of_rooms = form.cleaned_data['number_of_rooms'],
-            flat_schema.area = form.cleaned_data['area']
-            flat_schema.price = form.cleaned_data['price']
+            old_flat_schema.save()
 
-            flat_schema.save()
-
-            return generate_response(data=model_to_dict(flat_schema), status=200)
+            return generate_response(data=model_to_dict(old_flat_schema), status=200)
 
         return generate_response(data=form.errors, status=400)
 
@@ -521,6 +519,7 @@ class FloorType(View):
         form = bind_data_with_form(form=floor_type_form, data=floor_type)
 
         if form.is_valid():
+            return HttpResponse(form.cleaned_data)
             old_floor_type = fetch_from_db(model=floor_type_model, condition={'hash_id': id})
 
             if files:
@@ -818,6 +817,7 @@ class FlatType(View):
                 number=data['number'],
                 entrance=data['entrance'],
                 coordinates=data['coordinates'],
+                windows=data['windows']
             )
 
             flats_objects = []
@@ -860,11 +860,19 @@ class FlatType(View):
             flat_types = flat_type_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
             flats = flat_model.objects.filter(house_hash_id=form.cleaned_data['house_id'])
 
+            flat_type = flat_types.filter(hash_id=id).first()
+            if flat_type.number == form.cleaned_data['number'] and flat_type.entrance == form.cleaned_data['entrance']:
+                flat_type = self.create_flat_type(form.cleaned_data)
+                return generate_response(data=model_to_dict(flat_type), status=200)
+
             if self.is_house_marked(flats):
 
                 if not self.is_edit_first_flat(flat_types, id):
                     return generate_response(
-                        data={'message': ['Для автоматической перенумерации измените номер 1-ой квартиры.']},
+                        data={
+                            'message': 'Для автоматической перенумерации измените номер 1-ой квартиры.',
+                            'single_error': True
+                        },
                         status=400
                     )
 
@@ -1004,6 +1012,7 @@ class FlatType(View):
         return False
 
     def delete(self, request, id):
+        return generate_response(status=500)
         delete_from_db(model=flat_type_model, condition={'hash_id': id})
 
         return generate_response(status=200)
@@ -1027,28 +1036,71 @@ def get_floor_type_flat_types(request, id):
     )
 
 
-def numbering_flats(request):
-    data = serialization.json_decode(request.body.decode('utf-8'))
+# def numbering_flats(request):
+#     data = serialization.json_decode(request.body.decode('utf-8'))
+#
+#     with transaction.atomic():
+#         flats = fetch_all_from_db(
+#             model=flat_model,
+#             condition={'house_hash_id': data['house_id']}
+#         )
+#
+#         number_of_entrance = flats.values('entrance').distinct().count() + 1
+#         floor_types = floor_type_model.objects.filter(house_hash_id=data['house_id'])
+#
+#         for entrance in range(1, number_of_entrance):
+#             for floor_type in floor_types:
+#                 floors = []
+#                 if floor_type.clone_floors:
+#                     floors = floor_type.clone_floors.split(',')
+#                 floors.insert(0, str(floor_type.number))
+#
+#                 for floor in floors:
+#                     if int(floor) == 1:
+#                         previous_floor = 1
+#                     else:
+#                         previous_floor = int(floor) - 1
+#
+#                     last_flat_number = flats.filter(entrance=entrance).filter(floor=previous_floor).last().number
+#                     flats_in_entrance_on_floor = flats.filter(entrance=entrance).filter(floor=floor)
+#
+#                     for flat in flats_in_entrance_on_floor:
+#                         if flat.number:
+#                             flat.number = flat.number
+#                             flat.save()
+#                         else:
+#                             last_flat_number += 1
+#                             flat.number = last_flat_number
+#                             flat.save()
+#
+#     return JsonResponse({}, status=200)
+
+
+def numbering_flats(house_id):
 
     with transaction.atomic():
         flats = fetch_all_from_db(
             model=flat_model,
-            condition={'house_hash_id': data['house_id']}
+            condition={'house_hash_id': house_id}
         )
 
         number_of_entrance = flats.values('entrance').distinct().count() + 1
-        floor_types = floor_type_model.objects.filter(house_hash_id=data['house_id'])
+        floor_types = floor_type_model.objects.filter(house_hash_id=house_id)
 
         for entrance in range(1, number_of_entrance):
             for floor_type in floor_types:
                 floors = []
+
                 if floor_type.clone_floors:
                     floors = floor_type.clone_floors.split(',')
+
                 floors.insert(0, str(floor_type.number))
 
+                first_floor_type = floor_types.aggregate(Min('number'))['number__min']
+
                 for floor in floors:
-                    if int(floor) == 1:
-                        previous_floor = 1
+                    if int(floor) == first_floor_type:
+                        previous_floor = first_floor_type
                     else:
                         previous_floor = int(floor) - 1
 
@@ -1068,21 +1120,61 @@ def numbering_flats(request):
 
 
 def get_house_flats(request, id):
-    flat_schemas = flat_schema_model.objects.filter(house_hash_id=id)
     flats = flat_model.objects.filter(house_hash_id=id)
+
+    if flats.filter(number=0):
+        numbering_flats(id)
+
+    flat_schemas = flat_schema_model.objects.filter(house_hash_id=id)
+    floor_types = floor_type_model.objects.filter(house_hash_id=id)
+    # flat_types = flat_type_model.objects.filter(house_hash_id=id)
+    flat_type = flat_type_model.objects.filter(house_hash_id=id)
 
     flats_with_number_of_by_type = {}
 
     if not flat_schemas or not flats:
         return generate_response(data=flats_with_number_of_by_type, status=200)
 
-    flats_with_number_of_by_type['flats'] = get_flats_by_floor(flat_schemas, flats)
+    # flats_with_number_of_by_type['flats'] = get_flats_by_floor(flat_schemas, flats, floor_types, flat_types)
+    flats_with_number_of_by_type['flats'] = get_flats_by_floor(flat_schemas, flats, flat_type)
     flats_with_number_of_by_type['number_of_flats_by_type'] = get_flats_with_number_of_by_type(flat_schemas, flats)
 
     return generate_response(data=flats_with_number_of_by_type, status=200)
 
 
-def get_flats_by_floor(flat_schemas, flats):
+# def get_flats_by_floor(flat_schemas, flats, floor_types, flat_types):
+#     flats_by_floor = []
+#
+#     for floor_type in floor_types:
+#         clone_floors = floor_type.clone_floors.split(',')
+#         clone_floors.insert(0, floor_type.number)
+#
+#         flats_floor = []
+#         for floor in clone_floors:
+#             floor_type_flats = {
+#                 floor_type.hash_id: {
+#                     floor: []
+#                 }
+#             }
+#
+#             for flat in flats.filter(floor=floor).values():
+#                 flat_schema = flat_schemas.filter(
+#                     hash_id=flat['flat_schema_hash_id']
+#                 ).first()
+#
+#                 flat['number_of_rooms'] = flat_schema.number_of_rooms
+#                 flat['flat_schema'] = flat_schema.type
+#
+#                 floor_type_flats[floor_type.hash_id][floor].append(flat)
+#
+#             flats_floor.append(floor_type_flats)
+#
+#         flats_by_floor.append(flats_floor)
+#
+#     return flats_floor
+
+
+def get_flats_by_floor(flat_schemas, flats, flat_type):
     flats_by_floor = []
 
     max_floor = flats.aggregate(Max('floor'))['floor__max']
@@ -1095,7 +1187,6 @@ def get_flats_by_floor(flat_schemas, flats):
             flat_schema = flat_schemas.filter(
                 hash_id=flat['flat_schema_hash_id']
             ).first()
-
 
             flat['number_of_rooms'] = flat_schema.number_of_rooms
             flat['flat_schema'] = flat_schema.type

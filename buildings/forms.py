@@ -222,14 +222,16 @@ class FlatSchemaForm(forms.Form):
     area = forms.DecimalField(
         error_messages={
             'required': custom_error_messages['required'],
-            'format': custom_error_messages['format']
+            'format': custom_error_messages['format'],
+            'invalid': custom_error_messages['invalid']
         }
     )
 
     price = forms.DecimalField(
         error_messages={
             'required': custom_error_messages['required'],
-            'format': custom_error_messages['format']
+            'format': custom_error_messages['format'],
+            'invalid': 'Введите целое число'
         }
     )
 
