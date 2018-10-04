@@ -519,7 +519,6 @@ class FloorType(View):
         form = bind_data_with_form(form=floor_type_form, data=floor_type)
 
         if form.is_valid():
-            return HttpResponse(form.cleaned_data)
             old_floor_type = fetch_from_db(model=floor_type_model, condition={'hash_id': id})
 
             if files:
