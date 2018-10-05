@@ -32,6 +32,8 @@ urlpatterns = [
     path('flats', views.Flat.as_view()),
     path('flats/<str:id>', views.Flat.as_view()),
     # path('houses/<str:id>/test-flats', views.test),
+
+    path('prices/upload', views.prices_upload)
 ]
 
 # http://127.0.0.1:8000/buildings/1/houses

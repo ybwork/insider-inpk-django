@@ -1,9 +1,13 @@
+import csv
 import json
 import os
+import re
 
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core import serializers
+from django.core.files import File
 from django.core.files.storage import FileSystemStorage
+from django.core.files.uploadedfile import UploadedFile
 from django.db import transaction
 from django.db.models import Max, Min
 from django.forms import model_to_dict
@@ -1265,3 +1269,43 @@ class Flat(View):
     #     flat_model.manager.filter(hash_id=id).delete()
     #
     #     return HttpResponse(status=200, reason='OK')
+
+
+def prices_upload(request):
+    if not request.FILES:
+        return generate_response(
+            data={
+                'message': 'Добавьте файл',
+                'single_error': True
+            },
+            status=400
+        )
+
+    # check house on exists
+    house_model.objects.get(hash_id='badfe7e5')
+
+    file = request.FILES.get('prices')
+    for line in file:
+        clean_line = line.decode('utf-8').rstrip()
+
+        is_correct_format = re.search('^[0-9]+~[0-9]+$', clean_line)
+
+        if not is_correct_format:
+            continue
+
+        numbers_prices = clean_line.split('~')
+
+        flat_number = numbers_prices[0]
+        flat_price = numbers_prices[1]
+
+        flat = flat_model.objects.filter(
+            house_hash_id='badfe7e5'
+        ).filter(
+            number=flat_number
+        ).first()
+
+        if flat:
+            flat.price = flat_price
+            flat.save()
+
+    return generate_response(status=200)
