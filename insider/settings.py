@@ -24,6 +24,8 @@ SECRET_KEY = '63&2i3*8zy8jdc4pq12^3@0tlmoqzwh3q-!=w_qjvt6m*kjkvy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+MEDIA_URL = '/media/'
+
 ALLOWED_HOSTS = ['172.100.2.15', '127.0.0.1', '172.100.114.2']
 
 CORS_ORIGIN_ALLOW_ALL = True

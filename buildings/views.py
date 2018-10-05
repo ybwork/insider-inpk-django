@@ -459,6 +459,29 @@ class FloorType(View):
         form = bind_data_with_form(form=floor_type_form, data=request.POST)
 
         if form.is_valid():
+            house = house_model.objects.get(hash_id=form.cleaned_data['house_id'])
+            if form.cleaned_data['number'] > house.number_of_floors:
+                return generate_response(
+                    data={
+                        'message': 'В доме не может быть больше этажей.',
+                        'single_error': True
+                    },
+                    status=400
+                )
+
+            floor = floor_model.objects.filter(
+                house_hash_id=form.cleaned_data['house_id']
+            ).filter(
+                number=form.cleaned_data['number']
+            ).exists()
+            if floor:
+                return generate_response(
+                    data={
+                        'message': 'Этаж уже занят.',
+                        'single_error': True
+                    },
+                    status=400
+                )
 
             if request.FILES:
                 image_name = create_image_name(image=request.FILES['image'])
@@ -1284,28 +1307,34 @@ def prices_upload(request):
     # check house on exists
     house_model.objects.get(hash_id='badfe7e5')
 
+    flat_properties = []
+
     file = request.FILES.get('prices')
     for line in file:
         clean_line = line.decode('utf-8').rstrip()
+        # properties = clean_line.split(request.POST['separator'])
+        flat_properties.append(clean_line.split('~'))
+        # print(properties)
+    return generate_response(data=flat_properties, status=200)
 
-        is_correct_format = re.search('^[0-9]+~[0-9]+$', clean_line)
+        # is_correct_format = re.search('^[0-9]+~[0-9]+$', clean_line)
+        #
+        # if not is_correct_format:
+        #     continue
 
-        if not is_correct_format:
-            continue
-
-        numbers_prices = clean_line.split('~')
-
-        flat_number = numbers_prices[0]
-        flat_price = numbers_prices[1]
-
-        flat = flat_model.objects.filter(
-            house_hash_id='badfe7e5'
-        ).filter(
-            number=flat_number
-        ).first()
-
-        if flat:
-            flat.price = flat_price
-            flat.save()
+        # numbers_prices = clean_line.split('~')
+        #
+        # flat_number = numbers_prices[0]
+        # flat_price = numbers_prices[1]
+        #
+        # flat = flat_model.objects.filter(
+        #     house_hash_id='badfe7e5'
+        # ).filter(
+        #     number=flat_number
+        # ).first()
+        #
+        # if flat:
+        #     flat.price = flat_price
+        #     flat.save()
 
     return generate_response(status=200)

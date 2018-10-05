@@ -13,16 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.conf.urls.static import static
 from django.urls import path, include
 
 import insider
-from insider import views
+from insider import views, settings
 
 urlpatterns = [
     # если dev, то добавить home
     path('', insider.views.index, name='home'),
     path('', include('auth.urls')),
     path('', include('buildings.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
