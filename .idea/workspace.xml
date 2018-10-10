@@ -3,109 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="228f0769-34a5-4bc3-a622-b1d2992fd37c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/buildings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insider/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/insider/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/app.e05f2a7bcbb4653239b82b58cc0a21fd.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/app.e05f2a7bcbb4653239b82b58cc0a21fd.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/052b78cf.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/1c504738.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/22932cc4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/27f8faf4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/2c983083.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/320830ae.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/33edeb93.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/3db812e9.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/3db812e91.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/45595df2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/5bb66947.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/855ceabd.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/a0a49c0f.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/a5ddc715.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/bc198b4b.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/c9622deb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/eca2e74a.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/efb4e0f2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/f1f80c39.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/media/f86de708.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/app.505e7a073fc345993328.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/app.505e7a073fc345993328.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/app.58f41838079a7b33638389b1f01bea2e.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/app.58f41838079a7b33638389b1f01bea2e.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/app.6e048a9600735f18471c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/app.6e048a9600735f18471c.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index/index_vue.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index_vue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-165101-68320400.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-170358-68317808.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-170551-68320944.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-170957-68319472.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-171510-68883984.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-171513-74530896.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-172449-68883856.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180711-172518-68883568.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180712-110349-66085392.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180712-144319-70304944.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180713-100448-68386544.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-111847-72310384.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-112012-72320784.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-112319-72192496.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-155309-81791216.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-155311-76262352.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-155644-81789360.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-160312-76580848.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-161125-71071312.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-161227-79942128.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-161409-62313168.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180716-163943-64236528.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180718-124250-80167792.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-150026-60331952.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-150026-60414480.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-150532-68849360.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-150532-71588528.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-150854-66468816.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-150854-66605296.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151351-71541808.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151351-74448368.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151353-80589584.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151353-80590000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151353-80592208.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151353-80592720.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-74446576.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-74446672.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-74447248.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-74447344.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-78172688.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-78172784.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-80592496.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-80592848.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-80650384.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-80650928.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-80652144.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151356-80654224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151357-78035248.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151357-80589968.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151357-80592496.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151357-80650992.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151357-80652752.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151358-80652432.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151358-80652560.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-151358-80654160.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-152642-80713552.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-153542-78304528.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-153542-78305936.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-162146-77787568.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-172059-78676048.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-172213-80592528.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-172821-78677968.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-173308-78677968.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-173350-78759952.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-173451-80712912.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-173638-80590608.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-173736-80591600.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-173913-78604912.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180719-174037-78570224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180720-093917-68465776.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180720-171951-77357264.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180724-090546-73022928.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180726-092728-72072528.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mails/20180727-122631-64065392.log" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -136,29 +43,17 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            <state relative-caret-position="572">
+              <caret line="26" selection-start-line="26" selection-end-line="26" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/buildings/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="35" column="23" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/buildings/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="518" column="38" lean-forward="true" selection-start-line="518" selection-start-column="38" selection-end-line="518" selection-end-column="38" />
+            <state relative-caret-position="256">
+              <caret line="1306" selection-start-line="1306" selection-end-line="1341" selection-end-column="23" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -166,20 +61,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/auth/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="169" column="92" selection-start-line="169" selection-start-column="92" selection-end-line="169" selection-end-column="92" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="104" column="42" selection-start-line="104" selection-start-column="42" selection-end-line="104" selection-end-column="42" />
+            <state relative-caret-position="2640">
+              <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,8 +76,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/buildings/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="234" column="9" selection-start-line="234" selection-start-column="9" selection-end-line="234" selection-end-column="9" />
+            <state relative-caret-position="2354">
+              <caret line="110" selection-start-line="110" selection-end-line="116" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -205,10 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create_flat_type</find>
-      <find>number_of_romms</find>
-      <find>get_building_houses</find>
-      <find>new_flat_schema</find>
       <find>marked_enable</find>
       <find>marked</find>
       <find>1</find>
@@ -234,7 +119,11 @@
       <find>e36e2cfb</find>
       <find>class Flat</find>
       <find>login</find>
+      <find>class FlatSch</find>
       <find>MEDIA_URL</find>
+      <find>PositiveIntegerField</find>
+      <find>last_flat_type_in_entrance</find>
+      <find>for</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -264,19 +153,19 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/auth/forms.py" />
         <option value="$PROJECT_DIR$/templates/index/index1.html" />
-        <option value="$PROJECT_DIR$/templates/index/index.html" />
         <option value="$PROJECT_DIR$/buildings/migrations/0013_auto_20180925_1733.py" />
         <option value="$PROJECT_DIR$/auth/middleware.py" />
         <option value="$PROJECT_DIR$/templates/index/index_simple.html" />
         <option value="$PROJECT_DIR$/insider/views.py" />
-        <option value="$PROJECT_DIR$/buildings/models.py" />
-        <option value="$PROJECT_DIR$/buildings/forms.py" />
         <option value="$PROJECT_DIR$/buildings/urls.py" />
-        <option value="$PROJECT_DIR$/templates/index/index_vue.html" />
-        <option value="$PROJECT_DIR$/buildings/views.py" />
         <option value="$PROJECT_DIR$/insider/settings.py" />
         <option value="$PROJECT_DIR$/insider/urls.py" />
         <option value="$PROJECT_DIR$/auth/views.py" />
+        <option value="$PROJECT_DIR$/buildings/models.py" />
+        <option value="$PROJECT_DIR$/buildings/forms.py" />
+        <option value="$PROJECT_DIR$/templates/index/index.html" />
+        <option value="$PROJECT_DIR$/templates/index/index_vue.html" />
+        <option value="$PROJECT_DIR$/buildings/views.py" />
       </list>
     </option>
   </component>
@@ -294,7 +183,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -316,12 +205,7 @@
             <path>
               <item name="insider" type="b2602c69:ProjectViewProjectNode" />
               <item name="insider" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="insider" type="b2602c69:ProjectViewProjectNode" />
-              <item name="insider" type="462c0819:PsiDirectoryNode" />
-              <item name="buildings" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -333,7 +217,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/django-rest/insider2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -409,17 +293,16 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4965278" visible="true" weight="0.19970082" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4965278" visible="true" weight="0.197457" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5198205" side_tool="true" weight="0.45833334" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4973822" weight="0.3298611" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298611" />
       <window_info id="Structure" order="1" sideWeight="0.5034722" side_tool="true" weight="0.18324608" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48017952" weight="0.41145834" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48017952" weight="0.4340278" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930555" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
@@ -430,6 +313,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295107" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,22 +405,8 @@
     <entry file="file://$PROJECT_DIR$/auth/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="372" selection-start-line="372" selection-end-line="383" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/mails/20180727-122631-64065392.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/img/media/1c504738.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/mails/20180727-122631-64065392.log" />
+    <entry file="file://$PROJECT_DIR$/static/img/media/1c504738.jpg" />
     <entry file="file://$PROJECT_DIR$/static/img/blank_layout.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -546,13 +416,6 @@
     <entry file="file://$PROJECT_DIR$/static/img/euro-02.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index/index_vue.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="623" selection-start-column="623" selection-end-column="623" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/insider/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -560,61 +423,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/auth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="342" lean-forward="true" selection-start-line="342" selection-end-line="342" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/insider/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="26" column="65" selection-start-line="26" selection-start-column="65" selection-end-line="26" selection-end-column="65" />
-          <folding>
-            <element signature="e#631#673#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="369">
+          <caret line="26" column="2" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index_simple.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/insider/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state relative-caret-position="572">
+          <caret line="26" selection-start-line="26" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="623" selection-start-column="623" selection-end-column="623" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index/index_vue.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="623" selection-start-column="623" selection-end-column="623" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="35" column="23" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="23" />
+        <state relative-caret-position="472">
+          <caret line="33" column="35" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildings/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2640">
+          <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/buildings/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="104" column="42" selection-start-line="104" selection-start-column="42" selection-end-line="104" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/buildings/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="234" column="9" selection-start-line="234" selection-start-column="9" selection-end-line="234" selection-end-column="9" />
+        <state relative-caret-position="2354">
+          <caret line="110" selection-start-line="110" selection-end-line="116" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildings/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="518" column="38" lean-forward="true" selection-start-line="518" selection-start-column="38" selection-end-line="518" selection-end-column="38" />
+        <state relative-caret-position="256">
+          <caret line="1306" selection-start-line="1306" selection-end-line="1341" selection-end-column="23" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="169" column="92" selection-start-line="169" selection-start-column="92" selection-end-line="169" selection-end-column="92" />
         </state>
       </provider>
     </entry>

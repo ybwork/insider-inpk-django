@@ -1305,36 +1305,40 @@ def prices_upload(request):
         )
 
     # check house on exists
-    house_model.objects.get(hash_id='badfe7e5')
+    house_model.objects.get(hash_id=request.POST['house_id'])
 
-    flat_properties = []
+    # flat_properties = []
+    # file = request.FILES.get('prices')
+    # for line in file:
+    #     clean_line = line.decode('utf-8').rstrip()
+    #     # properties = clean_line.split(request.POST['separator'])
+    #     flat_properties.append(clean_line.split('~'))
+    #     # print(properties)
+    # return generate_response(data=flat_properties, status=200)
 
     file = request.FILES.get('prices')
+
     for line in file:
         clean_line = line.decode('utf-8').rstrip()
-        # properties = clean_line.split(request.POST['separator'])
-        flat_properties.append(clean_line.split('~'))
-        # print(properties)
-    return generate_response(data=flat_properties, status=200)
 
         # is_correct_format = re.search('^[0-9]+~[0-9]+$', clean_line)
         #
         # if not is_correct_format:
         #     continue
 
-        # numbers_prices = clean_line.split('~')
-        #
-        # flat_number = numbers_prices[0]
-        # flat_price = numbers_prices[1]
-        #
-        # flat = flat_model.objects.filter(
-        #     house_hash_id='badfe7e5'
-        # ).filter(
-        #     number=flat_number
-        # ).first()
-        #
-        # if flat:
-        #     flat.price = flat_price
-        #     flat.save()
+        numbers_prices = clean_line.split('~')
+
+        flat_number = numbers_prices[0]
+        flat_price = numbers_prices[1]
+
+        flat = flat_model.objects.filter(
+            house_hash_id=request.POST['house_id']
+        ).filter(
+            number=flat_number
+        ).first()
+
+        if flat:
+            flat.price = flat_price
+            flat.save()
 
     return generate_response(status=200)

@@ -31,7 +31,7 @@ class House(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     building_hash_id = models.CharField(max_length=16, db_index=True)
     number_of_floors = models.PositiveSmallIntegerField(blank=True, null=True)
-    living_floors = models.TextField(blank=True, default='')
+    living_floors = models.TextField(default='')
     number_of_entrance = models.PositiveSmallIntegerField(blank=True, null=True)
     number_of_flat = models.PositiveIntegerField(blank=True, null=True)
     street_name = models.CharField(max_length=100)

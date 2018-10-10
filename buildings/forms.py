@@ -103,14 +103,15 @@ class HouseForm(forms.Form):
 
     number_of_floors = forms.IntegerField(
         error_messages={
+            'required': custom_error_messages['required'],
             'max_length': custom_error_messages['max_length'],
             'min_length': custom_error_messages['min_length'],
         }
     )
 
     living_floors = forms.CharField(
-        required=False,
         error_messages={
+            'required': custom_error_messages['required'],
             'max_length': custom_error_messages['max_length'],
         }
     )
@@ -170,16 +171,18 @@ class HouseForm(forms.Form):
     )
 
     start_development = forms.DateField(
-        required=False,
         error_messages={
-            'format': custom_error_messages['format']
+            'required': custom_error_messages['required'],
+            'format': custom_error_messages['format'],
+            'invalid': custom_error_messages['invalid']
         }
     )
 
     end_development = forms.DateField(
-        required=False,
         error_messages={
-            'format': custom_error_messages['format']
+            'required': custom_error_messages['required'],
+            'format': custom_error_messages['format'],
+            'invalid': custom_error_messages['invalid']
         }
     )
 
